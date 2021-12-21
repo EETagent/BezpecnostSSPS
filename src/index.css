@@ -1,0 +1,17 @@
+@font-face {
+  font-family: "Supply";
+  src: local("Supply"), url(./assets/fonts/supply.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "Hacked";
+  src: local("Hacked"), url(./assets/fonts/hacked.ttf) format("truetype");
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
