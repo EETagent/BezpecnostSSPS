@@ -3,7 +3,7 @@ import type { Component } from "solid-js";
 import bg from "../assets/img/background/hackdays-bg.jpg";
 
 import terminal from "../assets/img/hackdays-terminal.png";
-import poster from "../assets/img/hackdays-video-2.jpg";
+import poster from "../assets/img/hackdays-video.png";
 import video from "../assets/video/hackdays.mp4";
 
 // @ts-ignore
@@ -25,8 +25,8 @@ const HackDaysItem: Component<{ media: string; mediaSecond?: string, left: boole
     <img
       className={
         left
-          ? "w-1/2 mt-10 hover:-translate-y-1 hover:scale-110 ease-in-out duration-300 md:hover:mr-10 hover:cursor-pointer"
-          : "w-1/2 mt-10 hover:-translate-y-1 hover:scale-110 ease-in-out duration-300 md:hover:ml-10 hover:cursor-pointer"
+          ? "w-1/2 md:w-[45%] mt-10 md:mr-16 hover:-translate-y-1 hover:scale-110 ease-in-out duration-300 hover:cursor-pointer"
+          : "w-1/2 md:w-[45%] mt-10 hover:-translate-y-1 hover:scale-110 ease-in-out duration-300 hover:cursor-pointer"
       }
       src={media}
       alt=""
@@ -50,7 +50,7 @@ const HackDays: Component = () => {
         <h1 className="mt-3 font-hacked text-white font-bold uppercase text-6xl md:text-8xl">
           HackDays
         </h1>
-        <div className="grow flex flex-col md:flex-row items-center justify-center">
+        <div className="grow flex flex-col md:flex-row items-center justify-between">
           <HackDaysItem media={terminal} left={true} />
           <HackDaysItem media={poster} mediaSecond={video} left={false} />
           {/* <video
