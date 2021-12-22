@@ -54,7 +54,7 @@ const MenuItem: Component<{
 };
 
 const Navigation: Component<{ currentPage?: string }> = ({ currentPage }) => {
-  const [isOpen, setIsOpen] = createSignal(false);
+  const [isOpen, setIsOpen] = createSignal<boolean>(false);
 
   return (
     <nav className="bg-black sticky top-0 z-50 font-supply">

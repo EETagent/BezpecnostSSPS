@@ -1,8 +1,8 @@
-import { Component, createSignal, Switch, Match, Show } from "solid-js";
+import { Component, createSignal, Switch, Match, Show, onMount } from "solid-js";
 
 import { createStore } from "solid-js/store";
 
-import { load } from 'recaptcha-v3'
+import { load, ReCaptchaInstance } from 'recaptcha-v3'
 const REACAPTCHA_SITE_KEY: string = "6Lcy1L0dAAAAAAMsrNsQg-3HHjRfpFjRAAnJcooR";
 
 import ResponseBox from "./RegistrationFormResponseBox";
@@ -12,6 +12,7 @@ type FormFields = {
   email: string;
   message?: string;
   birthDate: string;
+  captcha: string;
 };
 
 enum FormResponse {
@@ -27,6 +28,8 @@ const submit = (form: FormFields) => {
     email: form.email,
     message: form.message,
     birthDate: form.birthDate,
+    captcha: form.captcha,
+
   };
   console.log(`submitting ${JSON.stringify(dataToSubmit)}`);
   return FormResponse.Success;
@@ -38,11 +41,18 @@ const useForm = () => {
     email: "",
     message: "",
     birthDate: "",
+    captcha: "",
   });
 
   const clearField = (fieldName: string) => {
     setForm({
       [fieldName]: "",
+    });
+  };
+
+  const setField = (fieldName: string, fieldValue: string) => {
+    setForm({
+      [fieldName]: fieldValue,
     });
   };
 
@@ -59,32 +69,39 @@ const useForm = () => {
     }
   };
 
-  return { form, submit, updateFormField, clearField };
+  return { form, submit, setField, updateFormField, clearField };
 };
 
 const RegistrationForm: Component = () => {
-  const [formStatus, setFormStatus] = createSignal(FormResponse.NotSent);
+  const [recaptcha, setRecaptcha] = createSignal<ReCaptchaInstance>();
 
-  const { form, updateFormField, submit } = useForm();
+  const [formStatus, setFormStatus] = createSignal<FormResponse>(FormResponse.NotSent);
+
+  const { form, updateFormField, setField, submit } = useForm();
 
   const handleSubmit = (event: Event): void => {
     event.preventDefault();
     setFormStatus(submit(form));
-
-    load(REACAPTCHA_SITE_KEY, {
-      useRecaptchaNet: true,
-      autoHideBadge: true
-    }).then((recaptcha) => {
-      recaptcha.execute('Register').then((token) => {
-        console.log(token) 
+    if (typeof recaptcha() !== "undefined") {
+      recaptcha()!.execute('Register').then((token) => {
+        setField("captcha", token);
+        console.log(form.captcha);
       })
-    })
-    
+    }
   };
 
   const dismissReponse = () => {
     setFormStatus(FormResponse.NotSent);
   };
+
+  onMount(() => {
+    load(REACAPTCHA_SITE_KEY, {
+      useRecaptchaNet: false,
+      autoHideBadge: true
+    }).then((recaptcha) => {
+      setRecaptcha(recaptcha);
+    })
+  });
 
   return (
     <form
