@@ -1,6 +1,10 @@
 import { Component, createSignal, Switch, Match, Show } from "solid-js";
 
 import { createStore } from "solid-js/store";
+
+import { load } from 'recaptcha-v3'
+const REACAPTCHA_SITE_KEY: string = "6Lcy1L0dAAAAAAMsrNsQg-3HHjRfpFjRAAnJcooR";
+
 import ResponseBox from "./RegistrationFormResponseBox";
 
 type FormFields = {
@@ -66,7 +70,16 @@ const RegistrationForm: Component = () => {
   const handleSubmit = (event: Event): void => {
     event.preventDefault();
     setFormStatus(submit(form));
-    console.log("Ahoj " + formStatus());
+
+    load(REACAPTCHA_SITE_KEY, {
+      useRecaptchaNet: true,
+      autoHideBadge: true
+    }).then((recaptcha) => {
+      recaptcha.execute('Register').then((token) => {
+        console.log(token) 
+      })
+    })
+    
   };
 
   const dismissReponse = () => {
