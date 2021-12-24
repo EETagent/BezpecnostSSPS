@@ -1,4 +1,5 @@
 import { Component, Show } from "solid-js";
+
 const SvgButton: Component<{ callback?: VoidFunction }> = ({ callback }) => {
   return (
     <svg

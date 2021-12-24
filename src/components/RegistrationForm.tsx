@@ -94,8 +94,8 @@ const RegistrationForm: Component = () => {
     setFormStatus(FormResponse.NotSent);
   };
 
-  onMount(() => {
-    load(REACAPTCHA_SITE_KEY, {
+  onMount( async () => {
+    await load(REACAPTCHA_SITE_KEY, {
       useRecaptchaNet: false,
       autoHideBadge: true
     }).then((recaptcha) => {
