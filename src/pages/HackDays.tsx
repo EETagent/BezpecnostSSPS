@@ -23,7 +23,7 @@ const HackDaysItem: Component<{
 
   return (
     <img
-      className={`w-1/2 md:w-[45%] mt-10 hover:-translate-y-1 hover:scale-110 ease-in-out duration-300 hover:cursor-pointer ${
+      className={`w-[80%] sm:w-[60%] md:w-[45%] mt-10 hover:-translate-y-1 hover:scale-110 ease-in-out duration-300 hover:cursor-pointer ${
         left ? "md:mr-16" : ""
       }`}
       src={media}
@@ -38,17 +38,17 @@ const HackDays: Component = () => {
   return (
     <div
       id="hackdays"
-      className="relative flex items-center justify-center overflow-hidden h-screen "
+      className="relative flex items-center justify-center overflow-hidden"
     >
       <img
         className="absolute z-10 w-auto min-w-full min-h-full object-cover"
         src={bg}
       />
       <div className="w-4/5 z-20 flex flex-col justify-center items-center">
-        <h1 className="mt-3 font-hacked text-white font-bold uppercase text-6xl md:text-8xl">
+        <h1 className="mt-10 font-hacked text-white font-bold uppercase text-6xl md:text-8xl">
           HackDays
         </h1>
-        <div className="grow flex flex-col md:flex-row items-center justify-between">
+        <div className="mb-10 grow flex flex-col md:flex-row items-center justify-between">
           <HackDaysItem media={terminal} left={true} />
           <HackDaysItem media={poster} mediaSecond={video} left={false} />
           {/* <video

@@ -7,10 +7,10 @@ const Intro: Component = () => {
   return (
     <div
       id="about"
-      className="relative flex md:items-center justify-center overflow-hidden h-screen "
+      className="relative flex md:items-center justify-center overflow-y-scroll bg-black h-screen"
     >
       <img
-        className="absolute z-10 w-auto min-w-full min-h-full object-cover"
+        className="absolute z-10 w-auto min-w-full min-h-full object-cover h-screen"
         src={bg}
       />
       <div className="w-4/5 z-20 flex flex-col h-1/2 items-center md:items-start">

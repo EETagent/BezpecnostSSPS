@@ -5,12 +5,12 @@ import bg from "../assets/img/background/registrace-bg.jpg";
 
 const HackDaysRegistrace: Component = () => {
   return (
-    <div className="relative flex items-center justify-center overflow-hidden h-screen ">
+    <div className="relative flex items-center justify-center overflow-hidden ">
       <img
         className="absolute z-10 w-auto min-w-full min-h-full object-cover"
         src={bg}
       />
-      <div className="z-20 flex flex-col w-4/5 items-center md:items-start">
+      <div className="my-10 z-20 flex flex-col w-4/5 items-center md:items-start">
         <h2 className="font-sans text-white font-light uppercase md:text-5xl">
           Nezávazná
         </h2>
