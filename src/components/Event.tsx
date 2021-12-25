@@ -39,7 +39,7 @@ const Event: Component<{ data: EventData }> = ({ data }) => {
           <div className="md:text-xl">{data.date.getFullYear()}</div>
         </div>
         <div className="flex-grow font-normal text-gray-800 flex flex-col md:w-3/4">
-          <p className="p-4 leading-normal font-supply">
+          <p className="p-4 leading-normal font-supply text-justify md:text-left text-sm md:text-xs">
             {data.content[0]}
             {data.content[1]}
           </p>
