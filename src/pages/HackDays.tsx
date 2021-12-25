@@ -4,6 +4,9 @@ import bg from "../assets/img/background/hackdays-bg.jpg";
 
 import terminal from "../assets/img/hackdays-terminal.png";
 import poster from "../assets/img/hackdays-video.png";
+import terminalWebP from "../assets/img/hackdays-terminal.webp";
+import posterWebp from "../assets/img/hackdays-video.webp";
+
 import video from "../assets/video/hackdays.mp4";
 
 // @ts-ignore
@@ -11,9 +14,10 @@ import "fslightbox";
 
 const HackDaysItem: Component<{
   media: string;
-  mediaSecond?: string;
+  mediaAlternative: string;
+  video?: string;
   left: boolean;
-}> = ({ media, mediaSecond, left }) => {
+}> = ({ media: media, mediaAlternative: mediaWebP, video, left }) => {
   const MediaLightbox = (name: string) => {
     // @ts-ignore
     const lightbox = new FsLightbox();
@@ -22,16 +26,20 @@ const HackDaysItem: Component<{
   };
 
   return (
-    <img
+    <picture
       className={`w-[80%] sm:w-[60%] md:w-[45%] mt-10 hover:-translate-y-1 hover:scale-110 ease-in-out duration-300 hover:cursor-pointer ${
         left ? "md:mr-16" : ""
       }`}
-      src={media}
-      alt=""
-      onClick={() => {
-        mediaSecond != null ? MediaLightbox(mediaSecond) : MediaLightbox(media);
-      }}
-    />
+    >
+      <source srcset={mediaWebP} type="image/webp" />
+      <img
+        src={media}
+        onClick={() => {
+          video != null ? MediaLightbox(video) : MediaLightbox(media);
+        }}
+        alt=""
+      />
+    </picture>
   );
 };
 const HackDays: Component = () => {
@@ -49,8 +57,17 @@ const HackDays: Component = () => {
           HackDays
         </h1>
         <div className="mb-10 grow flex flex-col md:flex-row items-center justify-between">
-          <HackDaysItem media={terminal} left={true} />
-          <HackDaysItem media={poster} mediaSecond={video} left={false} />
+          <HackDaysItem
+            media={terminal}
+            mediaAlternative={terminalWebP}
+            left={true}
+          />
+          <HackDaysItem
+            media={poster}
+            mediaAlternative={posterWebp}
+            video={video}
+            left={false}
+          />
           {/* <video
             controls
             preload="none"
