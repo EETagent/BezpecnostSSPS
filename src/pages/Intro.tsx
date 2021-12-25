@@ -28,17 +28,18 @@ const Intro: Component = () => {
           />
         </div>
 
-        <p className="mt-5 text-justify md:text-left text-white text-sm font-supply">
+        <p className="mt-5 text-justify leading-normal md:text-left text-white text-sm font-supply">
           Nejnovější studijní obor na Smíchovské střední průmyslové škole
           poskytuje studentům znalosti informačních technologií se specializací
-          na&nbsp;bezpečnost v&nbsp;prostoru kybernetiky. V&nbsp;dnešním rychle rozvíjejícím se
-          světě informačních technologií je třeba mít specialisty, kteří budou
-          schopni chránit instituce, firmy a&nbsp;další subjekty před kybernetickými
-          hrozbami a&nbsp;zasáhnout proti hrozícímu nebezpečí.Jsme jedinou školou v&nbsp;Praze,&nbsp;
-          která tento obor nabízí, protože víme, co&nbsp; je ve světě IT
-          prioritní. Pořádáme besedy a&nbsp;přednášky na tato témata a&nbsp;také
-          pravidelně pořádáme HackDays, kde žákům základních škol předáváme
-          znalosti a&nbsp;přibližujeme jim problematiku kybernetické bezpečnosti.
+          na&nbsp;bezpečnost v&nbsp;prostoru kybernetiky. V&nbsp;dnešním rychle
+          rozvíjejícím se světě informačních technologií je třeba mít
+          specialisty, kteří budou schopni chránit instituce, firmy a&nbsp;další
+          subjekty před kybernetickými hrozbami a&nbsp;zasáhnout proti hrozícímu
+          nebezpečí.Jsme jedinou školou v&nbsp;Praze,&nbsp; která tento obor
+          nabízí, protože víme, co&nbsp; je ve světě IT prioritní. Pořádáme
+          besedy a&nbsp;přednášky na tato témata a&nbsp;také pravidelně pořádáme
+          HackDays, kde žákům základních škol předáváme znalosti
+          a&nbsp;přibližujeme jim problematiku kybernetické bezpečnosti.
         </p>
         <div className="mt-10">
           <a

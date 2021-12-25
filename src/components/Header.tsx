@@ -42,11 +42,9 @@ const MenuItem: Component<{
   return (
     <a
       href={href}
-      className={
-        currentPage === name
-          ? "text-white underline hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm  uppercase "
-          : "text-gray-300 hover:bg-gray-700 hover:text-white px-3  py-2 rounded-md text-sm  uppercase "
-      }
+      className={`hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm  uppercase ${
+        currentPage === name ? "text-white underline" : "text-gray-300"
+      }`}
     >
       {description}
     </a>

@@ -9,11 +9,11 @@ import video from "../assets/video/hackdays.mp4";
 // @ts-ignore
 import "fslightbox";
 
-const HackDaysItem: Component<{ media: string; mediaSecond?: string, left: boolean }> = ({
-  media,
-  mediaSecond,
-  left,
-}) => {
+const HackDaysItem: Component<{
+  media: string;
+  mediaSecond?: string;
+  left: boolean;
+}> = ({ media, mediaSecond, left }) => {
   const MediaLightbox = (name: string) => {
     // @ts-ignore
     const lightbox = new FsLightbox();
@@ -23,15 +23,13 @@ const HackDaysItem: Component<{ media: string; mediaSecond?: string, left: boole
 
   return (
     <img
-      className={
-        left
-          ? "w-1/2 md:w-[45%] mt-10 md:mr-16 hover:-translate-y-1 hover:scale-110 ease-in-out duration-300 hover:cursor-pointer"
-          : "w-1/2 md:w-[45%] mt-10 hover:-translate-y-1 hover:scale-110 ease-in-out duration-300 hover:cursor-pointer"
-      }
+      className={`w-1/2 md:w-[45%] mt-10 hover:-translate-y-1 hover:scale-110 ease-in-out duration-300 hover:cursor-pointer ${
+        left ? "md:mr-16" : ""
+      }`}
       src={media}
       alt=""
       onClick={() => {
-        mediaSecond != null ? MediaLightbox(mediaSecond) : MediaLightbox(media)
+        mediaSecond != null ? MediaLightbox(mediaSecond) : MediaLightbox(media);
       }}
     />
   );
