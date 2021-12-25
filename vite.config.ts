@@ -4,7 +4,7 @@ import solidPlugin from "vite-plugin-solid";
 export default defineConfig({
   plugins: [solidPlugin()],
   build: {
-    target: "safari 12",
+    target: "safari12",
     polyfillDynamicImport: false,
   },
 });
