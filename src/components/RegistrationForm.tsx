@@ -109,7 +109,7 @@ const RegistrationForm: Component = () => {
     <form
       onSubmit={handleSubmit}
       action=""
-      className="w-8/12"
+      className="w-full md:w-8/12"
       id="registration"
     >
       <Show when={formStatus() !== FormResponse.NotSent}>
