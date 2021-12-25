@@ -7,6 +7,8 @@ const REACAPTCHA_SITE_KEY: string = "6Lcy1L0dAAAAAAMsrNsQg-3HHjRfpFjRAAnJcooR";
 
 import ResponseBox from "./RegistrationFormResponseBox";
 
+import GDPR from "../assets/GDPR.pdf";
+
 type FormFields = {
   name: string;
   email: string;
@@ -203,7 +205,8 @@ const RegistrationForm: Component = () => {
         Souhlasím se{" "}
         <a
           className="underline hover:text-zinc-300"
-          href="https://hackdays.eu/GDPR.pdf"
+          href={GDPR}
+          target="_blank"
         >
           zpracováním osobních údajů
         </a>
