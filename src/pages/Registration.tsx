@@ -10,7 +10,7 @@ const HackDaysRegistrace: Component = () => {
         className="absolute z-10 w-auto min-w-full min-h-full object-cover"
         src={bg}
       />
-      <div className="my-10 z-20 flex flex-col w-4/5 items-center md:items-start">
+      <div className="z-20 flex flex-col w-4/5 items-center md:items-start my-10 lg:my-16 2xl:my-32">
         <h2 className="font-sans text-white font-light uppercase md:text-5xl">
           Nezávazná
         </h2>

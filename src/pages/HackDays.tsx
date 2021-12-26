@@ -52,11 +52,11 @@ const HackDays: Component = () => {
         className="absolute z-10 w-auto min-w-full min-h-full object-cover"
         src={bg}
       />
-      <div className="w-4/5 z-20 flex flex-col justify-center items-center">
+      <div className="w-4/5 z-20 flex flex-col justify-center items-center my-10 lg:my-16 2xl:my-32">
         <h1 className="mt-10 font-hacked text-white font-bold uppercase text-6xl md:text-8xl">
           HackDays
         </h1>
-        <div className="mb-10 grow flex flex-col md:flex-row items-center justify-between">
+        <div className="my-10 2xl:my-16 grow flex flex-col md:flex-row items-center justify-between">
           <HackDaysItem
             media={terminal}
             mediaAlternative={terminalWebP}

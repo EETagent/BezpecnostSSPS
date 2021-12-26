@@ -14,21 +14,21 @@ const Intro: Component = () => {
         src={bg}
       />
       <div className="w-4/5 z-20 flex flex-col h-1/2 items-center md:items-start">
-        <h2 className="font-sans text-white font-light uppercase md:text-5xl">
+        <h2 className="font-sans text-white font-light uppercase md:text-5xl 2xl:text-7xl">
           Kybernetická
         </h2>
         <div className="flex flex-col md:flex-row items-center">
-          <h1 className="mt-3 font-sans text-white font-bold uppercase text-3xl md:text-7xl">
+          <h1 className="mt-3 font-sans text-white font-bold uppercase text-3xl md:text-7xl 2xl:text-9xl">
             Bezpečnost
           </h1>
           <img
             src={logo}
-            className="h-16 mt-8 md:mt-0 md:h-6 md:mb-10"
+            className="h-16 2xl:h-20 mt-8 md:mt-0 md:h-6 md:mb-10"
             alt=""
           />
         </div>
 
-        <p className="mt-5 text-justify leading-normal md:text-left text-white text-sm font-supply">
+        <p className="mt-5 text-justify leading-normal md:text-left text-white text-sm font-supply lg:text-base 2xl:text-lg">
           Nejnovější studijní obor na Smíchovské střední průmyslové škole
           poskytuje studentům znalosti informačních technologií se specializací
           na&nbsp;bezpečnost v&nbsp;prostoru kybernetiky. V&nbsp;dnešním rychle
