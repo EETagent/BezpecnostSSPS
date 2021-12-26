@@ -33,6 +33,7 @@ enum FormResponse {
 
 interface FormResponseJson {
   result: string;
+  error?: string
 }
 
 const submit = async (form: FormFields): Promise<FormResponse> => {
@@ -56,12 +57,14 @@ const submit = async (form: FormFields): Promise<FormResponse> => {
   const responseJSON: FormResponseJson = await response.json();
 
   switch (responseJSON.result) {
-    case FormResponse.CAPTCHA.toString():
+    case "CAPTCHA":
       return FormResponse.CAPTCHA;
-    case FormResponse.ERROR.toString():
+    case "ERROR":
       return FormResponse.ERROR;
-    default:
+    case "SUCCESS":
       return FormResponse.SUCCESS;
+    default:
+      return FormResponse.ERROR;
   }
 };
 
