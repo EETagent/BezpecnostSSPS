@@ -28,7 +28,6 @@ const ResponseBox: Component<{ text: string; callback?: VoidFunction }> = ({
             <span className="text-red-800">{text}</span>
             <SvgButton callback={callback} />
           </div>
-          )
         </div>
       )}
     >

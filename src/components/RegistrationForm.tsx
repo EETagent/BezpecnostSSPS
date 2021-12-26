@@ -1,8 +1,15 @@
-import { Component, createSignal, Switch, Match, Show, onMount } from "solid-js";
+import {
+  Component,
+  createSignal,
+  Switch,
+  Match,
+  Show,
+  onMount,
+} from "solid-js";
 
 import { createStore } from "solid-js/store";
 
-import { load, ReCaptchaInstance } from 'recaptcha-v3'
+import { load, ReCaptchaInstance } from "recaptcha-v3";
 const REACAPTCHA_SITE_KEY: string = "6Lcy1L0dAAAAAAMsrNsQg-3HHjRfpFjRAAnJcooR";
 
 import ResponseBox from "./RegistrationFormResponseBox";
@@ -18,23 +25,44 @@ type FormFields = {
 };
 
 enum FormResponse {
-  NotSent,
-  Success,
-  Captcha,
-  Error,
+  NOTSENT,
+  SUCCESS,
+  CAPTCHA,
+  ERROR,
 }
 
-const submit = (form: FormFields) => {
+interface FormResponseJson {
+  result: string;
+}
+
+const submit = async (form: FormFields): Promise<FormResponse> => {
   const dataToSubmit = {
     name: form.name,
     email: form.email,
     message: form.message,
     birthDate: form.birthDate,
     captcha: form.captcha,
-
   };
-  console.log(`submitting ${JSON.stringify(dataToSubmit)}`);
-  return FormResponse.Success;
+
+  const response = await fetch("backend/mail.php", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(dataToSubmit),
+  });
+
+  const responseJSON: FormResponseJson = await response.json();
+
+  switch (responseJSON.result) {
+    case FormResponse.CAPTCHA.toString():
+      return FormResponse.CAPTCHA;
+    case FormResponse.ERROR.toString():
+      return FormResponse.ERROR;
+    default:
+      return FormResponse.SUCCESS;
+  }
 };
 
 const useForm = () => {
@@ -77,32 +105,38 @@ const useForm = () => {
 const RegistrationForm: Component = () => {
   const [recaptcha, setRecaptcha] = createSignal<ReCaptchaInstance>();
 
-  const [formStatus, setFormStatus] = createSignal<FormResponse>(FormResponse.NotSent);
+  const [formStatus, setFormStatus] = createSignal<FormResponse>(
+    FormResponse.NOTSENT
+  );
 
   const { form, updateFormField, setField, submit } = useForm();
 
   const handleSubmit = (event: Event): void => {
     event.preventDefault();
-    setFormStatus(submit(form));
     if (typeof recaptcha() !== "undefined") {
-      recaptcha()!.execute('Register').then((token) => {
-        setField("captcha", token);
-        console.log(form.captcha);
-      })
+      recaptcha()!
+        .execute("Register")
+        .then(async (token) => {
+          setField("captcha", token);
+          setFormStatus(await submit(form));
+        })
+        .catch(() => setFormStatus(FormResponse.CAPTCHA));
+    } else {
+      setFormStatus(FormResponse.CAPTCHA);
     }
   };
 
   const dismissReponse = () => {
-    setFormStatus(FormResponse.NotSent);
+    setFormStatus(FormResponse.NOTSENT);
   };
 
-  onMount( async () => {
+  onMount(async () => {
     await load(REACAPTCHA_SITE_KEY, {
       useRecaptchaNet: false,
-      autoHideBadge: true
+      autoHideBadge: true,
     }).then((recaptcha) => {
       setRecaptcha(recaptcha);
-    })
+    });
   });
 
   return (
@@ -112,23 +146,23 @@ const RegistrationForm: Component = () => {
       className="w-full md:w-8/12"
       id="registration"
     >
-      <Show when={formStatus() !== FormResponse.NotSent}>
+      <Show when={formStatus() !== FormResponse.NOTSENT}>
         <Switch>
-          <Match when={formStatus() === FormResponse.Success}>
+          <Match when={formStatus() === FormResponse.SUCCESS}>
             <ResponseBox
               text="E-mail úspěšně odeslán"
               callback={dismissReponse}
             ></ResponseBox>
           </Match>
-          <Match when={formStatus() === FormResponse.Captcha}>
+          <Match when={formStatus() === FormResponse.CAPTCHA}>
             <ResponseBox
-              text="Chybná reCAPTCHA"
+              text="Chybná reCAPTCHA, zpráva nebyla odeslána. V případě dalších problémů nás kontaktujte."
               callback={dismissReponse}
             ></ResponseBox>
           </Match>
-          <Match when={formStatus() === FormResponse.Error}>
+          <Match when={formStatus() === FormResponse.ERROR}>
             <ResponseBox
-              text="Chyba serveru"
+              text="Chyba serveru, zpráva nebyla odeslána."
               callback={dismissReponse}
             ></ResponseBox>
           </Match>
