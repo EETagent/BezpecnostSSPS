@@ -97,7 +97,7 @@ const Events: Component = () => {
         #444 11px
       );"
     >
-      <div className="w-4/5 my-10">
+      <div className="w-4/5 my-10 lg:my-16 2xl:my-32">
           <div className={`grid grid-cols-1 md:my-16 gap-16 ${events().length === 1 ? "md:grid-cols-1" : "md:grid-cols-2"}`}>
             <For each={events()}>{(event, i) => 
             <div className="">
