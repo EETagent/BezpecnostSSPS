@@ -123,7 +123,7 @@ const Navigation: Component = () => {
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             <MenuItemCompact
               onClick={() => setIsOpened(!isOpened())}
-              href="#about"
+              href="#"
               description="O nás"
             />
             <MenuItemCompact
@@ -138,7 +138,7 @@ const Navigation: Component = () => {
             />
             <MenuItemCompact
               onClick={() => setIsOpened(!isOpened())}
-              href="#Kontakt"
+              href="#kontakt"
               description="Kontakt"
             />
           </div>
