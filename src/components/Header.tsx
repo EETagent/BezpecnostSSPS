@@ -1,58 +1,81 @@
-import { Component, Show } from "solid-js";
+import { Accessor, Component, Show } from "solid-js";
 import { createSignal } from "solid-js";
 
 import logo from "../assets/img/logo/logo-web.svg";
 
-const MenuButtonBurger: Component = () => {
+const MenuButton: Component<{
+  onClick: VoidFunction;
+  isMenuOpened: Accessor<boolean>;
+}> = ({ onClick, isMenuOpened }) => {
   return (
-    <svg
-      className="block h-6 w-6"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      aria-hidden="true"
+    <button
+      aria-controls="mobile-menu"
+      onclick={onClick}
+      className="transform transition duration-500 hover:scale-110 focus:outline-none"
     >
-      <path d="M6 18L18 6M6 6l12 12" />
-    </svg>
-  );
-};
-
-const MenuButtonCross: Component = () => {
-  return (
-    <svg
-      className="block h-6 w-6"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      aria-hidden="true"
-    >
-      <path d="M4 6h16M4 12h16M4 18h16" />
-    </svg>
+      <svg viewBox="0 0 32 36" className="h-10 stroke-green-hacked stroke-2">
+        {/* Fešné SVG vypůjčeno z Haxagon.cz, zbytek poctivá práce :) */}
+        <path
+          data-v-21716efb=""
+          d="M15.5079 34.8482L1 26.4243V9.57571L15.5079 1.15178L30.5 9.58485V26.4152L15.5079 34.8482Z"
+        ></path>
+      </svg>
+      <div
+        className={`block absolute  left-1/4 top-1/2 transform -translate-x-1/2 -translate-y-1/2`}
+      >
+        {" "}
+        <span
+          className={`block absolute h-0.5 w-4 text-white bg-current transform transition duration-500 ease-in-out" ${
+            isMenuOpened() ? "rotate-45" : "-translate-y-1.5"
+          }`}
+        ></span>{" "}
+        <span
+          className={`block absolute h-0.5 w-2 text-white bg-current transform transition duration-500 ease-in-out" ${
+            isMenuOpened() ? "opacity-0" : ""
+          }`}
+        ></span>{" "}
+        <span
+          className={`block absolute h-0.5 w-4 text-white bg-current transform transition duration-500 ease-in-out ${
+            isMenuOpened() ? "-rotate-45" : "translate-y-1.5"
+          }`}
+        ></span>{" "}
+      </div>
+    </button>
   );
 };
 
 const MenuItem: Component<{
-  name: string;
+  href: string;
   description: string;
-  currentPage?: string;
-}> = ({ name, description, currentPage }) => {
-  const href: string = "#" + name;
+}> = ({ href, description }) => {
   return (
     <a
       href={href}
-      className={`hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm  uppercase ${
-        currentPage === name ? "text-white underline" : "text-gray-300"
-      }`}
+      className={`hover:bg-green-hacked-darker hover:text-white px-3 py-2 rounded-md text-sm  uppercase text-gray-300`}
     >
       {description}
     </a>
   );
 };
 
-const Navigation: Component<{ currentPage?: string }> = ({ currentPage }) => {
-  const [isOpen, setIsOpen] = createSignal<boolean>(false);
+const MenuItemCompact: Component<{
+  href: string;
+  description: string;
+  onClick: VoidFunction;
+}> = ({ href, description, onClick }) => {
+  return (
+    <a
+      onClick={onClick}
+      href={href}
+      className="text-white hover:bg-green-hacked-darker  block mx-10 px-3 py-2 rounded-md text-base  uppercase"
+    >
+      {description}
+    </a>
+  );
+};
+
+const Navigation: Component = () => {
+  const [isOpened, setIsOpened] = createSignal<boolean>(false);
 
   return (
     <nav className="bg-black sticky top-0 z-50 font-supply">
@@ -61,56 +84,32 @@ const Navigation: Component<{ currentPage?: string }> = ({ currentPage }) => {
           <div className="flex items-center">
             <div className="hidden md:block order-1">
               <div className="flex items-baseline">
-                <MenuItem
-                  name="about"
-                  description="O nás"
-                  currentPage={currentPage}
-                />
-                <MenuItem
-                  name="hackdays"
-                  description="HackDays"
-                  currentPage={currentPage}
-                />
+                <MenuItem href="#about" description="O nás" />
+                <MenuItem href="#hackdays" description="HackDays" />
               </div>
             </div>
-            <div className="ml-3 mr-3 flex-shrink-0 order-2 transform transition duration-500 hover:scale-110">
+            <div className="mx-3 flex-shrink-0 order-2 transform transition duration-500 hover:scale-110">
               <a href="/" className="hover:cursor-pointer">
                 <img className="h-10 w-10 " src={logo} alt="Root" />
               </a>
             </div>
             <div className="hidden md:block order-3">
               <div className="flex items-baseline">
-                <MenuItem
-                  name="akce"
-                  description="Akce"
-                  currentPage={currentPage}
-                />
+                <MenuItem href="#akce" description="Akce" />
 
-                <MenuItem
-                  name="kontakt"
-                  description="Kontakt"
-                  currentPage={currentPage}
-                />
+                <MenuItem href="#kontakt" description="Kontakt" />
               </div>
             </div>
           </div>
-          <div className="-mr-2 flex md:hidden">
-            <button
-              onClick={() => setIsOpen(!isOpen())}
-              type="button"
-              className="bg-gray-900 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-              aria-controls="mobile-menu"
-              aria-expanded="false"
-            >
-              <span className="sr-only">Otevřít hlavní menu</span>
-              <Show when={isOpen()} fallback={() => <MenuButtonCross />}>
-                <MenuButtonBurger />
-              </Show>
-            </button>
+          <div className="mx-3 md:hidden">
+            <MenuButton
+              onClick={() => setIsOpened(!isOpened())}
+              isMenuOpened={isOpened}
+            />
           </div>
         </div>
       </div>
-      <Show when={isOpen()}>
+      <Show when={isOpened()}>
         <div
           className="md:hidden"
           style="background: repeating-linear-gradient(
@@ -122,37 +121,26 @@ const Navigation: Component<{ currentPage?: string }> = ({ currentPage }) => {
           );"
         >
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <a
-              onClick={() => setIsOpen(!isOpen())}
+            <MenuItemCompact
+              onClick={() => setIsOpened(!isOpened())}
               href="#about"
-              className="text-white hover:bg-gray-700 block mx-10 px-3 py-2 rounded-md text-base  uppercase"
-            >
-              O nás
-            </a>
-
-            <a
-              onClick={() => setIsOpen(!isOpen())}
+              description="O nás"
+            />
+            <MenuItemCompact
+              onClick={() => setIsOpened(!isOpened())}
               href="#hackdays"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white mx-10 block px-3 py-2 rounded-md text-base  uppercase"
-            >
-              HackDays
-            </a>
-
-            <a
-              onClick={() => setIsOpen(!isOpen())}
+              description="HackDays"
+            />
+            <MenuItemCompact
+              onClick={() => setIsOpened(!isOpened())}
               href="#akce"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white mx-10 block px-3 py-2 rounded-md text-base  uppercase"
-            >
-              Akce
-            </a>
-
-            <a
-              onClick={() => setIsOpen(!isOpen())}
-              href="#kontakt"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white mx-10 block px-3 py-2 rounded-md text-base  uppercase"
-            >
-              Kontakt
-            </a>
+              description="Akce"
+            />
+            <MenuItemCompact
+              onClick={() => setIsOpened(!isOpened())}
+              href="#Kontakt"
+              description="Kontakt"
+            />
           </div>
         </div>
       </Show>
