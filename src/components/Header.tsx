@@ -1,5 +1,6 @@
 import { Accessor, Component, Show } from "solid-js";
 import { createSignal } from "solid-js";
+import { Transition } from "solid-transition-group";
 
 import logo from "../assets/img/logo/logo-web.svg";
 
@@ -109,41 +110,56 @@ const Navigation: Component = () => {
           </div>
         </div>
       </div>
-      <Show when={isOpened()}>
-        <div
-          className="md:hidden"
-          style="background: repeating-linear-gradient(
+      <Transition
+        onEnter={(el, done) => {
+          const a = el.animate([{ opacity: 0 }, { opacity: 100 }], {
+            duration: 600,
+          });
+          a.finished.then(done);
+        }}
+        onExit={(el, done) => {
+          const a = el.animate([{ opacity: 1 }, { opacity: 0 }], {
+            duration: 0,
+          });
+          a.finished.then(done);
+        }}
+      >
+        {isOpened() && (
+          <div
+            className="md:hidden"
+            style="background: repeating-linear-gradient(
             -45deg,
             black,
             black 10px,
             #444 10px,
             #444 11px
           );"
-        >
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <MenuItemCompact
-              onClick={() => setIsOpened(!isOpened())}
-              href="#"
-              description="O nás"
-            />
-            <MenuItemCompact
-              onClick={() => setIsOpened(!isOpened())}
-              href="#hackdays"
-              description="HackDays"
-            />
-            <MenuItemCompact
-              onClick={() => setIsOpened(!isOpened())}
-              href="#akce"
-              description="Akce"
-            />
-            <MenuItemCompact
-              onClick={() => setIsOpened(!isOpened())}
-              href="#kontakt"
-              description="Kontakt"
-            />
+          >
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+              <MenuItemCompact
+                onClick={() => setIsOpened(!isOpened())}
+                href="#"
+                description="O nás"
+              />
+              <MenuItemCompact
+                onClick={() => setIsOpened(!isOpened())}
+                href="#hackdays"
+                description="HackDays"
+              />
+              <MenuItemCompact
+                onClick={() => setIsOpened(!isOpened())}
+                href="#akce"
+                description="Akce"
+              />
+              <MenuItemCompact
+                onClick={() => setIsOpened(!isOpened())}
+                href="#kontakt"
+                description="Kontakt"
+              />
+            </div>
           </div>
-        </div>
-      </Show>
+        )}
+      </Transition>
     </nav>
   );
 };
