@@ -2,6 +2,8 @@ import { Component, createSignal, For, onMount } from "solid-js";
 
 import { EventData, Event } from "../components/Event";
 
+import defaultBg from "../assets/img/background/intro-bg.jpg";
+
 interface EventsApiInterface {
   id: number;
   status: string;
@@ -76,11 +78,10 @@ const Events: Component = () => {
           const content: string[] = Array.from(
             document.getElementsByTagName("p")
           ).map((e) => e.innerText + "\n");
-          const img: string | null = document
-            .getElementsByTagName("img")[0]
-            .getAttribute("src");
+          const background: HTMLCollectionOf<HTMLImageElement> = document.getElementsByTagName("img");
+          const imgSrc: string = background.length > 0 ? background[0].getAttribute("src")! : defaultBg;
 
-          setEvents([...events(), new EventData(date, title, link, content, img)]);
+          setEvents([...events(), new EventData(date, title, link, content, imgSrc)]);
         });
       })
       .catch((error) => console.log(error));

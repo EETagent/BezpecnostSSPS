@@ -1,20 +1,18 @@
 import { Component } from "solid-js";
 
-import defaultBg from "../assets/img/background/intro-bg.jpg";
-
 class EventData {
   constructor(
     date: Date,
     title: string,
     link: string,
     content: string[],
-    img?: string | null
+    img: string
   ) {
     this.date = date;
     this.title = title;
     this.link = link;
     this.content = content;
-    this.img = img ? img : defaultBg;
+    this.img = img;
   }
   date: Date;
   title: string;
