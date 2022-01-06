@@ -41,15 +41,13 @@ const Event: Component<{ data: EventData }> = ({ data }) => {
             {data.content[0]}
             {data.content[1]}
           </p>
-          <div className="mt-auto p-2 rounded-b-3xl md:rounded-b-none md:rounded-br-3xl text-center bg-green-hacked hover:transition-colors hover:duration-300 hover:bg-green-hacked-darker hover:cursor-pointer">
-            <a
-              target="_blank"
-              href={data.link}
-              className="text-xl text-white font-supply uppercase "
-            >
-              Zjistit více!
-            </a>
-          </div>
+          <a
+            target="_blank"
+            href={data.link}
+            className="mt-auto p-2 rounded-b-3xl md:rounded-b-none md:rounded-br-3xl text-center bg-green-hacked hover:transition-colors hover:duration-300 hover:bg-green-hacked-darker hover:cursor-pointer text-xl text-white font-supply uppercase "
+          >
+            Zjistit více!
+          </a>
         </div>
       </div>
     </div>
