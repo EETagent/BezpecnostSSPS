@@ -33,7 +33,7 @@ enum FormResponse {
 
 interface FormResponseJson {
   result: string;
-  error?: string
+  error?: string;
 }
 
 const submit = async (form: FormFields): Promise<FormResponse> => {
@@ -112,6 +112,8 @@ const RegistrationForm: Component = () => {
     FormResponse.NOTSENT
   );
 
+  const [submitStatus, setSubmitStatus] = createSignal<boolean>(false);
+
   const { form, updateFormField, setField, submit } = useForm();
 
   const handleSubmit = (event: Event): void => {
@@ -121,6 +123,7 @@ const RegistrationForm: Component = () => {
         .execute("Register")
         .then(async (token) => {
           setField("captcha", token);
+          setSubmitStatus(true);
           setFormStatus(await submit(form));
         })
         .catch(() => setFormStatus(FormResponse.CAPTCHA));
@@ -150,6 +153,7 @@ const RegistrationForm: Component = () => {
       id="registration"
     >
       <Show when={formStatus() !== FormResponse.NOTSENT}>
+        {setSubmitStatus(false)}
         <Switch>
           <Match when={formStatus() === FormResponse.SUCCESS}>
             <ResponseBox
@@ -170,6 +174,9 @@ const RegistrationForm: Component = () => {
             ></ResponseBox>
           </Match>
         </Switch>
+      </Show>
+      <Show when={submitStatus() === true}>
+        <span className="text-white font-supply">Odesílání zprávy....</span>
       </Show>
       <div className="flex flex-row mt-7 transition ease-in-out delay-150  hover:-translate-y-1 duration-300">
         <input
