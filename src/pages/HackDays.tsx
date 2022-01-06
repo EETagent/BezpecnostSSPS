@@ -9,6 +9,8 @@ import posterWebp from "../assets/img/hackdays-video.webp";
 
 import video from "../assets/video/hackdays.mp4";
 
+import Terminal from "../components/Terminal";
+
 // @ts-ignore
 import "fslightbox";
 
@@ -53,9 +55,10 @@ const HackDays: Component = () => {
         src={bg}
       />
       <div className="w-4/5 z-20 flex flex-col justify-center items-center my-10 lg:my-16 2xl:my-32">
-        <h1 className="mt-10 font-hacked text-white font-bold uppercase text-6xl md:text-8xl">
+        <h1 className="my-10 font-hacked text-white font-bold uppercase text-6xl md:text-8xl">
           HackDays
         </h1>
+        <Terminal/>
         <div className="my-10 2xl:my-16 grow flex flex-col md:flex-row items-center justify-between">
           <HackDaysItem
             media={terminal}
