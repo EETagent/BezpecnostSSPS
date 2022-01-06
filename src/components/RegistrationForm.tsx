@@ -255,6 +255,9 @@ const RegistrationForm: Component = () => {
           zpracováním osobních údajů
         </a>
       </div>
+      <div className="mt-3 font-supply text-gray-500 text-[0.1rem] w-8/12">
+        <a href="mailto:registrace@hackdays.eu?subject=HackDays 2022 | Předběžná registrace přes webový formulář">Staré dobré: <span className="underline">záložní registrace</span></a>
+      </div>
     </form>
   );
 };
