@@ -2,6 +2,7 @@ import type { Component } from "solid-js";
 
 import facebook from "../../assets/img/icons/facebook.svg";
 import youtube from "../../assets/img/icons/youtube.svg";
+import github from "../../assets/img/icons/github.svg";
 
 const Kontakt: Component = () => {
   return (
@@ -47,7 +48,7 @@ const Kontakt: Component = () => {
                 Facebook
               </a>
             </span>
-            <span className="inline-flex items-center">
+            <span className="mt-2 inline-flex items-center">
               <img src={youtube} className="h-5 mr-2" alt="YouTube ikonka" />
               <a
                 target="_blank"
@@ -55,6 +56,16 @@ const Kontakt: Component = () => {
                 className="underline hover:text-zinc-300"
               >
                 YouTube kanál
+              </a>
+            </span>
+            <span className="mt-2 inline-flex items-center">
+              <img src={github} className="h-5 mr-2" alt="GitHub maskot" />
+              <a
+                target="_blank"
+                href="https://github.com/EETagent/BezpecnostSSPS"
+                className="underline hover:text-zinc-300"
+              >
+                GitHub repozitář
               </a>
             </span>
           </div>
