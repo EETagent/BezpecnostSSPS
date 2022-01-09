@@ -1,22 +1,25 @@
-import type { Component } from "solid-js";
+import { Component, lazy } from "solid-js";
+import { Route, Routes } from "solid-app-router";
 
 import NavBar from "./components/NavBar";
-import Intro from "./pages/Intro";
-import HackDays from "./pages/HackDays";
-import HackDaysRegistrace from "./pages/Registration";
-import Kontakt from "./pages/Kontakt";
-import Events from "./pages/Events";
+
+const Home = lazy(() => import("./pages/Home"));
+const About = lazy(() => import("./pages/About"));
 
 const App: Component = () => {
   return (
-    <div>
-      <NavBar />
-      <Intro />
-      <HackDays />
-      <Events />
-      <HackDaysRegistrace />
-      <Kontakt />
-    </div>
+    <>
+      <header className="sticky top-0 z-50">
+        <NavBar />
+      </header>
+      <main className="relative bg-black">
+        <Routes>
+          <Route path="/*all" element={<Home />} />
+          <Route path="/about" element={<About />} />
+
+        </Routes>
+      </main>
+    </>
   );
 };
 

@@ -1,3 +1,4 @@
+import { Link } from "solid-app-router";
 import { Accessor, Component, Show } from "solid-js";
 import { createSignal } from "solid-js";
 import { Transition } from "solid-transition-group";
@@ -85,20 +86,20 @@ const Navigation: Component = () => {
           <div className="flex items-center">
             <div className="hidden md:block order-1">
               <div className="flex items-baseline">
-                <MenuItem href="#about" description="O nás" />
-                <MenuItem href="#hackdays" description="HackDays" />
+                <MenuItem href="/#info" description="O nás" />
+                <MenuItem href="/#hackdays" description="HackDays" />
               </div>
             </div>
             <div className="mx-3 flex-shrink-0 order-2 transform transition duration-500 hover:scale-110">
-              <a href="/" className="hover:cursor-pointer">
+              <Link href="/" className="hover:cursor-pointer">
                 <img className="h-10 w-10 " src={logo} alt="Root" />
-              </a>
+              </Link>
             </div>
             <div className="hidden md:block order-3">
               <div className="flex items-baseline">
-                <MenuItem href="#akce" description="Akce" />
+                <MenuItem href="/#akce" description="Akce" />
 
-                <MenuItem href="#kontakt" description="Kontakt" />
+                <MenuItem href="/#kontakt" description="Kontakt" />
               </div>
             </div>
           </div>
@@ -138,22 +139,22 @@ const Navigation: Component = () => {
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               <MenuItemCompact
                 onClick={() => setIsOpened(!isOpened())}
-                href="#"
+                href="/#"
                 description="O nás"
               />
               <MenuItemCompact
                 onClick={() => setIsOpened(!isOpened())}
-                href="#hackdays"
+                href="/#hackdays"
                 description="HackDays"
               />
               <MenuItemCompact
                 onClick={() => setIsOpened(!isOpened())}
-                href="#akce"
+                href="/#akce"
                 description="Akce"
               />
               <MenuItemCompact
                 onClick={() => setIsOpened(!isOpened())}
-                href="#kontakt"
+                href="/#kontakt"
                 description="Kontakt"
               />
             </div>

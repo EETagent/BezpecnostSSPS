@@ -1,6 +1,6 @@
 import { Component, createSignal, For, onMount } from "solid-js";
 
-import defaultBg from "../assets/img/background/intro-bg.jpg";
+import defaultBg from "../../assets/img/background/intro-bg.jpg";
 
 interface EventsApiInterface {
   id: number;

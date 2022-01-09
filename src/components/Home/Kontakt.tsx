@@ -1,7 +1,7 @@
 import type { Component } from "solid-js";
 
-import facebook from "../assets/img/icons/facebook.svg";
-import youtube from "../assets/img/icons/youtube.svg";
+import facebook from "../../assets/img/icons/facebook.svg";
+import youtube from "../../assets/img/icons/youtube.svg";
 
 const Kontakt: Component = () => {
   return (
@@ -25,6 +25,12 @@ const Kontakt: Component = () => {
               kb@ssps.cz
             </a>
             <a
+              href="mailto:registrace@hackdays.eu"
+              className="underline hover:text-zinc-300"
+            >
+              registrace@hackdays.eu
+            </a>
+            <a
               href="https://ssps.cz"
               target="_blank"
               className="underline hover:text-zinc-300"
@@ -32,7 +38,7 @@ const Kontakt: Component = () => {
               Webové stránky školy
             </a>
             <span className="mt-3 mb-1 inline-flex items-center">
-              <img src={facebook} className="h-5 mr-2" alt="" />
+              <img src={facebook} className="h-5 mr-2" alt="Facebook ikonka" />
               <a
                 target="_blank"
                 href="https://www.facebook.com/kybernetickaBezpecnostSSPS/"
@@ -42,7 +48,7 @@ const Kontakt: Component = () => {
               </a>
             </span>
             <span className="inline-flex items-center">
-              <img src={youtube} className="h-5 mr-2" alt="" />
+              <img src={youtube} className="h-5 mr-2" alt="YouTube ikonka" />
               <a
                 target="_blank"
                 href="https://www.youtube.com/channel/UCwsDbR-Y_PctzZGvEIf_dOQ"

@@ -1,13 +1,13 @@
 import type { Component } from "solid-js";
 
-import bg from "../assets/img/background/hackdays-bg.jpg";
+import bg from "../../assets/img/background/hackdays-bg.jpg";
 
-import terminal from "../assets/img/hackdays-terminal.png";
-import poster from "../assets/img/hackdays-video.png";
-import terminalWebP from "../assets/img/hackdays-terminal.webp";
-import posterWebp from "../assets/img/hackdays-video.webp";
+import terminal from "../../assets/img/hackdays-terminal.png";
+import poster from "../../assets/img/hackdays-video.png";
+import terminalWebP from "../../assets/img/hackdays-terminal.webp";
+import posterWebp from "../../assets/img/hackdays-video.webp";
 
-import video from "../assets/video/hackdays.mp4";
+import video from "../../assets/video/hackdays.mp4";
 
 // @ts-ignore
 import "fslightbox";
@@ -15,9 +15,10 @@ import "fslightbox";
 const HackDaysItem: Component<{
   media: string;
   mediaAlternative: string;
+  alt: string;
   video?: string;
   left: boolean;
-}> = ({ media: media, mediaAlternative: mediaWebP, video, left }) => {
+}> = ({ media: media, mediaAlternative: mediaWebP, alt, video, left }) => {
   const MediaLightbox = (name: string) => {
     // @ts-ignore
     const lightbox = new FsLightbox();
@@ -37,7 +38,7 @@ const HackDaysItem: Component<{
         onClick={() => {
           video != null ? MediaLightbox(video) : MediaLightbox(media);
         }}
-        alt=""
+        alt={alt}
       />
     </picture>
   );
@@ -138,6 +139,7 @@ const HackDays: Component = () => {
       <img
         className="absolute z-10 w-auto min-w-full min-h-full object-cover"
         src={bg}
+        alt="Fotografie HackDays"
       />
       <div className="w-4/5 z-20 flex flex-col justify-center items-center my-10 lg:my-16 2xl:my-32">
         <h1 className="my-10 font-hacked text-white font-bold uppercase text-6xl md:text-8xl">
@@ -148,22 +150,16 @@ const HackDays: Component = () => {
           <HackDaysItem
             media={terminal}
             mediaAlternative={terminalWebP}
+            alt="Plán HackDays"
             left={true}
           />
           <HackDaysItem
             media={poster}
             mediaAlternative={posterWebp}
+            alt="Upoutávka HackDays"
             video={video}
             left={false}
           />
-          {/* <video
-            controls
-            preload="none"
-            poster={poster}
-            className="ml-3 mt-10 w-1/2"
-            src={video}
-            onClick={VideoClick}
-          ></video> */}
         </div>
       </div>
     </section>

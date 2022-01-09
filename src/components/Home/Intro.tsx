@@ -1,17 +1,19 @@
+import { Link } from "solid-app-router";
 import type { Component } from "solid-js";
 
-import bg from "../assets/img/background/intro-bg.jpg";
-import logo from "../assets/img/logo/logo-lev.png";
+import bg from "../../assets/img/background/intro-bg.jpg";
+import logo from "../../assets/img/logo/logo-lev.png";
 
 const Intro: Component = () => {
   return (
     <section
-      id="about"
-      className="relative flex md:items-center justify-center overflow-y-scroll bg-black  w-screen h-screen"
+      id="info"
+      className="relative flex md:items-center justify-center overflow-y-scroll md:overflow-y-hidden bg-black  w-screen h-screen"
     >
       <img
         className="absolute z-10 w-auto min-w-full min-h-full object-cover h-screen"
         src={bg}
+        alt="Fotografie kybernetické serverovny"
       />
       <div className="w-4/5 z-20 flex flex-col h-1/2 items-center md:items-start">
         <h2 className="font-sans text-white font-light uppercase md:text-5xl 2xl:text-7xl">
@@ -24,7 +26,7 @@ const Intro: Component = () => {
           <img
             src={logo}
             className="h-16 2xl:h-20 mt-8 md:mt-0 md:h-6 md:mb-10"
-            alt=""
+            alt="Logo"
           />
         </div>
 
@@ -42,12 +44,12 @@ const Intro: Component = () => {
           a&nbsp;přibližujeme jim problematiku kybernetické bezpečnosti.
         </p>
         <div className="mt-10">
-          <a
-            href="#"
+          <Link
+            href="about"
             className="mt-6 px-6 py-3 rounded-3xl bg-green-hacked text-white font-supply uppercase no-underline hover:transition-colors hover:duration-300 hover:bg-green-hacked-darker hover:cursor-pointer"
           >
             Zjistit více
-          </a>
+          </Link>
         </div>
       </div>
     </section>

@@ -12,8 +12,8 @@ import { createStore } from "solid-js/store";
 import { load, ReCaptchaInstance } from "recaptcha-v3";
 const REACAPTCHA_SITE_KEY: string = "6Lcy1L0dAAAAAAMsrNsQg-3HHjRfpFjRAAnJcooR";
 
-import GDPR from "../assets/GDPR.pdf";
-import bg from "../assets/img/background/registrace-bg.jpg";
+import GDPR from "../../assets/GDPR.pdf";
+import bg from "../../assets/img/background/registrace-bg.jpg";
 
 type FormFields = {
   name: string;
@@ -319,6 +319,7 @@ const HackDaysRegistrace: Component = () => {
       <img
         className="absolute z-10 w-auto min-w-full min-h-full object-cover"
         src={bg}
+        alt="Background image"
       />
       <div className="z-20 flex flex-col w-4/5 items-center md:items-start my-10 lg:my-16 2xl:my-32">
         <h2 className="font-sans text-white font-light uppercase md:text-5xl">
