@@ -9,7 +9,7 @@ import Events from "./pages/Events";
 
 const App: Component = () => {
   return (
-    <div className="overflow-x-hidden">
+    <div>
       <Header />
       <Intro />
       <HackDays />
