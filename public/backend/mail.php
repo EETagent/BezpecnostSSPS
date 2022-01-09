@@ -56,9 +56,8 @@ try {
             $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
             $recaptcha = json_decode($recaptcha);
         
-            //TODO: Vybrat optimální hodnotu mezi 0-1
             if($recaptcha->success == true) {
-                if ($recaptcha->score >= 0.5) {
+                if ($recaptcha->score >= 0.3) {
                     //Nastavení
                     $mail->isSMTP();                                                                        //Aktivování SMTP
                     $mail->Host       = 'smtp.seznam.cz';                                                   //Nastavení SMTP serveru
