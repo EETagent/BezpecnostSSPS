@@ -21,10 +21,10 @@ const About: Component = () => {
       id="about"
       className="w-[80%] mx-auto py-10 flex flex-col items-center justify-center overflow-hidden text-white leading-relaxed"
     >
-      <div className="mt-10">
+      <div className="mt-10 mb-5">
         <Link
           href="/"
-          className="mt-6 px-6 py-3 rounded-3xl bg-green-hacked text-white font-supply uppercase no-underline hover:transition-colors hover:duration-300 hover:bg-green-hacked-darker hover:cursor-pointer"
+          className="px-6 py-3 rounded-3xl bg-green-hacked text-white font-supply uppercase no-underline hover:transition-colors hover:duration-300 hover:bg-green-hacked-darker hover:cursor-pointer"
         >
           Zpět na hlavní stránku
         </Link>
