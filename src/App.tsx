@@ -1,6 +1,6 @@
 import type { Component } from "solid-js";
 
-import Header from "./components/Header";
+import NavBar from "./components/NavBar";
 import Intro from "./pages/Intro";
 import HackDays from "./pages/HackDays";
 import HackDaysRegistrace from "./pages/Registration";
@@ -10,7 +10,7 @@ import Events from "./pages/Events";
 const App: Component = () => {
   return (
     <div>
-      <Header />
+      <NavBar />
       <Intro />
       <HackDays />
       <Events />

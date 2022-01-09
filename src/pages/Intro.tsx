@@ -5,9 +5,9 @@ import logo from "../assets/img/logo/logo-lev.png";
 
 const Intro: Component = () => {
   return (
-    <div
+    <section
       id="about"
-      className="relative flex md:items-center justify-center overflow-y-scroll bg-black h-screen"
+      className="relative flex md:items-center justify-center overflow-y-scroll bg-black  w-screen h-screen"
     >
       <img
         className="absolute z-10 w-auto min-w-full min-h-full object-cover h-screen"
@@ -50,7 +50,7 @@ const Intro: Component = () => {
           </a>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 export default Intro;

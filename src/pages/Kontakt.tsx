@@ -5,7 +5,7 @@ import youtube from "../assets/img/icons/youtube.svg";
 
 const Kontakt: Component = () => {
   return (
-    <div id="kontakt" className="bg-black h-[80vh] flex justify-center ">
+    <section id="kontakt" className="bg-black h-[80vh] flex justify-center ">
       <div className="w-4/5 flex flex-col items-center my-10 lg:my-16 2xl:my-32">
         <h1 className="mt-8 uppercase text-white font-supply text-5xl md:text-7xl">
           Kontakt
@@ -54,7 +54,7 @@ const Kontakt: Component = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 export default Kontakt;
