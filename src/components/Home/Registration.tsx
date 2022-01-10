@@ -192,7 +192,9 @@ const HackDaysRegistrace: Component = () => {
         id="registration"
       >
         <Show when={formStatus() !== FormResponse.NOTSENT}>
-          {setSubmitStatus(false)}
+          {setTimeout(() => {
+            setSubmitStatus(false);
+          }, 2000)}
           <Switch>
             <Match when={formStatus() === FormResponse.SUCCESS}>
               <ResponseBox
@@ -215,7 +217,9 @@ const HackDaysRegistrace: Component = () => {
           </Switch>
         </Show>
         <Show when={submitStatus() === true}>
-          <div className="text-white font-supply w-full mt-3 text-center md:text-left">Odesílání zprávy....</div>
+          <div className="text-white font-supply w-full mt-3 text-center md:text-left">
+            Odesílání zprávy....
+          </div>
         </Show>
         <div className="flex flex-row mt-7 transition ease-in-out delay-150  hover:-translate-y-1 duration-300">
           <input
