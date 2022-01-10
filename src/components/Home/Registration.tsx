@@ -77,12 +77,6 @@ const HackDaysRegistrace: Component = () => {
       captcha: "",
     });
 
-    const clearField = (fieldName: string) => {
-      setForm({
-        [fieldName]: "",
-      });
-    };
-
     const setField = (fieldName: string, fieldValue: string) => {
       setForm({
         [fieldName]: fieldValue,
@@ -102,7 +96,7 @@ const HackDaysRegistrace: Component = () => {
       }
     };
 
-    return { form, submit, setField, updateFormField, clearField };
+    return { form, submit, setField, updateFormField };
   };
 
   const RegistrationForm: Component = () => {
@@ -161,13 +155,15 @@ const HackDaysRegistrace: Component = () => {
 
     const handleSubmit = (event: Event): void => {
       event.preventDefault();
+      setSubmitStatus(true);
       if (typeof recaptcha() !== "undefined") {
         recaptcha()!
           .execute("Register")
           .then(async (token) => {
             setField("captcha", token);
-            setSubmitStatus(true);
-            setFormStatus(await submit(form));
+            setTimeout(async () => {
+              setFormStatus(await submit(form));
+            }, 150);
           })
           .catch(() => setFormStatus(FormResponse.CAPTCHA));
       } else {
@@ -280,7 +276,8 @@ const HackDaysRegistrace: Component = () => {
               <button
                 form="registration"
                 type="submit"
-                className="w-4/6 p-2 text-sm text-white bg-green-hacked text-center font-supply uppercase rounded-br-2xl hover:transition-colors hover:duration-300 hover:bg-green-hacked-darker hover:cursor-pointer"
+                disabled={submitStatus()}
+                className="w-4/6 p-2 text-sm text-white bg-green-hacked disabled:bg-red-800 text-center font-supply uppercase rounded-br-2xl hover:transition-colors hover:duration-300 hover:bg-green-hacked-darker hover:cursor-pointer"
               >
                 Zaregistrovat se!
               </button>
