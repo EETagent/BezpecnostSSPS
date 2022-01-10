@@ -74,7 +74,7 @@ try {
                     $mail->addReplyTo($API_REQUEST->{'email'}, $API_REQUEST->{'name'});
                     
                     //Obsah
-                    $content = 'Jméno: ' . $API_REQUEST->{'name'} . "\n E-mail: " . $API_REQUEST->{'email'} . "\n Rok narození: " . $API_REQUEST->{'birthDate'} ?? '1984'  . "\n Zpráva: " . $API_REQUEST->{'message'} ?? '';
+                    $content = 'Jméno: ' . $API_REQUEST->{'name'} . "\n E-mail: " . $API_REQUEST->{'email'} . "\n Rok narození: " . $API_REQUEST->{'birthDate'} . "\n Zpráva: " . $API_REQUEST->{'message'};
                     $mail->isHTML(false);                                  
                     $mail->Subject = 'HackDays 2022 | Předběžná registrace přes webový formulář';
                     $mail->Body    = $content;
