@@ -37,13 +37,21 @@ interface FormResponseJson {
 
 const HackDaysRegistrace: Component = () => {
   const submit = async (form: FormFields): Promise<FormResponse> => {
+    const dataToSubmit = {
+      name: form.name,
+      email: form.email,
+      message: form.message,
+      birthDate: form.birthDate,
+      captcha: form.captcha,
+    };
+
     const response = await fetch("backend/mail.php", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(form),
+      body: JSON.stringify(dataToSubmit),
     });
 
     const responseJSON: FormResponseJson = await response.json();
@@ -69,13 +77,9 @@ const HackDaysRegistrace: Component = () => {
       captcha: "",
     });
 
-    const clearFields = () => {
+    const clearField = (fieldName: string) => {
       setForm({
-        name: "",
-        email: "",
-        message: "",
-        birthDate: "",
-        captcha: "",
+        [fieldName]: "",
       });
     };
 
@@ -98,7 +102,7 @@ const HackDaysRegistrace: Component = () => {
       }
     };
 
-    return { form, submit, setField, clearFields, updateFormField };
+    return { form, submit, setField, updateFormField, clearField };
   };
 
   const RegistrationForm: Component = () => {
@@ -153,7 +157,7 @@ const HackDaysRegistrace: Component = () => {
 
     const [submitStatus, setSubmitStatus] = createSignal<boolean>(false);
 
-    const { form, updateFormField, setField, clearFields, submit } = useForm();
+    const { form, updateFormField, setField, submit } = useForm();
 
     const handleSubmit = (event: Event): void => {
       event.preventDefault();
@@ -163,15 +167,7 @@ const HackDaysRegistrace: Component = () => {
           .then(async (token) => {
             setField("captcha", token);
             setSubmitStatus(true);
-            const dataToSubmit = {
-              name: form.name,
-              email: form.email,
-              message: form.message,
-              birthDate: form.birthDate,
-              captcha: form.captcha,
-            };
-            clearFields();
-            setFormStatus(await submit(dataToSubmit));
+            setFormStatus(await submit(form));
           })
           .catch(() => setFormStatus(FormResponse.CAPTCHA));
       } else {
@@ -223,9 +219,7 @@ const HackDaysRegistrace: Component = () => {
           </Switch>
         </Show>
         <Show when={submitStatus() === true}>
-          <div className="text-white font-supply w-full mt-3 text-center md:text-left">
-            Odesílání zprávy....
-          </div>
+          <div className="text-white font-supply w-full mt-3 text-center md:text-left">Odesílání zprávy....</div>
         </Show>
         <div className="flex flex-row mt-7 transition ease-in-out delay-150  hover:-translate-y-1 duration-300">
           <input
@@ -325,7 +319,7 @@ const HackDaysRegistrace: Component = () => {
       <img
         className="absolute z-10 w-auto min-w-full min-h-full object-cover"
         src={bg}
-        alt="Fotografie HackDays"
+        alt="Background image"
       />
       <div className="z-20 flex flex-col w-4/5 items-center md:items-start my-10 lg:my-16 2xl:my-32">
         <h2 className="font-sans text-white font-light uppercase md:text-5xl">
