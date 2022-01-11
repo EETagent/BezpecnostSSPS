@@ -8,7 +8,6 @@ const Intro: Component = () => {
   return (
     <section
       id="info"
-      className="relative flex md:items-center justify-center overflow-y-scroll md:overflow-y-hidden bg-black  w-screen h-screen"
       className="relative flex md:items-center justify-center bg-black  w-screen min-h-screen"
     >
       <img
@@ -44,13 +43,23 @@ const Intro: Component = () => {
           HackDays, kde žákům základních škol předáváme znalosti
           a&nbsp;přibližujeme jim problematiku kybernetické bezpečnosti.
         </p>
-        <div className="mt-10">
-          <Link
-            href="about"
-            className="mt-6 px-6 py-3 rounded-3xl bg-green-hacked text-white font-supply uppercase no-underline hover:transition-colors hover:duration-300 hover:bg-green-hacked-darker hover:cursor-pointer"
-          >
-            Zjistit více
-          </Link>
+        <div className="mt-10 flex flex-col items-center justify-between md:flex-row">
+          <div>
+            <Link
+              href="about"
+              className="px-6 py-3 rounded-3xl bg-green-hacked text-white font-supply uppercase no-underline hover:transition-colors hover:duration-300 hover:bg-green-hacked-darker hover:cursor-pointer"
+            >
+              Zjistit více
+            </Link>
+          </div>
+          <div className="my-10 md:my-0 md:ml-5">
+            <a
+              href="#registrace"
+              className="px-6 py-3 rounded-3xl bg-blue-hacked text-white font-supply uppercase no-underline hover:transition-colors hover:duration-300 hover:bg-blue-hacked-darker hover:cursor-pointer"
+            >
+              Registrace <span className="font-hacked">HackDays</span>!
+            </a>
+          </div>
         </div>
       </div>
     </section>

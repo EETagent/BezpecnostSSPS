@@ -7,6 +7,8 @@ module.exports = {
       colors: {
         "green-hacked": "#8d9c2f",
         "green-hacked-darker": "#657216",
+        "blue-hacked": "#2e5999",
+        "blue-hacked-darker": "#1a4067",
         "response-error": "#f3d8da",
         "response-success": "#d5e6de",
 
