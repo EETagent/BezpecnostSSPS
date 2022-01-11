@@ -9,6 +9,7 @@ const Intro: Component = () => {
     <section
       id="info"
       className="relative flex md:items-center justify-center overflow-y-scroll md:overflow-y-hidden bg-black  w-screen h-screen"
+      className="relative flex md:items-center justify-center bg-black  w-screen min-h-screen"
     >
       <img
         className="absolute z-10 w-auto min-w-full min-h-full object-cover h-screen"
