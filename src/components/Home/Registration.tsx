@@ -45,7 +45,7 @@ const HackDaysRegistrace: Component = () => {
       captcha: form.captcha,
     };
 
-    const response = await fetch("backend/mail.php", {
+    const response = await fetch("/backend/mail/send.php", {
       method: "POST",
       headers: {
         Accept: "application/json",
