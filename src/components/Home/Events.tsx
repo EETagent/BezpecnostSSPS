@@ -42,8 +42,12 @@ const Events: Component = () => {
         </div>
         <div className="h-full flex flex-col justify-between w-full md:flex-row rounded-b-3xl">
           <div className="py-2 flex flex-row justify-around md:rounded-bl-3xl font-supply leading-none text-white uppercase bg-black md:flex-col md:items-center md:justify-center md:w-1/4">
-            <div className="md:text-3xl">{data.date.getDay()}</div>
-            <div className="md:text-6xl">{data.date.getMonth()}</div>
+            <div className="md:text-3xl">
+              {("0" + data.date.getDate()).slice(-2)}
+            </div>
+            <div className="md:text-6xl">
+              {("0" + (data.date.getMonth() + 1)).slice(-2)}
+            </div>
             <div className="md:text-xl">{data.date.getFullYear()}</div>
           </div>
           <div className="flex-grow font-normal text-gray-800 flex flex-col md:w-3/4">
@@ -134,7 +138,7 @@ const Events: Component = () => {
       })
       .catch((error) => console.log(error));
   });
-  
+
   return (
     <section
       id="akce"
