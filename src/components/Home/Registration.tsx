@@ -161,9 +161,7 @@ const HackDaysRegistrace: Component = () => {
           .execute("Register")
           .then(async (token) => {
             setField("captcha", token);
-            setTimeout(async () => {
-              setFormStatus(await submit(form));
-            }, 150);
+            setFormStatus(await submit(form));
           })
           .catch(() => setFormStatus(FormResponse.CAPTCHA));
       } else {
@@ -192,9 +190,12 @@ const HackDaysRegistrace: Component = () => {
         id="registration"
       >
         <Show when={formStatus() !== FormResponse.NOTSENT}>
-          {setTimeout(() => {
-            setSubmitStatus(false);
-          }, 2000)}
+          {((): null => {
+            setTimeout(() => {
+              setSubmitStatus(false);
+            }, 2000);
+            return null;
+          })()}
           <Switch>
             <Match when={formStatus() === FormResponse.SUCCESS}>
               <ResponseBox
