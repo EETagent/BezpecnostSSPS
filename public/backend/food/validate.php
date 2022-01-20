@@ -1,7 +1,6 @@
 <?php
-require '../utils.php';
-
-const SECRET = 'REDACTED';
+require_once '../utils.php';
+require_once '../secret.php';
 
 try {
     $php_input = file_get_contents('php://input');
@@ -14,9 +13,13 @@ try {
     
     if (!isset($API_REQUEST->{'token'})) {
         throw new Exception('Missing token property');
-    } 
+    }
 
-    echo json_encode(array('result'=>isValidJWT($API_REQUEST->{'token'}, SECRET)));
+    if (isValidJwt($API_REQUEST->{'token'}, FOOD_TOKEN_SECRET)) {
+        echo json_encode(array('result'=>'true'));
+    } else {
+        echo json_encode(array('result'=>'false'));
+    }
 } 
 
 catch (Exception $e) {

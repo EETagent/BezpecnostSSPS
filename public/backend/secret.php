@@ -1,0 +1,7 @@
+<?php
+const RECAPTCHA_SECRET = 'REDACTED';
+
+const MAIL_SECRET = 'REDACTED';
+
+const FOOD_TOKEN_SECRET = 'REDACTED';
+?>
