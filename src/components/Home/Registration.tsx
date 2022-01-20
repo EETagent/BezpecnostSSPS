@@ -237,7 +237,8 @@ const HackDaysRegistrace: Component = () => {
             required
             value={form.birthDate}
             onChange={updateFormField("birthDate")}
-            className="rounded-r-2xl text-sm text-gray-400 font-supply outline-none border-solid border-l-2 text-center"
+            className="rounded-r-2xl rounded-l-none text-sm text-gray-400 font-supply outline-none border-solid border-l-2 text-center"
+            style="-webkit-appearance:none;"
           >
             <option disabled selected value="">
               Rok nar.
