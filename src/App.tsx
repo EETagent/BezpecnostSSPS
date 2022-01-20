@@ -6,8 +6,7 @@ import NavBar from "./components/NavBar";
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
 
-const FoodVisitor = lazy(() => import("./pages/Food/[id]"));
-const FoodDashboard = lazy(() => import("./pages/Food/Dashboard"));
+const Food = lazy(() => import("./pages/Food/[id]"));
 
 const App: Component = () => {
   return (
@@ -19,8 +18,7 @@ const App: Component = () => {
         <Routes>
           <Route path="/*all" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/food/" element={<FoodDashboard />} />
-          <Route path="/food/ucastnik/:id" element={<FoodVisitor />} />
+          <Route path="/food/ucastnik/:id" element={<Food />} />
         </Routes>
       </main>
     </div>
