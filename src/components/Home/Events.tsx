@@ -112,7 +112,7 @@ const Events: Component = () => {
       .then((response) => response.json())
       .then((json: Array<EventsApiInterface>) => {
         const filtered = json.filter((e) => filterEvents(e));
-        filtered.forEach((filteredEvent: EventsApiInterface) => {
+        filtered.slice(0, 4).forEach((filteredEvent: EventsApiInterface) => {
           const date: Date = new Date(filteredEvent.date);
           const title: string = filteredEvent.title.rendered;
           const link: string = filteredEvent.link;
