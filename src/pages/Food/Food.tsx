@@ -1,6 +1,7 @@
 enum FoodCategories {
   ALL = "VŠECHNO",
   VEGETARIAN = "BEZ MASA",
+  FISH = "RYBY",
 }
 
 interface FoodInterface {
@@ -13,6 +14,7 @@ interface FoodInterface {
 const FOODCATEGORIES: FoodCategories[] = [
   FoodCategories.ALL,
   FoodCategories.VEGETARIAN,
+  FoodCategories.FISH,
 ];
 
 const FOODS: FoodInterface[] = [
@@ -20,44 +22,71 @@ const FOODS: FoodInterface[] = [
     name: "Pizza",
     image:
       "https://images.aktin.cz/recipe-cover/cover-desktop/1559890836-a-2935.jpg?v=1586538776",
-    categories: [FoodCategories.ALL],
+    categories: [FoodCategories.ALL, FoodCategories.VEGETARIAN, FoodCategories.FISH],
     subitems: [
       {
-        name: "Pizza Jepes",
+        name: "Pizza Margherita",
         image:
-          "https://images.unsplash.com/photo-1574126154517-d1e0d89ef734?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8NHx8fGVufDB8fHx8&w=1000&q=80",
-        categories: [FoodCategories.ALL, FoodCategories.VEGETARIAN],
+          "https://assets.tmecosys.com/image/upload/t_web767x639/img/recipe/ras/Assets/5802fab5-fdce-468a-a830-43e8001f5a72/Derivates/c00dc34a-e73d-42f0-a86e-e2fd967d33fe.jpg",
+        categories: [FoodCategories.ALL, FoodCategories.VEGETARIAN, FoodCategories.FISH],
       },
       {
-        name: "Pizza Nepes",
+        name: "Pizza Hawai",
         image:
-          "https://cdn.pixabay.com/photo/2017/12/09/08/18/pizza-3007395__480.jpg",
-        categories: [FoodCategories.ALL, FoodCategories.VEGETARIAN],
+          "https://fototapeta12.cz/themes/default-bootstrap/functions/timthumb.php?src=https://st2.depositphotos.com/1699440/8512/i/950/depositphotos_85123736-stock-photo-close-up-pizza-hawai.jpg&w=1023&h=682",
+        categories: [FoodCategories.ALL],
       },
       {
-        name: "Pizza JepesČiNepes",
-        image:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiDfc3rlnKkuy0a-Fi4gjFSn4SLDyjyhPQHLhQhMp1l9CL5A5ddjShBR2ebD1VSVVKs7w&usqp=CAU",
-        categories: [FoodCategories.ALL, FoodCategories.VEGETARIAN],
+        name: "Pizza Vegetariana",
+        image: "https://pizzafranci.cz/fotky/pizza/pizza-vegetariana.jpg",
+        categories: [FoodCategories.ALL, FoodCategories.VEGETARIAN, FoodCategories.FISH],
       },
     ],
-  },
-  {
-    name: "Guláš",
-    image: "https://sazenicka.cz/wp-content/uploads/2019/05/tráva.jpg",
-    categories: [FoodCategories.ALL, FoodCategories.VEGETARIAN],
   },
   {
     name: "Kebab",
     image:
       "https://dlabarnauno.adaptee.cz/assets/images/9714809b755cbebbb1a09b78768fe27e/36-600.jpg",
-    categories: [FoodCategories.ALL],
+    categories: [FoodCategories.ALL, FoodCategories.VEGETARIAN, FoodCategories.FISH],
+    subitems: [
+      {
+        name: "Klasický Kebab",
+        image:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpaPANYtew9iO10gzLjYy-UnV-TSNdQOJwIA&usqp=CAU",
+        categories: [FoodCategories.ALL],
+      },
+      {
+        name: "Vegetariánský Kebab",
+        image:
+          "https://bitofthegoodstuff.com/wp-content/uploads/2018/05/Seitan-Doner-Kebab-5-1000.jpg",
+        categories: [FoodCategories.ALL, FoodCategories.VEGETARIAN, FoodCategories.FISH],
+      },
+    ],
   },
   {
     name: "Čína",
     image:
-      "https://www.spektrumzdravi.cz/img/clanky/6fc8eb9e1234b80630774fdd45b8419f/kureci-cina-s-ryzi.jpg",
-    categories: [FoodCategories.ALL],
+      "https://c3.primacdn.cz/sites/default/files/image_crops/image_620/1/1671253_smazene-nudle-s-kurecim-masem-2_image_620.jpg",
+    categories: [FoodCategories.ALL, FoodCategories.VEGETARIAN, FoodCategories.FISH],
+    subitems: [
+      {
+        name: "Kuře kung-pao",
+        image: "https://www.vartesmajklem.cz/picture/large/20190205092304799979724.jpg",
+        categories: [FoodCategories.ALL],
+      },
+      {
+        name: "Nudle s kuřecím",
+        image:
+          "https://www.kvalitnitunak.eu/fotky89909/blog/kureci-s-ryzovymi-nudlemi-a-zeleninou.jpeg",
+        categories: [FoodCategories.ALL],
+      },
+      {
+        name: "Nudle se zeleninou",
+        image:
+          "https://itesco.cz/imgglobal/content_platform/recipes/main/17/sized/756x426-100-fff-0-0/17c2044f0c8c136f69f4cb95c3dc90ff.jpg",
+        categories: [FoodCategories.ALL, FoodCategories.VEGETARIAN, FoodCategories.FISH],
+      },
+    ],
   },
 ];
 
