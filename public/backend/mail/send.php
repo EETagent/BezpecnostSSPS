@@ -8,15 +8,8 @@ require './PHPMailer/PHPMailer.php';
 require './PHPMailer/SMTP.php';
 require './PHPMailer/Exception.php';
 
-<<<<<<< HEAD:public/backend/mail/send.php
-require '../utils.php';
-
-const RECAPTCHA_SECRET = 'REDACTED';
-const MAIL_SECRET = 'REDACTED';
-=======
 require_once '../utils.php';
 require_once '../secret.php';
->>>>>>> 678e010 (Reorganizovaný PHP backend, úvodní práce na databázi):public/backend/mail/mail.php
 
 $mail = new PHPMailer(true);
 
