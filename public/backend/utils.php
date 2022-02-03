@@ -16,7 +16,7 @@ function isValidJWT($jwt, $secret) {
     $tokenParts = explode('.', $jwt);
 
     if (count($tokenParts) !== 3) {
-       return false;
+        return false;
     }
 
     $header = base64_decode($tokenParts[0]);
@@ -35,4 +35,3 @@ function getPayloadJWT($jwt) {
     $tokenParts = explode('.', $jwt);
     return base64_decode($tokenParts[1]);
 }
-?>
