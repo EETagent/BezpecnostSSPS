@@ -9,6 +9,7 @@ import {
 } from "solid-js";
 import SvgCloseButton from "../../components/SvgCloseButton";
 import { FoodInterface, FOODS, FOODCATEGORIES, FoodCategories } from "./Food";
+import RYBICKY from "./_easterEgg";
 
 interface TokenInterface {
   name: string;
@@ -16,7 +17,7 @@ interface TokenInterface {
   day: string;
 }
 
-interface ResponseJson {
+interface ResponseJSONInterface {
   result: string;
   error?: string;
 }
@@ -28,7 +29,6 @@ enum FormResponse {
 }
 
 const validateToken = async (token: string): Promise<boolean> => {
-  console.log(token);
   const response = await fetch(
     "http://localhost:8000/backend/food/validate.php",
     {
@@ -37,8 +37,7 @@ const validateToken = async (token: string): Promise<boolean> => {
     }
   );
 
-  const responseValue: ResponseJson = await response.json();
-  console.log(responseValue.result);
+  const responseValue: ResponseJSONInterface = await response.json();
   return responseValue.result === "true";
 };
 
@@ -68,12 +67,12 @@ const Food: Component = () => {
   );
 
   const submit = async () => {
-    const response = await fetch("http://localhost:8000/backend/food/db.php", {
+    const response = await fetch("http://localhost:8000/backend/food/db/add.php", {
       method: "POST",
       body: JSON.stringify({ token: token, food: selectedFood() }),
     });
 
-    const responseValue: ResponseJson = await response.json();
+    const responseValue: ResponseJSONInterface = await response.json();
     if (responseValue.result === "SUCCESS") {
       setSubmitStatus(FormResponse.SUCCESS);
     } else if (responseValue.result === "ERROR") {
@@ -110,7 +109,7 @@ const Food: Component = () => {
             {name}
           </div>
           <Show when={selected()}>
-            <div class="z-10 flex items-center justify-center absolute w-[15%] h-[15%] right-0 -top-[5%] rounded-full bg-green-700 text-white text-xs text-center leading-4">
+            <div className="z-10 flex items-center justify-center absolute w-[15%] h-[15%] right-0 -top-[5%] rounded-full bg-green-700 text-white text-xs text-center leading-4">
               ✓
             </div>
           </Show>
@@ -222,8 +221,8 @@ const Food: Component = () => {
           </div>
         </Show>
 
-        <div class="w-[90%] grid grid-cols-2 md:grid-cols-3 gap-10">
-          <For each={FOODS}>{(food) => <FoodSquare food={food} />}</For>
+        <div className="w-[90%] grid grid-cols-2 md:grid-cols-3 gap-10">
+          <For each={[...FOODS, RYBICKY]}>{(food) => <FoodSquare food={food} />}</For>
         </div>
       </Show>
     </div>
