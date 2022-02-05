@@ -30,7 +30,7 @@ enum FormResponse {
 
 const validateToken = async (token: string): Promise<boolean> => {
   const response = await fetch(
-    "http://localhost:8000/backend/food/validate.php",
+    "/backend/food/validate.php",
     {
       method: "POST",
       body: JSON.stringify({ token: token }),
@@ -67,7 +67,7 @@ const Food: Component = () => {
   );
 
   const submit = async () => {
-    const response = await fetch("http://localhost:8000/backend/food/db/add.php", {
+    const response = await fetch("/backend/food/db/add.php", {
       method: "POST",
       body: JSON.stringify({ token: token, food: selectedFood() }),
     });

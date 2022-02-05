@@ -15,14 +15,12 @@ interface ResponseJSONInterface {
 
 const [authorize, setAuthorize] = createSignal<string>();
 const getFoodDashboard = async (): Promise<ResponseJSONInterface> => {
-  const authorization = authorize() == undefined ? prompt("Zadejte heslo") ?? "" : authorize() 
-  const response = await fetch(
-    "http://localhost:8000/backend/food/db/list.php",
-    {
-      method: "POST",
-      body: JSON.stringify({ secret: authorization }),
-    }
-  );
+  const authorization =
+    authorize() == undefined ? prompt("Zadejte heslo") ?? "" : authorize();
+  const response = await fetch("/backend/food/db/list.php", {
+    method: "POST",
+    body: JSON.stringify({ secret: authorization }),
+  });
 
   const responseValue: ResponseJSONInterface = await response.json();
   if (responseValue.result === "SUCCESS") {
@@ -32,13 +30,10 @@ const getFoodDashboard = async (): Promise<ResponseJSONInterface> => {
 };
 
 const removeUser = async (token: string) => {
-  const response = await fetch(
-    "http://localhost:8000/backend/food/db/remove.php",
-    {
-      method: "POST",
-      body: JSON.stringify({ token: token }),
-    }
-  );
+  const response = await fetch("/backend/food/db/remove.php", {
+    method: "POST",
+    body: JSON.stringify({ token: token }),
+  });
 };
 
 const Dashboard: Component = () => {
@@ -52,42 +47,47 @@ const Dashboard: Component = () => {
             <div className="inline-block py-2 min-w-full sm:px-6 lg:px-8">
               <div className="overflow-hidden shadow-md sm:rounded-lg">
                 <table className="min-w-full">
-                  <thead className="bg-gray-50 dark:bg-gray-700">
+                  <thead className="bg-green-hacked-darker">
                     <tr>
-                      <th className="py-3 px-6 text-xs font-medium text-left text-gray-700 uppercase dark:text-gray-400">
+                      <th className="py-3 px-6 text-xs font-medium text-white">
                         #
                       </th>
-                      <th className="py-3 px-6 text-xs font-medium text-left text-gray-700 uppercase dark:text-gray-400">
+                      <th className="py-3 px-6 text-xs font-medium text-white">
                         Jméno
                       </th>
-                      <th className="py-3 px-6 text-xs font-medium text-left text-gray-700 uppercase dark:text-gray-400">
+                      <th className="py-3 px-6 text-xs font-medium text-white">
                         Jídlo
                       </th>
-                      <th className="py-3 px-6 text-xs font-medium text-left text-gray-700 uppercase dark:text-gray-400">
+                      <th className="py-3 px-6 text-xs font-medium text-white">
                         Den
                       </th>
-                      <th className="relative py-3 px-6">
-                        <span className="sr-only">Edit</span>
+                      <th className="py-3 px-6 text-xs font-medium text-white">
+                        <button
+                          className="mr-2 text-terminal-menu-green"
+                          onclick={refetch}
+                        >
+                          Reload
+                        </button>
                       </th>
                     </tr>
                   </thead>
                   <tbody>
                     <For each={items()!.data}>
                       {(item: FoodDBInterface, index) => (
-                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                          <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                        <tr className="bg-green-hacked border-b dark:border-gray-700">
+                          <td className="py-4 px-6 text-sm text-white">
                             {index() + 1}.
                           </td>
-                          <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                          <td className="py-4 px-6 text-sm text-white">
                             {item.name}
                           </td>
-                          <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                          <td className="py-4 px-6 text-sm text-white">
                             {item.food}
                           </td>
-                          <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                          <td className="py-4 px-6 text-sm text-white">
                             {item.day}
                           </td>
-                          <td className="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                          <td className="py-4 px-6 text-sm text-white">
                             <button
                               className="mr-2 text-terminal-menu-red"
                               onclick={async () => {
