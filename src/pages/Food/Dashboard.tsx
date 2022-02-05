@@ -13,16 +13,21 @@ interface ResponseJSONInterface {
   data: FoodDBInterface[];
 }
 
+const [authorize, setAuthorize] = createSignal<string>();
 const getFoodDashboard = async (): Promise<ResponseJSONInterface> => {
+  const authorization = authorize() == undefined ? prompt("Zadejte heslo") ?? "" : authorize() 
   const response = await fetch(
     "http://localhost:8000/backend/food/db/list.php",
     {
       method: "POST",
+      body: JSON.stringify({ secret: authorization }),
     }
   );
 
   const responseValue: ResponseJSONInterface = await response.json();
-  console.log(responseValue);
+  if (responseValue.result === "SUCCESS") {
+    setAuthorize(authorization);
+  }
   return responseValue;
 };
 
@@ -37,7 +42,7 @@ const removeUser = async (token: string) => {
 };
 
 const Dashboard: Component = () => {
-  const [items, { mutate, refetch }] = createResource(true, getFoodDashboard);
+  const [items, { refetch }] = createResource(true, getFoodDashboard);
 
   return (
     <div className="mx-auto min-h-screen flex flex-col items-center">
