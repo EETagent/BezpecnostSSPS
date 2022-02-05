@@ -18,7 +18,7 @@ try {
         throw new Exception('Missing secret property');
     }
 
-    if ($API_REQUEST->{'secret'} === FOOD_TOKEN_SECRET) {
+    if ($API_REQUEST->{'secret'} !== FOOD_TOKEN_SECRET) {
         throw new Exception('Invalid secret property');
     }
 
