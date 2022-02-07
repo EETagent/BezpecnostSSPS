@@ -28,14 +28,14 @@ enum FormResponse {
   ERROR,
 }
 
+const fetchURLPrefix =
+  import.meta.env.MODE === "development" ? "http://localhost:8000" : "";
+
 const validateToken = async (token: string): Promise<boolean> => {
-  const response = await fetch(
-    "/backend/food/validate.php",
-    {
-      method: "POST",
-      body: JSON.stringify({ token: token }),
-    }
-  );
+  const response = await fetch(fetchURLPrefix + "/backend/food/validate.php", {
+    method: "POST",
+    body: JSON.stringify({ token: token }),
+  });
 
   const responseValue: ResponseJSONInterface = await response.json();
   return responseValue.result === "true";
@@ -67,7 +67,7 @@ const Food: Component = () => {
   );
 
   const submit = async () => {
-    const response = await fetch("/backend/food/db/add.php", {
+    const response = await fetch(fetchURLPrefix + "/backend/food/db/add.php", {
       method: "POST",
       body: JSON.stringify({ token: token, food: selectedFood() }),
     });
@@ -222,7 +222,9 @@ const Food: Component = () => {
         </Show>
 
         <div className="w-[90%] grid grid-cols-2 md:grid-cols-3 gap-10">
-          <For each={[...FOODS, RYBICKY]}>{(food) => <FoodSquare food={food} />}</For>
+          <For each={[...FOODS, RYBICKY]}>
+            {(food) => <FoodSquare food={food} />}
+          </For>
         </div>
       </Show>
     </div>
