@@ -31,9 +31,14 @@ const FOODS: FoodInterface[] = [
         categories: [FoodCategories.ALL, FoodCategories.VEGETARIAN, FoodCategories.FISH],
       },
       {
-        name: "Pizza Hawai",
+        name: "Pizza Hawaii",
         image:
           "https://fototapeta12.cz/themes/default-bootstrap/functions/timthumb.php?src=https://st2.depositphotos.com/1699440/8512/i/950/depositphotos_85123736-stock-photo-close-up-pizza-hawai.jpg&w=1023&h=682",
+        categories: [FoodCategories.ALL],
+      },
+      {
+        name: "Pizza Šunková",
+        image: "http://pekarstvijecminek.cz/204-thickbox_default/pizza-sunkova.jpg",
         categories: [FoodCategories.ALL],
       },
       {
