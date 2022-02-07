@@ -8,19 +8,14 @@ require './PHPMailer/PHPMailer.php';
 require './PHPMailer/SMTP.php';
 require './PHPMailer/Exception.php';
 
-const RECAPTCHA_SECRET = 'REDACTED';
-const MAIL_SECRET = 'REDACTED';
+require_once '../utils.php';
+require_once '../secret.php';
 
 $mail = new PHPMailer(true);
 
 // Podpora diakritiky
 $mail->CharSet = 'UTF-8';
 $mail->Encoding = 'base64';
-
-function isValidJSON($str) {
-    json_decode($str);
-    return json_last_error() == JSON_ERROR_NONE;
- }
 
 try {
     $php_input = file_get_contents('php://input');
@@ -99,5 +94,4 @@ try {
 catch (Exception $e) {
     echo json_encode(array('result'=>'ERROR', 'error'=>$e->getMessage()));
 }
-
 ?>
