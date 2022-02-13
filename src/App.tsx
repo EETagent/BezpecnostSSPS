@@ -8,6 +8,7 @@ const About = lazy(() => import("./pages/About"));
 
 const Food = lazy(() => import("./pages/Food/[id]"));
 const Dashboard = lazy(() => import("./pages/Food/Dashboard"));
+const Generator = lazy(() => import("./pages/Food/Generator"));
 
 const App: Component = () => {
   return (
@@ -21,7 +22,7 @@ const App: Component = () => {
           <Route path="/about" element={<About />} />
           <Route path="/food/ucastnik/:id" element={<Food />} />
           <Route path="/food/dashboard/" element={<Dashboard />} />
-
+          <Route path="/food/generate/" element={<Generator />} />
         </Routes>
       </main>
     </div>
