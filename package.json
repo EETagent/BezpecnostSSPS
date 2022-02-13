@@ -3,7 +3,9 @@
   "version": "1.4.0",
   "scripts": {
     "dev": "vite",
+    "dev-php": "vite & php -S localhost:8000 -t public",
     "start": "npm run dev",
+    "start-php": "npm run dev-php",
     "build": "vite build",
     "serve": "vite preview"
   },
