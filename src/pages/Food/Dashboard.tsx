@@ -6,7 +6,7 @@ import {
   For,
   Show,
 } from "solid-js";
-import { FOODS } from "./Food";
+import { FoodInterface, FOODS } from "./Food";
 
 interface FoodDBInterface {
   token: string;
@@ -64,6 +64,20 @@ const Dashboard: Component = () => {
     getItemsCount(items()?.data)
   );
 
+  const findFood = (name: string): FoodInterface | undefined => {
+    const food = FOODS.find(
+      (e) => e.name === name || e.subitems?.some((s) => s.name === name)
+    );
+    if (food?.subitems != undefined) {
+      for (let index = 0; index < food.subitems.length; index++) {
+        if (food.subitems[index].name === name) {
+          return food.subitems[index];
+        }
+      }
+    }
+    return food;
+  };
+
   return (
     <div className="mx-auto min-h-screen flex flex-col items-center">
       <button
@@ -86,6 +100,9 @@ const Dashboard: Component = () => {
                       Počet
                     </th>
                     <th className="py-3 px-6 text-xs font-bold text-white text-center">
+                      Odhadovaná cena
+                    </th>
+                    <th className="py-3 px-6 text-xs font-bold text-white text-center">
                       Obrázek
                     </th>
                   </tr>
@@ -98,18 +115,21 @@ const Dashboard: Component = () => {
                           {food}
                         </td>
                         <td className="py-4 px-6 text-xl font-medium text-white">
-                          {itemsCount()?.get(food)}
+                          {itemsCount()!.get(food)}
+                        </td>
+                        <td className="py-4 px-6 text-xl font-medium text-white">
+                          {() => {
+                            const priceEstm = findFood(food)?.priceEst;
+                            console.log(findFood(food)?.image);
+                            return priceEstm
+                              ? priceEstm * itemsCount()!.get(food)!
+                              : "Žádný odhad";
+                          }} Kč
                         </td>
                         <td className="py-4 px-6 text-sm font-medium mx-auto flex items-center justify-center">
                           <img
-                            className="h-20"
-                            src={
-                              FOODS.find(
-                                (e) =>
-                                  e.name === food ||
-                                  e.subitems?.some((s) => s.name === food)
-                              )?.image
-                            }
+                            className="aspect-square h-24 rounded-2xl"
+                            src={findFood(food)?.image}
                           ></img>
                         </td>
                       </tr>
