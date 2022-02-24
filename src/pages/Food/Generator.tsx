@@ -103,8 +103,11 @@ const Generator: Component = () => {
   const handleSubmit = async (event: Event) => {
     event.preventDefault();
     setField("output", "");
+    if (form["input"].slice(-1) !== "\n") {
+      setField("input", form["input"] + "\n");
+    }
     form["input"].split("\n").forEach(async (e) => {
-      const [name, surname, email] = e.split(" ");
+      const [name, surname, email] = e.split(/\s+/);
       if (email != "" && name != "" && surname != "" && form.secret != "") {
         const payload: GeneratorJWTPayload = {
           email: email,
