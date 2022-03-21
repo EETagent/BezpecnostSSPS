@@ -9,43 +9,10 @@ import posterWebp from "../../assets/img/hackdays-video.webp";
 
 import video from "../../assets/video/hackdays.mp4";
 
-// @ts-ignore
-import "fslightbox";
-
-const HackDaysItem: Component<{
-  media: string;
-  mediaAlternative: string;
-  alt: string;
-  video?: string;
-  left: boolean;
-}> = ({ media: media, mediaAlternative: mediaWebP, alt, video, left }) => {
-  const MediaLightbox = (name: string) => {
-    // @ts-ignore
-    const lightbox = new FsLightbox();
-    lightbox.props.sources = [name];
-    lightbox.open();
-  };
-
-  return (
-    <picture
-      className={`w-[80%] sm:w-[60%] md:w-[45%] mt-10 hover:-translate-y-1 hover:scale-110 ease-in-out duration-300 hover:cursor-pointer ${
-        left ? "md:mr-16" : ""
-      }`}
-    >
-      <source srcset={mediaWebP} type="image/webp" />
-      <img
-        src={media}
-        onClick={() => {
-          video != null ? MediaLightbox(video) : MediaLightbox(media);
-        }}
-        alt={alt}
-      />
-    </picture>
-  );
-};
+import Picture from "../Picture";
 
 /**
- * Component representing Terminal mockup 
+ * Component representing Terminal mockup
  * @returns {JSX.Element}
  */
 const Terminal: Component = () => {
@@ -162,21 +129,23 @@ const HackDays: Component = () => {
         <h1 className="my-10 font-hacked text-white font-bold uppercase text-6xl md:text-8xl">
           HackDays
         </h1>
-        <Terminal/>
+        <Terminal />
         <div className="my-10 2xl:my-16 grow flex flex-col md:flex-row items-center justify-between">
-          <HackDaysItem
-            media={terminal}
-            mediaAlternative={terminalWebP}
-            alt="Plán HackDays"
-            left={true}
-          />
-          <HackDaysItem
-            media={poster}
-            mediaAlternative={posterWebp}
-            alt="Upoutávka HackDays"
-            video={video}
-            left={false}
-          />
+          <div class="md:w-[48%] hover:-translate-y-1 hover:scale-105 ease-in-out duration-300 hover:cursor-pointer">
+            <Picture
+              media={terminal}
+              mediaAlternativeWebP={terminalWebP}
+              alt="Plán HackDays"
+            />
+          </div>
+          <div class="mt-10 md:mt-0 md:w-[48%] hover:-translate-y-1 hover:scale-105 ease-in-out duration-300 hover:cursor-pointer">
+            <Picture
+              media={poster}
+              mediaAlternativeWebP={posterWebp}
+              alt="Upoutávka HackDays"
+              gallery={[video]}
+            />
+          </div>
         </div>
       </div>
     </section>
