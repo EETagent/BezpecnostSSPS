@@ -7,4 +7,9 @@ export default defineConfig({
     target: "safari12",
     polyfillDynamicImport: false,
   },
+  server: {
+    proxy: {
+      "/backend": "http://localhost:8000"
+    }
+  }
 });

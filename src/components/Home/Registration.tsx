@@ -58,9 +58,6 @@ interface FormResponseJson {
   error?: string;
 }
 
-const fetchURLPrefix =
-  import.meta.env.MODE === "development" ? "http://localhost:8000" : "";
-
 /**
  * Component representing registration form section
  * @returns {JSX.Element}
@@ -75,7 +72,7 @@ const HackDaysRegistrace: Component = () => {
       captcha: form.captcha,
     };
 
-    const response = await fetch(fetchURLPrefix + "/backend/mail/send.php", {
+    const response = await fetch("/backend/mail/send.php", {
       method: "POST",
       headers: {
         Accept: "application/json",

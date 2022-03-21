@@ -28,9 +28,6 @@ enum FormResponse {
   ERROR,
 }
 
-const fetchURLPrefix =
-  import.meta.env.MODE === "development" ? "http://localhost:8000" : "";
-
 /**
  * Function validating token
  * @async
@@ -39,7 +36,7 @@ const fetchURLPrefix =
  * @returns {<Promise<boolean>} Is token valid?
  */
 const validateToken = async (token: string): Promise<boolean> => {
-  const response = await fetch(fetchURLPrefix + "/backend/food/validate.php", {
+  const response = await fetch("/backend/food/validate.php", {
     method: "POST",
     body: JSON.stringify({ token: token }),
   });
@@ -86,7 +83,7 @@ const Food: Component = () => {
    * @return {Promise<void>}
    */
   const submit = async (): Promise<void> => {
-    const response = await fetch(fetchURLPrefix + "/backend/food/db/add.php", {
+    const response = await fetch("/backend/food/db/add.php", {
       method: "POST",
       body: JSON.stringify({ token: token, food: selectedFood() }),
     });
