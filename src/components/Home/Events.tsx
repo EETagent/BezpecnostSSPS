@@ -149,7 +149,7 @@ const Events: Component = () => {
      * @returns {boolean} Event is valid
      */
     const filterEvents = (e: EventsApiInterface): boolean => {
-      if (_dateDiffDays(Date.parse(e.date)) < 90) {
+      //if (_dateDiffDays(Date.parse(e.date)) < 90) {
         if (
           _stringContains(e.title.rendered, KEYWORDS) ||
           _stringContains(e.content.rendered, KEYWORDS) ||
@@ -157,7 +157,7 @@ const Events: Component = () => {
         ) {
           return true;
         }
-      }
+      //}
 
       return false;
     };
