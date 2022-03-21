@@ -30,6 +30,15 @@ class EventData {
   ) {}
 }
 
+const htmlEntitiesDecode = (input: string): string => {
+  const tempArea: HTMLTextAreaElement = document.createElement("textarea");
+  input = input.replace(/<script[^>]*>([\S\s]*?)<\/script>/gim, "");
+  input = input.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gim, "");
+  tempArea.innerHTML = input;
+  const txt: string = tempArea.value;
+  return txt;
+};
+
 const Events: Component = () => {
   const Event: Component<{ data: EventData }> = ({ data }) => {
     return (
@@ -132,7 +141,13 @@ const Events: Component = () => {
 
           setEvents([
             ...events(),
-            new EventData(date, title, link, content, imgSrc),
+            new EventData(
+              date,
+              htmlEntitiesDecode(title),
+              link,
+              content,
+              imgSrc
+            ),
           ]);
         });
       })
