@@ -61,12 +61,14 @@ const Gallery: Component = () => {
       <div className="w-4/5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-7 my-10 lg:my-16 2xl:my-32">
         <For each={gallery}>
           {(image, i) => (
-            <Picture
-              media={image}
-              mediaAlternativeWebP={galleryWebP[i()]}
-              alt={`HackDays ${i()}`}
-              gallery={Array.from(new Set([image, ...gallery]))}
-            />
+            <div class="ease-in-out hover:scale-105 duration-300 hover:cursor-pointer">
+                <Picture
+                  media={image}
+                  mediaAlternativeWebP={galleryWebP[i()]}
+                  alt={`HackDays ${i()}`}
+                  gallery={Array.from(new Set([image, ...gallery]))}
+                />
+            </div>
           )}
         </For>
       </div>
