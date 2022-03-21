@@ -58,6 +58,7 @@ const Intro: Component = () => {
           </div>
           <div className="my-10 md:my-0 md:ml-5">
             <a
+              rel="external"
               href="#registrace"
               className="px-6 py-3 rounded-3xl bg-blue-hacked text-white font-supply uppercase no-underline hover:transition-colors hover:duration-300 hover:bg-blue-hacked-darker hover:cursor-pointer"
             >
