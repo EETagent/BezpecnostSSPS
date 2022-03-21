@@ -1,4 +1,4 @@
-import { Component } from "solid-js";
+import { Component, For } from "solid-js";
 import { createStore } from "solid-js/store";
 
 /**
@@ -76,7 +76,7 @@ const useForm = () => {
 
 /**
  * Function providing BASE64URL encoding
- * @param {string} source Input string 
+ * @param {string} source Input string
  * @returns {string} BASE64URL encoded string
  */
 const base64url = (source: string): string => {
@@ -91,9 +91,9 @@ const base64url = (source: string): string => {
  * Function encoding and signing JWT
  * @async
  * @function encodeJWT
- * @param {GeneratorJWTPayload} payloadInput JWT payload 
+ * @param {GeneratorJWTPayload} payloadInput JWT payload
  * @param {string} secret JWT secret
- * @returns 
+ * @returns
  */
 const encodeJWT = async (
   payloadInput: GeneratorJWTPayload,
@@ -200,13 +200,9 @@ const Generator: Component = () => {
             value={form.day}
             onchange={updateFormField("day")}
           >
-            <option value="Neděle">Neděle</option>
-            <option value="Sobota">Sobota</option>
-            <option value="Pátek">Pátek</option>
-            <option value="Čtvrtek">Čtvrtek</option>
-            <option value="Středa">Středa</option>
-            <option value="Úterý">Úterý</option>
-            <option value="Pondělí">Pondělí</option>
+            <For each={[...Array(7).keys()]}>
+              {(_item, i) => <option value={DAYS[i()]}>{DAYS[i()]}</option>}
+            </For>
           </select>
         </div>
         <div className="mt-6 flex flex-col md:flex-row items-center w-full">
