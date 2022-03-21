@@ -64,6 +64,7 @@ const MenuItem: Component<{
 }> = ({ href, description }) => {
   return (
     <a
+      rel="external"
       href={href}
       className={`hover:bg-green-hacked-darker hover:text-white px-3 py-2 rounded-md text-sm  uppercase text-gray-300`}
     >
@@ -86,6 +87,7 @@ const MenuItemCompact: Component<{
 }> = ({ href, description, onClick }) => {
   return (
     <a
+      rel="external"
       onClick={onClick}
       href={href}
       className="text-white hover:bg-green-hacked-darker  block mx-10 px-3 py-2 rounded-md text-base  uppercase"
