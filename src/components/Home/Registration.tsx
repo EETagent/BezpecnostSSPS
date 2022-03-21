@@ -23,13 +23,36 @@ type FormFields = {
   captcha: string;
 };
 
+/**
+ * Enum for form response status
+ * @enum {number}
+ */
 enum FormResponse {
+  /**
+   * @member {number}
+   * Form was not send
+   */
   NOTSENT,
+  /**
+   * @member {number}
+   * Form was sent successfully
+   */
   SUCCESS,
+  /**
+   * @member {number}
+   * Form was not send because of captcha
+   */
   CAPTCHA,
+  /**
+   * @member {number}
+   * Form was not send because of other error
+   */
   ERROR,
 }
 
+/**
+ * Interface for backend REST API response
+ */
 interface FormResponseJson {
   result: string;
   error?: string;
@@ -38,6 +61,10 @@ interface FormResponseJson {
 const fetchURLPrefix =
   import.meta.env.MODE === "development" ? "http://localhost:8000" : "";
 
+/**
+ * Component representing registration form section
+ * @returns {JSX.Element}
+ */
 const HackDaysRegistrace: Component = () => {
   const submit = async (form: FormFields): Promise<FormResponse> => {
     const dataToSubmit = {
@@ -102,6 +129,10 @@ const HackDaysRegistrace: Component = () => {
     return { form, submit, setField, updateFormField };
   };
 
+  /**
+   * Component representing registration form
+   * @returns {JSX.Element}
+   */
   const RegistrationForm: Component = () => {
     const ResponseBox: Component<{ text: string; callback?: VoidFunction }> = ({
       text,

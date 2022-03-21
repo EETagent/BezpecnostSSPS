@@ -6,6 +6,10 @@ import Intro from "../components/Home/Intro";
 import Kontakt from "../components/Home/Kontakt";
 import HackDaysRegistrace from "../components/Home/Registration";
 
+/**
+ * Component representing home page
+ * @returns {JSX.Element}
+ */
 const Home: Component = () => {
   return (
     <>

@@ -2,6 +2,9 @@ import { Component, createSignal, For, onMount } from "solid-js";
 
 import defaultBg from "../../assets/img/background/intro-bg.jpg";
 
+/**
+ * Interface representing output of SSPS WordPress REST API
+ */
 interface EventsApiInterface {
   id: number;
   status: string;
@@ -20,16 +23,32 @@ interface EventsApiInterface {
   date: string;
 }
 
+/**
+ * Class representating Event
+ */
 class EventData {
+  /**
+   * Create EventData
+   * @param {Date} date Event date
+   * @param {string} title Title of event
+   * @param {string} link Link to event
+   * @param {Array<string>} content Event content seperated by paragraphs
+   * @param {string} img SRC for image
+   */
   constructor(
     readonly date: Date,
     readonly title: string,
     readonly link: string,
-    readonly content: string[],
+    readonly content: Array<string>,
     readonly img: string
   ) {}
 }
 
+/**
+ * Decode HTML entities
+ * @param {string} input Input string
+ * @returns {string} Decoded text
+ */
 const htmlEntitiesDecode = (input: string): string => {
   const tempArea: HTMLTextAreaElement = document.createElement("textarea");
   input = input.replace(/<script[^>]*>([\S\s]*?)<\/script>/gim, "");
@@ -39,7 +58,16 @@ const htmlEntitiesDecode = (input: string): string => {
   return txt;
 };
 
+/**
+ * Component representing Event section
+ * @returns {JSX.Element}
+ */
 const Events: Component = () => {
+  /**
+   * Component representing 1 event block
+   * @param {EventData} data Event object with required values
+   * @returns {JSX.Element}
+   */
   const Event: Component<{ data: EventData }> = ({ data }) => {
     return (
       <div className="flex h-full justify-between flex-col rounded-3xl bg-white border-solid border-2">
@@ -79,12 +107,24 @@ const Events: Component = () => {
 
   const [events, setEvents] = createSignal<EventData[]>([]);
 
+  /**
+   * Returns the difference between today's date and the argument in days
+   * @constructor
+   * @param {number} date Date to be compared with
+   * @returns {number} Number of days to current date
+   */
   const _dateDiffDays = (date: number): number => {
     const _MS_PER_DAY = 1000 * 60 * 60 * 24;
     const current = Date.now();
     return Math.floor((current - date) / _MS_PER_DAY);
   };
 
+  /**
+   * Check if string contains word from array
+   * @param {string} string String to be compared to
+   * @param {Array<string>} array Array with keywords
+   * @returns {boolean} String contains some keyword from array
+   */
   const _stringContains = (string: string, array: string[]): boolean => {
     return array.some((v) => string.toUpperCase().includes(v));
   };
@@ -103,6 +143,11 @@ const Events: Component = () => {
       //"user-agent": "Stránka Bezpečnost SSPŠ a HackDays, stažení eventů z hlavního webu",
     };
 
+    /**
+     * Callback for filter() validating fetched data
+     * @param {EventsApiInterface} e 
+     * @returns {boolean} Event is valid
+     */
     const filterEvents = (e: EventsApiInterface): boolean => {
       if (_dateDiffDays(Date.parse(e.date)) < 90) {
         if (

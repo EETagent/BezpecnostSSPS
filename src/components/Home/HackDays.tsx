@@ -44,7 +44,20 @@ const HackDaysItem: Component<{
   );
 };
 
+/**
+ * Component representing Terminal mockup 
+ * @returns {JSX.Element}
+ */
 const Terminal: Component = () => {
+  /**
+   * Component representing terminal command
+   * for color settings, etc.
+   * @param {string} username UNIX user username
+   * @param {string} hostname UNIX user hostname
+   * @param {string} command Terminal command
+   * @param {string} commadContent Command content
+   * @returns {JSX.Element}
+   */
   const Command: Component<{
     username: string;
     hostname: string;
@@ -130,6 +143,10 @@ const Terminal: Component = () => {
   );
 };
 
+/**
+ * Component representing HackDays section
+ * @returns {JSX.Element}
+ */
 const HackDays: Component = () => {
   return (
     <section

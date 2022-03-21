@@ -1,10 +1,16 @@
 import { Link } from "solid-app-router";
-import { Accessor, Component, Show } from "solid-js";
+import { Accessor, Component } from "solid-js";
 import { createSignal } from "solid-js";
 import { Transition } from "solid-transition-group";
 
 import logo from "../assets/img/logo/logo-web.svg";
 
+/**
+ * Component representing menu hexagon button
+ * @param {VoidFunction} onClick on:click callback
+ * @param {Accessor<boolean>} isMenuOpened state for menu status
+ * @returns {JSX.Element}
+ */
 const MenuButton: Component<{
   onClick: VoidFunction;
   isMenuOpened: Accessor<boolean>;
@@ -46,6 +52,12 @@ const MenuButton: Component<{
   );
 };
 
+/**
+ * Component representing menu item
+ * @param {string} href menu item link
+ * @param {string} description menu item description
+ * @returns {JSX.Element}
+ */
 const MenuItem: Component<{
   href: string;
   description: string;
@@ -60,6 +72,13 @@ const MenuItem: Component<{
   );
 };
 
+/**
+ * Component representing menu item in compact menu
+ * @param {string} href menu item link
+ * @param {string} description menu item description
+ * @param {VoidFunction} onClick on:click callback
+ * @returns {JSX.Element}
+ */
 const MenuItemCompact: Component<{
   href: string;
   description: string;
@@ -76,6 +95,10 @@ const MenuItemCompact: Component<{
   );
 };
 
+/**
+ * Component navbar
+ * @returns {JSX.Element}
+ */
 const Navigation: Component = () => {
   const [isOpened, setIsOpened] = createSignal<boolean>(false);
 

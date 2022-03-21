@@ -31,6 +31,13 @@ enum FormResponse {
 const fetchURLPrefix =
   import.meta.env.MODE === "development" ? "http://localhost:8000" : "";
 
+/**
+ * Function validating token
+ * @async
+ * @function validateToken
+ * @param {string} token Token
+ * @returns {<Promise<boolean>} Is token valid?
+ */
 const validateToken = async (token: string): Promise<boolean> => {
   const response = await fetch(fetchURLPrefix + "/backend/food/validate.php", {
     method: "POST",
@@ -41,6 +48,13 @@ const validateToken = async (token: string): Promise<boolean> => {
   return responseValue.result === "true";
 };
 
+/**
+ * Function parsing JWT
+ * @async
+ * @function parseToken
+ * @param {string} token Token
+ * @returns {Promise<TokenInterface | null>} Returns
+ */
 const parseToken = async (token: string): Promise<TokenInterface | null> => {
   const isValid = await validateToken(token);
   if (isValid === true) {
@@ -49,16 +63,15 @@ const parseToken = async (token: string): Promise<TokenInterface | null> => {
   return null;
 };
 
-const openToken = async (token: string) => {
-  const parsedToken: TokenInterface | null = await parseToken(token);
-  return parsedToken;
-};
-
+/**
+ * Component representing food selection page
+ * @returns {JSX.Element}
+ */
 const Food: Component = () => {
   const params = useParams();
 
   const token = params.id.replace("@", ".").replace("@", ".");
-  const [visitor] = createResource(() => token, openToken);
+  const [visitor] = createResource(() => token, parseToken);
 
   const [filter, setFilter] = createSignal<string>(FoodCategories.ALL);
   const [selectedFood, setSelectedFood] = createSignal<string | null>();
@@ -66,7 +79,13 @@ const Food: Component = () => {
     FormResponse.NOTSENT
   );
 
-  const submit = async () => {
+  /**
+   * Submit selected food
+   * @async
+   * @function submit
+   * @return {Promise<void>}
+   */
+  const submit = async (): Promise<void> => {
     const response = await fetch(fetchURLPrefix + "/backend/food/db/add.php", {
       method: "POST",
       body: JSON.stringify({ token: token, food: selectedFood() }),
@@ -78,9 +97,13 @@ const Food: Component = () => {
     } else if (responseValue.result === "ERROR") {
       setSubmitStatus(FormResponse.ERROR);
     }
-    console.log(responseValue);
   };
 
+  /**
+   * Component representing food selection item
+   * @param {FoodInterface} food Presented food
+   * @returns {JSX.Element}
+   */
   const FoodSquare: Component<{ food: FoodInterface }> = ({ food }) => {
     const [clicked, setClicked] = createSignal(false);
 
@@ -146,6 +169,10 @@ const Food: Component = () => {
     );
   };
 
+  /**
+   * Component representing response box
+   * @returns {JSX.Element}
+   */
   const ResponseBox = () => {
     return (
       <Show

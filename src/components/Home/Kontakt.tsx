@@ -4,6 +4,10 @@ import facebook from "../../assets/img/icons/facebook.svg";
 import youtube from "../../assets/img/icons/youtube.svg";
 import github from "../../assets/img/icons/github.svg";
 
+/**
+ * Component representing Contact section
+ * @returns {JSX.Element}
+ */
 const Kontakt: Component = () => {
   return (
     <section id="kontakt" className="bg-black min-h-[80vh] flex justify-center ">

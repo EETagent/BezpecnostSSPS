@@ -1,6 +1,9 @@
 import { Component } from "solid-js";
 import { createStore } from "solid-js/store";
 
+/**
+ * Record translating day numbers to Czech words
+ */
 const DAYS: Record<number, string> = {
   0: "Neděle",
   1: "Pondělí",
@@ -11,6 +14,9 @@ const DAYS: Record<number, string> = {
   6: "Sobota",
 };
 
+/**
+ * Form fields
+ */
 type FormFields = {
   input: string;
   output: string;
@@ -19,6 +25,9 @@ type FormFields = {
   day: string;
 };
 
+/**
+ * Object with all food JWT payload items
+ */
 type GeneratorJWTPayload = {
   email: string;
   name: string;
@@ -26,6 +35,9 @@ type GeneratorJWTPayload = {
   day: string;
 };
 
+/**
+ * Access form fields
+ */
 const useForm = () => {
   const [form, setForm] = createStore<FormFields>({
     input: "",
@@ -35,12 +47,23 @@ const useForm = () => {
     day: DAYS[new Date().getDay()],
   });
 
+  /**
+   * Set form field
+   * @param {string} fieldName Field name
+   * @param {string} fieldValue Field value
+   * @returns {void}
+   */
   const setField = (fieldName: string, fieldValue: string) => {
     setForm({
       [fieldName]: fieldValue,
     });
   };
 
+  /**
+   * Update form field
+   * @param {string} fieldName Field name
+   * @returns {void}
+   */
   const updateFormField = (fieldName: string) => (event: Event) => {
     const inputElement = event.currentTarget as HTMLInputElement;
     setForm({
@@ -51,7 +74,12 @@ const useForm = () => {
   return { form, setField, updateFormField };
 };
 
-const base64url = (source: string) => {
+/**
+ * Function providing BASE64URL encoding
+ * @param {string} source Input string 
+ * @returns {string} BASE64URL encoded string
+ */
+const base64url = (source: string): string => {
   let encodedSource = btoa(source);
   encodedSource = encodedSource.replace(/=+$/, "");
   encodedSource = encodedSource.replace(/\+/g, "-");
@@ -59,6 +87,14 @@ const base64url = (source: string) => {
   return encodedSource;
 };
 
+/**
+ * Function encoding and signing JWT
+ * @async
+ * @function encodeJWT
+ * @param {GeneratorJWTPayload} payloadInput JWT payload 
+ * @param {string} secret JWT secret
+ * @returns 
+ */
 const encodeJWT = async (
   payloadInput: GeneratorJWTPayload,
   secret: string
@@ -73,6 +109,13 @@ const encodeJWT = async (
   );
   let token = header + "." + payload;
 
+  /**
+   * Function generating JWT signature
+   * @async
+   * @function genSignature
+   * @param {string} token JWT token
+   * @returns {Promise<string>} JWT signature
+   */
   const genSignature = async (token: string): Promise<string> => {
     "use strict";
     const enc = new TextEncoder();
@@ -97,9 +140,19 @@ const encodeJWT = async (
   return token;
 };
 
+/**
+ * Component representing generator page
+ * @returns {JSX.Element}
+ */
 const Generator: Component = () => {
   const { form, setField, updateFormField } = useForm();
 
+  /**
+   * Handle textfield submit
+   * @async
+   * @function handleSubmit
+   * @param {Event} event DOM event
+   */
   const handleSubmit = async (event: Event) => {
     event.preventDefault();
     setField("output", "");

@@ -1,5 +1,11 @@
 import { Component } from "solid-js";
 
+/**
+ * Component representing SVG close icon
+ * @param {string} href menu item link
+ * @param {VoidFunction} callback on:click callback
+ * @returns {JSX.Element}
+ */
 const SvgCloseButton: Component<{ callback?: VoidFunction }> = ({ callback }) => {
   return (
     <svg

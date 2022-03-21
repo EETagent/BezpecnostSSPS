@@ -4,6 +4,10 @@ import type { Component } from "solid-js";
 import bg from "../../assets/img/background/intro-bg.jpg";
 import logo from "../../assets/img/logo/logo-lev.png";
 
+/**
+ * Component representing Intro section
+ * @returns {JSX.Element}
+ */
 const Intro: Component = () => {
   return (
     <section

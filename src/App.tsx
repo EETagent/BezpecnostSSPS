@@ -10,6 +10,10 @@ const Food = lazy(() => import("./pages/Food/[id]"));
 const Dashboard = lazy(() => import("./pages/Food/Dashboard"));
 const Generator = lazy(() => import("./pages/Food/Generator"));
 
+/**
+ * Component representing app root
+ * @returns {JSX.Element}
+ */
 const App: Component = () => {
   return (
     <div className="">

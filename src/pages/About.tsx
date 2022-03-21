@@ -4,14 +4,26 @@ import { Component } from "solid-js";
 import polygonWebP from "../assets/img/about-polygon.webp";
 import polygon from "../assets/img/about-polygon.jpg";
 
+/**
+ * Component representing about page
+ * @returns {JSX.Element}
+ */
 const About: Component = () => {
+  /**
+   * Component representing single article
+   * @param {string} title Article title
+   * @param {string} text Article text
+   * @returns {JSX.Element}
+   */
   const Article: Component<{ title: string; text: string }> = ({
     title,
     text,
   }) => {
     return (
       <article>
-        <h1 className="my-10 font-supply text-center text-2xl md:text-[2.5vw]">{title}</h1>
+        <h1 className="my-10 font-supply text-center text-2xl md:text-[2.5vw]">
+          {title}
+        </h1>
         <p className="text-justify text-gray-200 md:text-[1.25vw]">{text}</p>
       </article>
     );
