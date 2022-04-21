@@ -72,10 +72,10 @@ const Events: Component = () => {
     return (
       <div className="flex h-full justify-between flex-col rounded-3xl bg-white border-solid border-2">
         <div
-          className="w-full h-64 p-8 bg-top  bg-cover rounded-t-3xl flex text-center justify-center items-center text-white text-3xl uppercase font-supply leading-relaxed"
+          className="w-full h-64 p-5 bg-top  bg-cover rounded-t-3xl flex text-center justify-center items-center text-white text-3xl uppercase font-supply leading-relaxed"
           style={`background-image:linear-gradient(rgba(103, 114, 41, 0.4), rgba(0, 0, 0, 0.9)), url(${data.img})`}
         >
-          {data.title}
+          {trimTitle(data.title)}
         </div>
         <div className="h-full flex flex-col justify-between w-full md:flex-row rounded-b-3xl">
           <div className="py-2 flex flex-row justify-around md:rounded-bl-3xl font-supply leading-none text-white uppercase bg-black md:flex-col md:items-center md:justify-center md:w-1/4">
@@ -128,6 +128,23 @@ const Events: Component = () => {
   const _stringContains = (string: string, array: string[]): boolean => {
     return array.some((v) => string.toUpperCase().includes(v));
   };
+
+  /**
+   * Trim event title so it will fit into the block
+   * @param {string} title String containing title 
+   * @returns {string} String containing trimed title
+   */
+  const trimTitle = (title: string): string => {
+    const MAX_CHARACTERS_FIT: number = 42;
+
+    title = title.trim();
+    if (title.length <= MAX_CHARACTERS_FIT) {
+      return title;
+    }
+    const separated = title.slice(0, MAX_CHARACTERS_FIT + 3).split(" ");
+    separated.pop();
+    return separated.join(" ") + "...";
+  }
 
   onMount(async () => {
     const KEYWORDS: string[] = [
