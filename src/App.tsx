@@ -5,6 +5,7 @@ import NavBar from "./components/NavBar";
 
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
+const Discussion = lazy(() => import("./pages/Discussion"));
 
 const Food = lazy(() => import("./pages/Food/[id]"));
 const Dashboard = lazy(() => import("./pages/Food/Dashboard"));
@@ -24,6 +25,8 @@ const App: Component = () => {
         <Routes>
           <Route path="/*all" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/discussion" element={<Discussion />} />
+
           <Route path="/food/ucastnik/:id" element={<Food />} />
           <Route path="/food/dashboard/" element={<Dashboard />} />
           <Route path="/food/generate/" element={<Generator />} />
