@@ -21,9 +21,6 @@ interface ResponseJSONInterface {
   data: FoodDBInterface[];
 }
 
-const fetchURLPrefix =
-  import.meta.env.MODE === "development" ? "http://localhost:8000" : "";
-
 const [authorize, setAuthorize] = createSignal<string>();
 
 /**
@@ -35,7 +32,7 @@ const [authorize, setAuthorize] = createSignal<string>();
 const getFoodDashboard = async (): Promise<ResponseJSONInterface> => {
   const authorization =
     authorize() == undefined ? prompt("Zadejte heslo") ?? "" : authorize();
-  const response = await fetch(fetchURLPrefix + "/backend/food/db/list.php", {
+  const response = await fetch("/backend/food/db/list.php", {
     method: "POST",
     body: JSON.stringify({ secret: authorization }),
   });
@@ -72,7 +69,7 @@ const getItemsCount = (
  * @returns {Promise<boolean>} Response.OK
  */
 const removeUser = async (token: string): Promise<boolean> => {
-  const response = await fetch(fetchURLPrefix + "/backend/food/db/remove.php", {
+  const response = await fetch("/backend/food/db/remove.php", {
     method: "POST",
     body: JSON.stringify({ token: token }),
   });
