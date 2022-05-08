@@ -55,12 +55,13 @@ const getFoodDashboard = async (): Promise<ResponseJSONInterface> => {
 const getItemsCount = (
   items: FoodDBInterface[] | undefined
 ): Map<string, number> | null => {
-  if (items == undefined) {
+  if (items == undefined || items == null) {
     return null;
+  } else {
+    return items
+      .map((x) => x.food)
+      .reduce((a, c) => a.set(c, (a.get(c) || 0) + 1), new Map());
   }
-  return items!
-    .map((x) => x.food)
-    .reduce((a, c) => a.set(c, (a.get(c) || 0) + 1), new Map());
 };
 
 /**
@@ -128,23 +129,23 @@ const Dashboard: Component = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <For each={[...new Set(items()!.data.map((x) => x.food))]}>
+                  <For each={[...new Set(items()?.data.map((x) => x.food))]}>
                     {(food) => (
                       <tr class="bg-green-hacked border-b border-green-hacked-darker text-center">
                         <td class="py-4 px-6 text-sm font-medium text-white">
                           {food}
                         </td>
                         <td class="py-4 px-6 text-xl font-medium text-white">
-                          {itemsCount()!.get(food)}
+                          {itemsCount()?.get(food)}
                         </td>
                         <td class="py-4 px-6 text-xl font-medium text-white">
                           {() => {
                             const priceEstm = findFood(food)?.priceEst;
-                            console.log(findFood(food)?.image);
                             return priceEstm
                               ? priceEstm * itemsCount()!.get(food)!
                               : "Žádný odhad";
-                          }} Kč
+                          }}
+                          Kč
                         </td>
                         <td class="py-4 px-6 text-sm font-medium mx-auto flex items-center justify-center">
                           <img
@@ -162,9 +163,7 @@ const Dashboard: Component = () => {
               <table class="min-w-full">
                 <thead class="bg-green-hacked-darker">
                   <tr>
-                    <th class="py-3 px-6 text-xs font-medium text-white">
-                      #
-                    </th>
+                    <th class="py-3 px-6 text-xs font-medium text-white">#</th>
                     <th class="py-3 px-6 text-xs font-medium text-white">
                       Jméno
                     </th>
@@ -178,7 +177,7 @@ const Dashboard: Component = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <For each={items()!.data}>
+                  <For each={items()?.data}>
                     {(item: FoodDBInterface, index) => (
                       <tr class="bg-green-hacked border-b border-green-hacked-darker text-center">
                         <td class="py-4 px-6 text-sm text-white">
@@ -190,9 +189,7 @@ const Dashboard: Component = () => {
                         <td class="py-4 px-6 text-sm text-white">
                           {item.food}
                         </td>
-                        <td class="py-4 px-6 text-sm text-white">
-                          {item.day}
-                        </td>
+                        <td class="py-4 px-6 text-sm text-white">{item.day}</td>
                         <td class="py-4 px-6 text-sm text-white">
                           <button
                             class="mr-2 text-terminal-menu-red"

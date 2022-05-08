@@ -113,11 +113,11 @@ const Events: Component = () => {
    * @param {number} date Date to be compared with
    * @returns {number} Number of days to current date
    */
-  const _dateDiffDays = (date: number): number => {
+  /*const _dateDiffDays = (date: number): number => {
     const _MS_PER_DAY = 1000 * 60 * 60 * 24;
     const current = Date.now();
     return Math.floor((current - date) / _MS_PER_DAY);
-  };
+  };*/
 
   /**
    * Check if string contains word from array
@@ -131,7 +131,7 @@ const Events: Component = () => {
 
   /**
    * Trim event title so it will fit into the block
-   * @param {string} title String containing title 
+   * @param {string} title String containing title
    * @returns {string} String containing trimed title
    */
   const trimTitle = (title: string): string => {
@@ -162,15 +162,15 @@ const Events: Component = () => {
 
     /**
      * Callback for filter() validating fetched data
-     * @param {EventsApiInterface} e 
+     * @param {EventsApiInterface} e
      * @returns {boolean} Event is valid
      */
     const filterEvents = (e: EventsApiInterface): boolean => {
       //if (_dateDiffDays(Date.parse(e.date)) < 90) {
       if (
         _stringContains(e.title.rendered, KEYWORDS) ||
-          _stringContains(e.content.rendered, KEYWORDS) ||
-          e.tags.some((w) => _stringContains(w, KEYWORDS))
+        _stringContains(e.content.rendered, KEYWORDS) ||
+        e.tags.some((w) => _stringContains(w, KEYWORDS))
       ) {
         return true;
       }
@@ -198,7 +198,9 @@ const Events: Component = () => {
             document.getElementsByTagName("img");
           const imgSrc: string =
             background.length > 0
-              ? background[0].getAttribute("src")!
+              ? background[0].getAttribute("src") != null
+                ? (background[0].getAttribute("src") as string)
+                : defaultBg
               : defaultBg;
 
           setEvents([
@@ -235,7 +237,7 @@ const Events: Component = () => {
           }`}
         >
           <For each={events()}>
-            {(event, i) => (
+            {(event) => (
               <div class="">
                 <Event data={event} />
               </div>

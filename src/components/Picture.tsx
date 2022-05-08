@@ -1,6 +1,5 @@
 import { Component } from "solid-js";
 
-// @ts-ignore
 import "fslightbox";
 
 /**

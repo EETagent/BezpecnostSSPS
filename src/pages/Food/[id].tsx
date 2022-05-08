@@ -213,7 +213,7 @@ const Food: Component = () => {
           <div class="font-bold text-4xl">
             {
               <Show when={!selectedFood()} fallback={selectedFood()}>
-                {visitor()!.name}
+                {visitor()?.name}
               </Show>
             }
           </div>

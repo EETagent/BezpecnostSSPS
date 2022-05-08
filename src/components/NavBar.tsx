@@ -88,7 +88,7 @@ const MenuItemCompact: Component<{
   return (
     <a
       rel="external"
-      onClick={props.onClick}
+      onClick={() => props.onClick()}
       href={props.href}
       class="text-white hover:bg-green-hacked-darker  block mx-10 px-3 py-2 rounded-md text-base  uppercase"
     >
