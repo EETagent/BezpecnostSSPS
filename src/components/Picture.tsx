@@ -22,7 +22,6 @@ const Picture: Component<{
    * @function
    */
   const MediaLightbox = (): void => {
-    // @ts-ignore
     const lightbox = new FsLightbox();
     lightbox.props.sources = !props.gallery ? [props.media] : props.gallery;
     lightbox.open();
