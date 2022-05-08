@@ -10,7 +10,4 @@
 
 <img width="1129" alt="BezpecnostSSPS HackDays Registrace" src="https://user-images.githubusercontent.com/20557318/146943375-f76b7c86-0da2-4932-ab71-da7b6acb8863.png">
 
-
-
 https://user-images.githubusercontent.com/20557318/148678452-15f9196d-8bb7-4c14-8171-2d04774ad244.mp4
-

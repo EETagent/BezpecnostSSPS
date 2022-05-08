@@ -1,6 +1,6 @@
 declare class FsLightbox {
   open: VoidFunction;
   props: {
-      sources: Array<string>
+    sources: Array<string>;
   };
 }

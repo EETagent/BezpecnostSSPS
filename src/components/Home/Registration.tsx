@@ -84,14 +84,14 @@ const HackDaysRegistrace: Component = () => {
     const responseJSON: FormResponseJson = await response.json();
 
     switch (responseJSON.result) {
-    case "CAPTCHA":
-      return FormResponse.CAPTCHA;
-    case "ERROR":
-      return FormResponse.ERROR;
-    case "SUCCESS":
-      return FormResponse.SUCCESS;
-    default:
-      return FormResponse.ERROR;
+      case "CAPTCHA":
+        return FormResponse.CAPTCHA;
+      case "ERROR":
+        return FormResponse.ERROR;
+      case "SUCCESS":
+        return FormResponse.SUCCESS;
+      default:
+        return FormResponse.ERROR;
     }
   };
 
@@ -131,7 +131,9 @@ const HackDaysRegistrace: Component = () => {
    * @returns {JSX.Element}
    */
   const RegistrationForm: Component = () => {
-    const ResponseBox: Component<{ text: string; callback?: VoidFunction }> = (props) => {
+    const ResponseBox: Component<{ text: string; callback?: VoidFunction }> = (
+      props
+    ) => {
       const SvgButton: Component<{ callback?: VoidFunction }> = (props) => {
         return (
           <svg
@@ -318,18 +320,9 @@ const HackDaysRegistrace: Component = () => {
           </div>
         </div>
         <div class="mt-7 font-supply text-white inline-block w-8/12">
-          <input
-            form="registration"
-            required
-            type="checkbox"
-            class="mr-2"
-          />
+          <input form="registration" required type="checkbox" class="mr-2" />
           Souhlasím se{" "}
-          <a
-            class="underline hover:text-zinc-300"
-            href={GDPR}
-            target="_blank"
-          >
+          <a class="underline hover:text-zinc-300" href={GDPR} target="_blank">
             zpracováním osobních údajů
           </a>
         </div>

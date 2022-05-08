@@ -29,7 +29,9 @@ const MenuButton: Component<{
         ></path>
       </svg>
       <div
-        class={"block absolute  left-1/4 top-1/2 transform -translate-x-1/2 -translate-y-1/2"}
+        class={
+          "block absolute  left-1/4 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
+        }
       >
         {" "}
         <span
@@ -66,7 +68,9 @@ const MenuItem: Component<{
     <a
       rel="external"
       href={props.href}
-      class={"hover:bg-green-hacked-darker hover:text-white px-3 py-2 rounded-md text-sm  uppercase text-gray-300"}
+      class={
+        "hover:bg-green-hacked-darker hover:text-white px-3 py-2 rounded-md text-sm  uppercase text-gray-300"
+      }
     >
       {props.description}
     </a>
@@ -150,39 +154,45 @@ const Navigation: Component = () => {
           a.finished.then(done);
         }}
       >
-        {<Show when={isOpened()}>{<div
-          class="md:hidden"
-          style="background: repeating-linear-gradient(
+        {
+          <Show when={isOpened()}>
+            {
+              <div
+                class="md:hidden"
+                style="background: repeating-linear-gradient(
             -45deg,
             black,
             black 10px,
             #444 10px,
             #444 11px
           );"
-        >
-          <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <MenuItemCompact
-              onClick={() => setIsOpened(!isOpened())}
-              href="/#"
-              description="O nás"
-            />
-            <MenuItemCompact
-              onClick={() => setIsOpened(!isOpened())}
-              href="/#hackdays"
-              description="HackDays"
-            />
-            <MenuItemCompact
-              onClick={() => setIsOpened(!isOpened())}
-              href="/#akce"
-              description="Akce"
-            />
-            <MenuItemCompact
-              onClick={() => setIsOpened(!isOpened())}
-              href="/#kontakt"
-              description="Kontakt"
-            />
-          </div>
-        </div>}</Show>}
+              >
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                  <MenuItemCompact
+                    onClick={() => setIsOpened(!isOpened())}
+                    href="/#"
+                    description="O nás"
+                  />
+                  <MenuItemCompact
+                    onClick={() => setIsOpened(!isOpened())}
+                    href="/#hackdays"
+                    description="HackDays"
+                  />
+                  <MenuItemCompact
+                    onClick={() => setIsOpened(!isOpened())}
+                    href="/#akce"
+                    description="Akce"
+                  />
+                  <MenuItemCompact
+                    onClick={() => setIsOpened(!isOpened())}
+                    href="/#kontakt"
+                    description="Kontakt"
+                  />
+                </div>
+              </div>
+            }
+          </Show>
+        }
       </Transition>
     </nav>
   );

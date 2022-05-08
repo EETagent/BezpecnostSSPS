@@ -23,10 +23,7 @@ const Kontakt: Component = () => {
           ></iframe>
           <div class="md:ml-8 mt-8 md:mt-0 flex flex-col text-white font-supply">
             <p>Preslova 72/25 Praha 5 - Smíchov 150 21</p>
-            <a
-              href="mailto:kb@ssps.cz"
-              class="underline hover:text-zinc-300"
-            >
+            <a href="mailto:kb@ssps.cz" class="underline hover:text-zinc-300">
               kb@ssps.cz
             </a>
             <a
