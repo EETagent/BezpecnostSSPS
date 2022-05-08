@@ -54,9 +54,9 @@ const getFoodDashboard = async (): Promise<ResponseJSONInterface> => {
  */
 const getItemsCount = (
   items: FoodDBInterface[] | undefined
-): Map<string, number> | null => {
+): Map<string, number> => {
   if (items == undefined || items == null) {
-    return null;
+    return new Map();
   } else {
     return items
       .map((x) => x.food)
@@ -81,7 +81,7 @@ const removeUser = async (token: string): Promise<boolean> => {
 
 const Dashboard: Component = () => {
   const [items, { refetch }] = createResource(true, getFoodDashboard);
-  const itemsCount = createMemo<Map<string, number> | null>(() =>
+  const itemsCount = createMemo<Map<string, number>>(() =>
     getItemsCount(items()?.data)
   );
 
@@ -107,7 +107,7 @@ const Dashboard: Component = () => {
       >
         Refresh objednávek
       </button>
-      <Show when={items() != undefined}>
+      <Show when={!items.loading || !items.error}>
         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
             <div class="overflow-hidden shadow-md sm:rounded-lg">
@@ -142,7 +142,7 @@ const Dashboard: Component = () => {
                           {() => {
                             const priceEstm = findFood(food)?.priceEst;
                             return priceEstm
-                              ? priceEstm * itemsCount()!.get(food)!
+                              ? priceEstm * itemsCount().get(food)!
                               : "Žádný odhad";
                           }}
                           Kč
@@ -193,8 +193,8 @@ const Dashboard: Component = () => {
                         <td class="py-4 px-6 text-sm text-white">
                           <button
                             class="mr-2 text-terminal-menu-red"
-                            onclick={async () => {
-                              await removeUser(item.token);
+                            onclick={() => {
+                              removeUser(item.token);
                               refetch();
                             }}
                           >

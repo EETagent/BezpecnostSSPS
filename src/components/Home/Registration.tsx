@@ -182,8 +182,9 @@ const HackDaysRegistrace: Component = () => {
     const handleSubmit = (event: Event): void => {
       event.preventDefault();
       setSubmitStatus(true);
-      if (typeof recaptcha() !== "undefined") {
-        recaptcha()!
+      const recaptchaInstance = recaptcha();
+      if (typeof recaptchaInstance !== "undefined") {
+        recaptchaInstance
           .execute("Register")
           .then(async (token) => {
             setField("captcha", token);
