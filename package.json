@@ -1,6 +1,7 @@
 {
   "name": "bezpecnost-ssps-web",
   "version": "1.5.2",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "dev-php": "vite & php -S localhost:8000 -t public",
