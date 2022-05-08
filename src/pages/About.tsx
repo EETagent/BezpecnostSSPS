@@ -15,28 +15,25 @@ const About: Component = () => {
    * @param {string} text Article text
    * @returns {JSX.Element}
    */
-  const Article: Component<{ title: string; text: string }> = ({
-    title,
-    text,
-  }) => {
+  const Article: Component<{ title: string; text: string }> = (props) => {
     return (
       <article>
-        <h1 className="my-10 font-supply text-center text-2xl md:text-[2.5vw]">
-          {title}
+        <h1 class="my-10 font-supply text-center text-2xl md:text-[2.5vw]">
+          {props.title}
         </h1>
-        <p className="text-justify text-gray-200 md:text-[1.25vw]">{text}</p>
+        <p class="text-justify text-gray-200 md:text-[1.25vw]">{props.text}</p>
       </article>
     );
   };
   return (
     <section
       id="about"
-      className="w-[80%] mx-auto py-10 flex flex-col items-center justify-center overflow-hidden text-white leading-relaxed"
+      class="w-[80%] mx-auto py-10 flex flex-col items-center justify-center overflow-hidden text-white leading-relaxed"
     >
-      <div className="mt-10 mb-5">
+      <div class="mt-10 mb-5">
         <Link
           href="/"
-          className="px-6 py-3 rounded-3xl bg-green-hacked text-white font-supply uppercase no-underline hover:transition-colors hover:duration-300 hover:bg-green-hacked-darker hover:cursor-pointer"
+          class="px-6 py-3 rounded-3xl bg-green-hacked text-white font-supply uppercase no-underline hover:transition-colors hover:duration-300 hover:bg-green-hacked-darker hover:cursor-pointer"
         >
           Zpět na hlavní stránku
         </Link>
@@ -45,9 +42,9 @@ const About: Component = () => {
         title="Nový obor Kybernetická bezpečnost"
         text="Žádost o spuštění pilotního ověřování nového oboru Kybernetická bezpečnost na dvou středních školách v ČR podal na MŠMT Svaz průmyslu a obchodu ČR. Ten oslovil v rámci sektorové dohody o kybernetické bezpečnosti naši Smíchovskou střední průmyslovou školu a brněnskou střední školu informatiky s nabídkou, aby na nich byl tento nový obor pilotován od školního roku 2017/2018. Na pilotním ověřování nového oboru, stejně jako na jeho obsahu, bude probíhat spolupráce skupin v Praze a Brně, přičemž v Praze půjde o odborné firmy a organizace (např. Cisco, CZ.NIC, Alef Nula, AFCEA), ČVUT a naši SSPŠ, v Brně pak o VUT, další odborné firmy a oslovenou střední školu. Obsah předmětů tak budou tvořit odborníci z praxe, což dává velké předpoklady na takovou výuku, kterou následně absolventi oboru v praxi skutečně využijí. Na doplnění přidáváme tři odpovědi ředitele školy Ing. Radko Sáblíka z jeho rozhovoru pro média na toto téma."
       />
-      <picture className="mt-10">
+      <picture class="mt-10">
         <source srcset={polygonWebP} type="image/webp" />
-        <img className="rounded-3xl" src={polygon} alt="Kybernetický polygon" />
+        <img class="rounded-3xl" src={polygon} alt="Kybernetický polygon" />
       </picture>
       <Article
         title="Proč byla oslovena právě vaše škola, aby pilotovala nový obor Kybernetická bezpečnost?"

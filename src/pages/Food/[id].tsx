@@ -101,7 +101,7 @@ const Food: Component = () => {
    * @param {FoodInterface} food Presented food
    * @returns {JSX.Element}
    */
-  const FoodSquare: Component<{ food: FoodInterface }> = ({ food }) => {
+  const FoodSquare: Component<{ food: FoodInterface }> = (props) => {
     const [clicked, setClicked] = createSignal(false);
 
     const setFood = (name: string) =>
@@ -111,25 +111,25 @@ const Food: Component = () => {
       name: string;
       image: string;
       onClick?: VoidFunction;
-    }> = ({ name, image, onClick }) => {
+    }> = (props) => {
       const [selected, setSelected] = createSignal<boolean>(false);
       createEffect(() => {
-        selectedFood() === name ? setSelected(true) : setSelected(false);
+        selectedFood() === props.name ? setSelected(true) : setSelected(false);
       });
       return (
         <div
-          onclick={onClick}
-          className="group relative bg-white rounded-3xl text-black text-6xl hover:-translate-y-1 hover:scale-110 ease-in-out duration-300 hover:cursor-pointer"
+          onclick={props.onClick}
+          class="group relative bg-white rounded-3xl text-black text-6xl hover:-translate-y-1 hover:scale-110 ease-in-out duration-300 hover:cursor-pointer"
         >
           <img
-            className="z-0 h-full w-full aspect-square object-cover rounded-3xl"
-            src={image}
+            class="z-0 h-full w-full aspect-square object-cover rounded-3xl"
+            src={props.image}
           />
-          <div className="z-10 top-0 w-full h-full flex items-center justify-center absolute text-white break-words text-[30%] md:text-[40%] xl:text-[50%] opacity-0 group-hover:opacity-100 transition-opacity ease-in-out delay-700 duration-300 text-center rounded-3xl border-solid border border-white bg-black ">
-            {name}
+          <div class="z-10 top-0 w-full h-full flex items-center justify-center absolute text-white break-words text-[30%] md:text-[40%] xl:text-[50%] opacity-0 group-hover:opacity-100 transition-opacity ease-in-out delay-700 duration-300 text-center rounded-3xl border-solid border border-white bg-black ">
+            {props.name}
           </div>
           <Show when={selected()}>
-            <div className="z-10 flex items-center justify-center absolute w-[15%] h-[15%] right-0 -top-[5%] rounded-full bg-green-700 text-white text-xs text-center leading-4">
+            <div class="z-10 flex items-center justify-center absolute w-[15%] h-[15%] right-0 -top-[5%] rounded-full bg-green-700 text-white text-xs text-center leading-4">
               ✓
             </div>
           </Show>
@@ -138,19 +138,19 @@ const Food: Component = () => {
     };
 
     return (
-      <Show when={food.categories.some((e) => filter() === e)}>
+      <Show when={props.food.categories.some((e) => filter() === e)}>
         <Item
-          name={food.name}
+          name={props.food.name}
           onClick={() => {
             setClicked(!clicked());
-            if (food.subitems == null) {
-              setFood(food.name);
+            if (props.food.subitems == null) {
+              setFood(props.food.name);
             }
           }}
-          image={food.image}
+          image={props.food.image}
         />
         <Show when={clicked()}>
-          <For each={food.subitems}>
+          <For each={props.food.subitems}>
             {(subitem) => (
               <Show when={subitem.categories.some((e) => filter() === e)}>
                 <Item
@@ -175,9 +175,9 @@ const Food: Component = () => {
       <Show
         when={submitStatus() === FormResponse.SUCCESS}
         fallback={() => (
-          <div className="p-4 rounded-2xl bg-response-error border-solid border-red-800 text-center font-supply">
-            <div className="flex flex-row justify-between">
-              <span className="text-red-800">Chyba</span>
+          <div class="p-4 rounded-2xl bg-response-error border-solid border-red-800 text-center font-supply">
+            <div class="flex flex-row justify-between">
+              <span class="text-red-800">Chyba</span>
               <SvgCloseButton
                 callback={() => setSubmitStatus(FormResponse.NOTSENT)}
               />
@@ -185,9 +185,9 @@ const Food: Component = () => {
           </div>
         )}
       >
-        <div className="p-4 rounded-2xl bg-response-success border-solid border-green-700 text-center font-supply">
-          <div className="flex flex-row justify-between">
-            <span className="text-green-700">Výběr uložen</span>
+        <div class="p-4 rounded-2xl bg-response-success border-solid border-green-700 text-center font-supply">
+          <div class="flex flex-row justify-between">
+            <span class="text-green-700">Výběr uložen</span>
             <SvgCloseButton
               callback={() => setSubmitStatus(FormResponse.NOTSENT)}
             />
@@ -198,10 +198,10 @@ const Food: Component = () => {
   };
 
   return (
-    <div className="w-[80%] mx-auto min-h-screen flex flex-col items-center">
+    <div class="w-[80%] mx-auto min-h-screen flex flex-col items-center">
       <Show when={visitor() !== undefined && visitor() !== null}>
         <div
-          className="w-full mt-10 p-3 rounded-3xl text-white flex items-center justify-center"
+          class="w-full mt-10 p-3 rounded-3xl text-white flex items-center justify-center"
           style="background: repeating-linear-gradient(
               -45deg,
               black,
@@ -210,7 +210,7 @@ const Food: Component = () => {
               #444 11px
             );"
         >
-          <div className="font-bold text-4xl">
+          <div class="font-bold text-4xl">
             {
               <Show when={!selectedFood()} fallback={selectedFood()}>
                 {visitor()!.name}
@@ -220,7 +220,7 @@ const Food: Component = () => {
         </div>
         <Show when={!selectedFood()}>
           <select
-            className="w-[90%] my-10 mx-auto rounded-3xl font-supply text-white text-xl p-4 bg-green-hacked"
+            class="w-[90%] my-10 mx-auto rounded-3xl font-supply text-white text-xl p-4 bg-green-hacked"
             style="-webkit-appearance:none;"
             onChange={(e) => setFilter(e.currentTarget.value)}
           >
@@ -230,22 +230,22 @@ const Food: Component = () => {
           </select>
         </Show>
         <Show when={selectedFood() != null}>
-          <div className="w-full flex justify-center my-10">
+          <div class="w-full flex justify-center my-10">
             <Show when={submitStatus() != FormResponse.NOTSENT}>
-              <div className="w-full mr-3">
+              <div class="w-full mr-3">
                 <ResponseBox />
               </div>
             </Show>
             <button
               onclick={submit}
-              className="w-1/2 px-6 py-4 rounded-3xl bg-green-hacked text-white font-supply uppercase no-underline hover:transition-colors hover:duration-300 hover:bg-green-hacked-darker hover:cursor-pointer"
+              class="w-1/2 px-6 py-4 rounded-3xl bg-green-hacked text-white font-supply uppercase no-underline hover:transition-colors hover:duration-300 hover:bg-green-hacked-darker hover:cursor-pointer"
             >
               Odeslat
             </button>
           </div>
         </Show>
 
-        <div className="w-[90%] grid grid-cols-2 md:grid-cols-3 gap-10">
+        <div class="w-[90%] grid grid-cols-2 md:grid-cols-3 gap-10">
           <For each={[...FOODS, RYBICKY]}>
             {(food) => <FoodSquare food={food} />}
           </For>

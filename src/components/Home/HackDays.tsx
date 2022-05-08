@@ -30,37 +30,37 @@ const Terminal: Component = () => {
     hostname: string;
     command: string;
     commandContent?: string;
-  }> = ({ username, hostname, command, commandContent }) => {
+  }> = (props) => {
     return (
-      <div className="inline-block">
-        <span className="text-terminal-user">${username}</span>
-        <span>@{hostname}</span>
-        <span className="ml-1 text-terminal-command">{command}</span>
-        <span className="ml-1">{commandContent}</span>
+      <div class="inline-block">
+        <span class="text-terminal-user">${props.username}</span>
+        <span>@{props.hostname}</span>
+        <span class="ml-1 text-terminal-command">{props.command}</span>
+        <span class="ml-1">{props.commandContent}</span>
       </div>
     );
   };
 
   return (
-    <div className="w-full">
+    <div class="w-full">
       <div
-        className="px-5 pt-4 shadow-lg text-gray-100 text-sm  subpixel-antialiased 
+        class="px-5 pt-4 shadow-lg text-gray-100 text-sm  subpixel-antialiased 
               bg-terminal-bg pb-6 rounded-lg leading-normal overflow-hidden"
       >
-        <div className="top mb-2 flex">
-          <div className="h-3 w-3 bg-terminal-menu-red rounded-full"></div>
-          <div className="ml-2 h-3 w-3 bg-terminal-menu-yellow rounded-full"></div>
-          <div className="ml-2 h-3 w-3 bg-terminal-menu-green rounded-full"></div>
+        <div class="top mb-2 flex">
+          <div class="h-3 w-3 bg-terminal-menu-red rounded-full"></div>
+          <div class="ml-2 h-3 w-3 bg-terminal-menu-yellow rounded-full"></div>
+          <div class="ml-2 h-3 w-3 bg-terminal-menu-green rounded-full"></div>
         </div>
-        <div className="mt-4 flex flex-col leading-relaxed">
+        <div class="mt-4 flex flex-col leading-relaxed">
           <Command
             username="radko"
             hostname="ssps"
             command="sudo bash"
             commandContent="ssps/hackdays.sh"
           />
-          <h3 className="my-3 uppercase">HackDays</h3>
-          <p className="mb-3">
+          <h3 class="my-3 uppercase">HackDays</h3>
+          <p class="mb-3">
             <b>
               Pro velký zájem bude první konání akce rozděleno na více dnů po 16
               lidech v termínech 4.2., 5.2. a 6.2.
@@ -83,8 +83,8 @@ const Terminal: Component = () => {
             command="sudo bash"
             commandContent="ssps/hackdays/info.sh"
           />
-          <h3 className="my-3 uppercase">Pro koho je událost určena?</h3>
-          <p className="mb-3">
+          <h3 class="my-3 uppercase">Pro koho je událost určena?</h3>
+          <p class="mb-3">
             Hlavní skupinou na kterou se při tvorbě obsahu soustředíme jsou
             studenti druhého stupně základních škol, přesto neplatí žádná
             omezení. Nejsou vyžadovány žádné předchozí znalosti a schopnosit -
@@ -99,7 +99,7 @@ const Terminal: Component = () => {
             command="sudo bash"
             commandContent="ssps/hackdays/cena.sh"
           />
-          <p className="my-3">
+          <p class="my-3">
             690 Kč - Součástí ceny je zajištění stravování, technického vybavení
             a lektorů kempu
           </p>
@@ -118,19 +118,19 @@ const HackDays: Component = () => {
   return (
     <section
       id="hackdays"
-      className="relative flex items-center justify-center overflow-hidden"
+      class="relative flex items-center justify-center overflow-hidden"
     >
       <img
-        className="absolute z-10 w-auto min-w-full min-h-full object-cover"
+        class="absolute z-10 w-auto min-w-full min-h-full object-cover"
         src={bg}
         alt="Fotografie HackDays"
       />
-      <div className="w-4/5 z-20 flex flex-col justify-center items-center my-10 lg:my-16 2xl:my-32">
-        <h1 className="my-10 font-hacked text-white font-bold uppercase text-6xl md:text-8xl">
+      <div class="w-4/5 z-20 flex flex-col justify-center items-center my-10 lg:my-16 2xl:my-32">
+        <h1 class="my-10 font-hacked text-white font-bold uppercase text-6xl md:text-8xl">
           HackDays
         </h1>
         <Terminal />
-        <div className="my-10 2xl:my-16 grow flex flex-col md:flex-row items-center justify-between">
+        <div class="my-10 2xl:my-16 grow flex flex-col md:flex-row items-center justify-between">
           <div class="md:w-[48%] hover:-translate-y-1 hover:scale-105 ease-in-out duration-300 hover:cursor-pointer">
             <Picture
               media={terminal}

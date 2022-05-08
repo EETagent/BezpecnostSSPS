@@ -16,11 +16,11 @@ const Generator = lazy(() => import("./pages/Food/Generator"));
  */
 const App: Component = () => {
   return (
-    <div className="">
-      <header className="sticky top-0 z-50">
+    <div class="">
+      <header class="sticky top-0 z-50">
         <NavBar />
       </header>
-      <main className="relative bg-black overflow-x-hidden">
+      <main class="relative bg-black overflow-x-hidden">
         <Routes>
           <Route path="/*all" element={<Home />} />
           <Route path="/about" element={<About />} />
