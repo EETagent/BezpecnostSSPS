@@ -10,7 +10,7 @@ import {
 import { createStore } from "solid-js/store";
 
 import { load, ReCaptchaInstance } from "recaptcha-v3";
-const REACAPTCHA_SITE_KEY: string = "6Lcy1L0dAAAAAAMsrNsQg-3HHjRfpFjRAAnJcooR";
+const REACAPTCHA_SITE_KEY = "6Lcy1L0dAAAAAAMsrNsQg-3HHjRfpFjRAAnJcooR";
 
 import GDPR from "../../assets/GDPR.pdf";
 import bg from "../../assets/img/background/registrace-bg.jpg";
@@ -131,17 +131,14 @@ const HackDaysRegistrace: Component = () => {
    * @returns {JSX.Element}
    */
   const RegistrationForm: Component = () => {
-    const ResponseBox: Component<{ text: string; callback?: VoidFunction }> = ({
-      text,
-      callback,
-    }) => {
-      const SvgButton: Component<{ callback?: VoidFunction }> = ({
-        callback,
-      }) => {
+    const ResponseBox: Component<{ text: string; callback?: VoidFunction }> = (
+      props
+    ) => {
+      const SvgButton: Component<{ callback?: VoidFunction }> = (props) => {
         return (
           <svg
-            onclick={callback}
-            className="block h-6 w-6 transform transition duration-500 hover:scale-125"
+            onclick={props.callback}
+            class="block h-6 w-6 transform transition duration-500 hover:scale-125"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -154,20 +151,20 @@ const HackDaysRegistrace: Component = () => {
       };
       return (
         <Show
-          when={text === "E-mail úspěšně odeslán"}
+          when={props.text === "E-mail úspěšně odeslán"}
           fallback={() => (
-            <div className="mt-10 py-5 px-7 rounded-2xl bg-response-error border-solid border-red-800  text-center font-supply">
-              <div className="flex flex-row justify-between">
-                <span className="text-red-800">{text}</span>
-                <SvgButton callback={callback} />
+            <div class="mt-10 py-5 px-7 rounded-2xl bg-response-error border-solid border-red-800  text-center font-supply">
+              <div class="flex flex-row justify-between">
+                <span class="text-red-800">{props.text}</span>
+                <SvgButton callback={props.callback} />
               </div>
             </div>
           )}
         >
-          <div className="mt-10 py-5 px-7 rounded-2xl bg-response-success border-solid border-green-700  text-center font-supply">
-            <div className="flex flex-row justify-between">
-              <span className="text-green-700">{text}</span>
-              <SvgButton callback={callback} />
+          <div class="mt-10 py-5 px-7 rounded-2xl bg-response-success border-solid border-green-700  text-center font-supply">
+            <div class="flex flex-row justify-between">
+              <span class="text-green-700">{props.text}</span>
+              <SvgButton callback={props.callback} />
             </div>
           </div>
         </Show>
@@ -187,8 +184,9 @@ const HackDaysRegistrace: Component = () => {
     const handleSubmit = (event: Event): void => {
       event.preventDefault();
       setSubmitStatus(true);
-      if (typeof recaptcha() !== "undefined") {
-        recaptcha()!
+      const recaptchaInstance = recaptcha();
+      if (typeof recaptchaInstance !== "undefined") {
+        recaptchaInstance
           .execute("Register")
           .then(async (token) => {
             setField("captcha", token);
@@ -217,7 +215,7 @@ const HackDaysRegistrace: Component = () => {
       <form
         onSubmit={handleSubmit}
         action=""
-        className="w-full md:w-8/12"
+        class="w-full md:w-8/12"
         id="registration"
       >
         <Show when={formStatus() !== FormResponse.NOTSENT}>
@@ -249,11 +247,11 @@ const HackDaysRegistrace: Component = () => {
           </Switch>
         </Show>
         <Show when={submitStatus() === true}>
-          <div className="text-white font-supply w-full mt-3 text-center md:text-left">
+          <div class="text-white font-supply w-full mt-3 text-center md:text-left">
             Odesílání zprávy....
           </div>
         </Show>
-        <div className="flex flex-row mt-7 transition ease-in-out delay-150  hover:-translate-y-1 duration-300">
+        <div class="flex flex-row mt-7 transition ease-in-out delay-150  hover:-translate-y-1 duration-300">
           <input
             form="registration"
             required
@@ -261,14 +259,14 @@ const HackDaysRegistrace: Component = () => {
             value={form.name}
             onChange={updateFormField("name")}
             placeholder="Jméno:"
-            className="font-supply text-sm p-3 rounded-l-2xl outline-none w-full"
+            class="font-supply text-sm p-3 rounded-l-2xl outline-none w-full"
           />
           <select
             form="registration"
             required
             value={form.birthDate}
             onChange={updateFormField("birthDate")}
-            className="rounded-r-2xl rounded-l-none text-sm text-gray-400 font-supply outline-none border-solid border-l-2 text-center"
+            class="rounded-r-2xl rounded-l-none text-sm text-gray-400 font-supply outline-none border-solid border-l-2 text-center"
             style="-webkit-appearance:none;"
           >
             <option disabled selected value="">
@@ -296,9 +294,9 @@ const HackDaysRegistrace: Component = () => {
           value={form.email}
           onChange={updateFormField("email")}
           placeholder="E-mail"
-          className="mt-7 font-supply text-sm p-3 rounded-2xl outline-none w-full transition ease-in-out delay-150  hover:-translate-y-1 duration-300 "
+          class="mt-7 font-supply text-sm p-3 rounded-2xl outline-none w-full transition ease-in-out delay-150  hover:-translate-y-1 duration-300 "
         />
-        <div className="mt-7 flex flex-col w-full transition ease-in-out delay-150 hover:-translate-y-1 duration-300">
+        <div class="mt-7 flex flex-col w-full transition ease-in-out delay-150 hover:-translate-y-1 duration-300">
           <textarea
             form="registration"
             placeholder="Zpráva:"
@@ -306,40 +304,31 @@ const HackDaysRegistrace: Component = () => {
             value={form.message}
             onChange={updateFormField("message")}
             id=""
-            className="mt-7 font-supply text-sm p-3 rounded-t-2xl resize-none outline-none"
+            class="mt-7 font-supply text-sm p-3 rounded-t-2xl resize-none outline-none"
           ></textarea>
-          <div className="bg-white rounded-b-2xl">
-            <div className="flex flex-row-reverse">
+          <div class="bg-white rounded-b-2xl">
+            <div class="flex flex-row-reverse">
               <button
                 form="registration"
                 type="submit"
                 disabled={submitStatus()}
-                className="w-4/6 p-2 text-sm text-white bg-green-hacked disabled:bg-red-800 text-center font-supply uppercase rounded-br-2xl hover:transition-colors hover:duration-300 hover:bg-green-hacked-darker hover:cursor-pointer"
+                class="w-4/6 p-2 text-sm text-white bg-green-hacked disabled:bg-red-800 text-center font-supply uppercase rounded-br-2xl hover:transition-colors hover:duration-300 hover:bg-green-hacked-darker hover:cursor-pointer"
               >
                 Zaregistrovat se!
               </button>
             </div>
           </div>
         </div>
-        <div className="mt-7 font-supply text-white inline-block w-8/12">
-          <input
-            form="registration"
-            required
-            type="checkbox"
-            className="mr-2"
-          />
+        <div class="mt-7 font-supply text-white inline-block w-8/12">
+          <input form="registration" required type="checkbox" class="mr-2" />
           Souhlasím se{" "}
-          <a
-            className="underline hover:text-zinc-300"
-            href={GDPR}
-            target="_blank"
-          >
+          <a class="underline hover:text-zinc-300" href={GDPR} target="_blank">
             zpracováním osobních údajů
           </a>
         </div>
-        <div className="mt-3 font-supply text-gray-500 text-xs w-8/12">
+        <div class="mt-3 font-supply text-gray-500 text-xs w-8/12">
           <a href="mailto:registrace@hackdays.eu?subject=HackDays 2022 | Předběžná registrace přes webový formulář">
-            Staré dobré: <span className="underline">záložní registrace</span>
+            Staré dobré: <span class="underline">záložní registrace</span>
           </a>
         </div>
       </form>
@@ -348,18 +337,18 @@ const HackDaysRegistrace: Component = () => {
   return (
     <section
       id="registrace"
-      className="relative flex items-center justify-center overflow-hidden "
+      class="relative flex items-center justify-center overflow-hidden "
     >
       <img
-        className="absolute z-10 w-auto min-w-full min-h-full object-cover"
+        class="absolute z-10 w-auto min-w-full min-h-full object-cover"
         src={bg}
         alt="Background image"
       />
-      <div className="z-20 flex flex-col w-4/5 items-center md:items-start my-10 lg:my-16 2xl:my-32">
-        <h2 className="font-sans text-white font-light uppercase md:text-5xl">
+      <div class="z-20 flex flex-col w-4/5 items-center md:items-start my-10 lg:my-16 2xl:my-32">
+        <h2 class="font-sans text-white font-light uppercase md:text-5xl">
           Nezávazná
         </h2>
-        <h1 className="mt-3 font-sans text-white font-bold uppercase text-3xl md:text-7xl">
+        <h1 class="mt-3 font-sans text-white font-bold uppercase text-3xl md:text-7xl">
           Registrace
         </h1>
         <RegistrationForm />

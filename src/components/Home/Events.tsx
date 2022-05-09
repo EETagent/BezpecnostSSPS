@@ -68,34 +68,34 @@ const Events: Component = () => {
    * @param {EventData} data Event object with required values
    * @returns {JSX.Element}
    */
-  const Event: Component<{ data: EventData }> = ({ data }) => {
+  const Event: Component<{ data: EventData }> = (props) => {
     return (
-      <div className="flex h-full justify-between flex-col rounded-3xl bg-white border-solid border-2">
+      <div class="flex h-full justify-between flex-col rounded-3xl bg-white border-solid border-2">
         <div
-          className="w-full h-64 p-5 bg-top  bg-cover rounded-t-3xl flex text-center justify-center items-center text-white text-3xl uppercase font-supply leading-relaxed"
-          style={`background-image:linear-gradient(rgba(103, 114, 41, 0.4), rgba(0, 0, 0, 0.9)), url(${data.img})`}
+          class="w-full h-64 p-5 bg-top  bg-cover rounded-t-3xl flex text-center justify-center items-center text-white text-3xl uppercase font-supply leading-relaxed"
+          style={`background-image:linear-gradient(rgba(103, 114, 41, 0.4), rgba(0, 0, 0, 0.9)), url(${props.data.img})`}
         >
-          {trimTitle(data.title)}
+          {trimTitle(props.data.title)}
         </div>
-        <div className="h-full flex flex-col justify-between w-full md:flex-row rounded-b-3xl">
-          <div className="py-2 flex flex-row justify-around md:rounded-bl-3xl font-supply leading-none text-white uppercase bg-black md:flex-col md:items-center md:justify-center md:w-1/4">
-            <div className="md:text-3xl">
-              {("0" + data.date.getDate()).slice(-2)}
+        <div class="h-full flex flex-col justify-between w-full md:flex-row rounded-b-3xl">
+          <div class="py-2 flex flex-row justify-around md:rounded-bl-3xl font-supply leading-none text-white uppercase bg-black md:flex-col md:items-center md:justify-center md:w-1/4">
+            <div class="md:text-3xl">
+              {("0" + props.data.date.getDate()).slice(-2)}
             </div>
-            <div className="md:text-6xl">
-              {("0" + (data.date.getMonth() + 1)).slice(-2)}
+            <div class="md:text-6xl">
+              {("0" + (props.data.date.getMonth() + 1)).slice(-2)}
             </div>
-            <div className="md:text-xl">{data.date.getFullYear()}</div>
+            <div class="md:text-xl">{props.data.date.getFullYear()}</div>
           </div>
-          <div className="flex-grow font-normal text-gray-800 flex flex-col md:w-3/4">
-            <p className="p-4 leading-normal font-supply text-justify md:text-left text-sm md:text-xs">
-              {data.content[0]}
-              {data.content[1]}
+          <div class="flex-grow font-normal text-gray-800 flex flex-col md:w-3/4">
+            <p class="p-4 leading-normal font-supply text-justify md:text-left text-sm md:text-xs">
+              {props.data.content[0]}
+              {props.data.content[1]}
             </p>
             <a
               target="_blank"
-              href={data.link}
-              className="mt-auto p-2 rounded-b-3xl md:rounded-b-none md:rounded-br-3xl text-center bg-green-hacked hover:transition-colors hover:duration-300 hover:bg-green-hacked-darker hover:cursor-pointer text-xl text-white font-supply uppercase "
+              href={props.data.link}
+              class="mt-auto p-2 rounded-b-3xl md:rounded-b-none md:rounded-br-3xl text-center bg-green-hacked hover:transition-colors hover:duration-300 hover:bg-green-hacked-darker hover:cursor-pointer text-xl text-white font-supply uppercase "
             >
               Zjistit více!
             </a>
@@ -113,11 +113,11 @@ const Events: Component = () => {
    * @param {number} date Date to be compared with
    * @returns {number} Number of days to current date
    */
-  const _dateDiffDays = (date: number): number => {
+  /*const _dateDiffDays = (date: number): number => {
     const _MS_PER_DAY = 1000 * 60 * 60 * 24;
     const current = Date.now();
     return Math.floor((current - date) / _MS_PER_DAY);
-  };
+  };*/
 
   /**
    * Check if string contains word from array
@@ -131,11 +131,11 @@ const Events: Component = () => {
 
   /**
    * Trim event title so it will fit into the block
-   * @param {string} title String containing title 
+   * @param {string} title String containing title
    * @returns {string} String containing trimed title
    */
   const trimTitle = (title: string): string => {
-    const MAX_CHARACTERS_FIT: number = 42;
+    const MAX_CHARACTERS_FIT = 42;
 
     title = title.trim();
     if (title.length <= MAX_CHARACTERS_FIT) {
@@ -144,7 +144,7 @@ const Events: Component = () => {
     const separated = title.slice(0, MAX_CHARACTERS_FIT + 3).split(" ");
     separated.pop();
     return separated.join(" ") + "...";
-  }
+  };
 
   onMount(async () => {
     const KEYWORDS: string[] = [
@@ -154,7 +154,7 @@ const Events: Component = () => {
       "BEPECNOST.SSPS.CZ",
       //"TĚLO"
     ];
-    const EVENTS_URL: string = "https://www.ssps.cz/wp-json/wp/v2/posts";
+    const EVENTS_URL = "https://www.ssps.cz/wp-json/wp/v2/posts";
     const HEADERS: HeadersInit = {
       accept: "application/json",
       //"user-agent": "Stránka Bezpečnost SSPŠ a HackDays, stažení eventů z hlavního webu",
@@ -162,18 +162,18 @@ const Events: Component = () => {
 
     /**
      * Callback for filter() validating fetched data
-     * @param {EventsApiInterface} e 
+     * @param {EventsApiInterface} e
      * @returns {boolean} Event is valid
      */
     const filterEvents = (e: EventsApiInterface): boolean => {
       //if (_dateDiffDays(Date.parse(e.date)) < 90) {
-        if (
-          _stringContains(e.title.rendered, KEYWORDS) ||
-          _stringContains(e.content.rendered, KEYWORDS) ||
-          e.tags.some((w) => _stringContains(w, KEYWORDS))
-        ) {
-          return true;
-        }
+      if (
+        _stringContains(e.title.rendered, KEYWORDS) ||
+        _stringContains(e.content.rendered, KEYWORDS) ||
+        e.tags.some((w) => _stringContains(w, KEYWORDS))
+      ) {
+        return true;
+      }
       //}
 
       return false;
@@ -198,7 +198,9 @@ const Events: Component = () => {
             document.getElementsByTagName("img");
           const imgSrc: string =
             background.length > 0
-              ? background[0].getAttribute("src")!
+              ? background[0].getAttribute("src") != null
+                ? (background[0].getAttribute("src") as string)
+                : defaultBg
               : defaultBg;
 
           setEvents([
@@ -219,7 +221,7 @@ const Events: Component = () => {
   return (
     <section
       id="akce"
-      className="relative flex justify-center content-center	"
+      class="relative flex justify-center content-center	"
       style="background: repeating-linear-gradient(
         -45deg,
         black,
@@ -228,15 +230,15 @@ const Events: Component = () => {
         #444 11px
       );"
     >
-      <div className="w-4/5 my-10 lg:my-16 2xl:my-32">
+      <div class="w-4/5 my-10 lg:my-16 2xl:my-32">
         <div
-          className={`grid grid-cols-1 md:my-16 gap-16 ${
+          class={`grid grid-cols-1 md:my-16 gap-16 ${
             events().length === 1 ? "md:grid-cols-1" : "md:grid-cols-2"
           }`}
         >
           <For each={events()}>
-            {(event, i) => (
-              <div className="">
+            {(event) => (
+              <div class="">
                 <Event data={event} />
               </div>
             )}

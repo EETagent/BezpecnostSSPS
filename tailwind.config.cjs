@@ -1,7 +1,5 @@
 module.exports = {
-  content: [
-    "./src/**/*.{html,css,js,ts,jsx,tsx}",
-  ],
+  content: ["./src/**/*.{html,css,js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
@@ -12,18 +10,18 @@ module.exports = {
         "response-error": "#f3d8da",
         "response-success": "#d5e6de",
 
-        "terminal-bg" : "#252221",
+        "terminal-bg": "#252221",
         "terminal-menu-red": "#dd665a",
         "terminal-menu-yellow": "#efbe5c",
         "terminal-menu-green": "#7ac656",
         "terminal-user": "#6384c7",
-        "terminal-command": "#78b56c"
+        "terminal-command": "#78b56c",
       },
       fontFamily: {
-        "hacked": ["Hacked"],
-        "supply": ["Supply"]
-      }
+        hacked: ["Hacked"],
+        supply: ["Supply"],
+      },
     },
   },
   plugins: [],
-}
+};

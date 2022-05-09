@@ -177,25 +177,25 @@ const Generator: Component = () => {
   };
 
   return (
-    <div className="mx-auto min-h-screen m-7">
-      <form onsubmit={handleSubmit} className="mx-auto flex flex-col w-[80%]">
-        <div className="flex flex-col md:flex-row justify-between items-center w-full">
+    <div class="mx-auto min-h-screen m-7">
+      <form onsubmit={handleSubmit} class="mx-auto flex flex-col w-[80%]">
+        <div class="flex flex-col md:flex-row justify-between items-center w-full">
           <input
             type="password"
-            className="p-1 w-full rounded-lg"
+            class="p-1 w-full rounded-lg"
             placeholder="Token secret"
             value={form.secret}
             onchange={updateFormField("secret")}
           />
           <input
             type="text"
-            className="p-1 w-full mt-3 md:mt-0 md:ml-3 rounded-lg"
+            class="p-1 w-full mt-3 md:mt-0 md:ml-3 rounded-lg"
             placeholder="URL"
             value={form.url}
             onchange={updateFormField("url")}
           />
           <select
-            className="p-1 w-full mt-3 md:mt-0 md:ml-3 rounded-lg"
+            class="p-1 w-full mt-3 md:mt-0 md:ml-3 rounded-lg"
             style="-webkit-appearance:none;"
             value={form.day}
             onchange={updateFormField("day")}
@@ -205,10 +205,10 @@ const Generator: Component = () => {
             </For>
           </select>
         </div>
-        <div className="mt-6 flex flex-col md:flex-row items-center w-full">
+        <div class="mt-6 flex flex-col md:flex-row items-center w-full">
           <textarea
             placeholder="Jméno Příjmení E-mail"
-            className="p-2 w-full rounded-xl"
+            class="p-2 w-full rounded-xl"
             rows="16"
             value={form.input}
             onchange={updateFormField("input")}
@@ -216,7 +216,7 @@ const Generator: Component = () => {
           <textarea
             // Na Safari &#13;&#10; newline nefunkční :(
             placeholder="Jméno Příjmení &#13;&#10;Token"
-            className="p-2 mt-5 md:mt-0 md:ml-5 w-full rounded-xl"
+            class="p-2 mt-5 md:mt-0 md:ml-5 w-full rounded-xl"
             rows="16"
             value={form.output}
             readonly
@@ -224,7 +224,7 @@ const Generator: Component = () => {
         </div>
         <button
           type="submit"
-          className="mt-6 px-6 py-3 rounded-3xl bg-green-hacked text-white font-supply uppercase no-underline hover:transition-colors hover:duration-300 hover:bg-green-hacked-darker hover:cursor-pointer"
+          class="mt-6 px-6 py-3 rounded-3xl bg-green-hacked text-white font-supply uppercase no-underline hover:transition-colors hover:duration-300 hover:bg-green-hacked-darker hover:cursor-pointer"
         >
           Vytvořit tokeny
         </button>

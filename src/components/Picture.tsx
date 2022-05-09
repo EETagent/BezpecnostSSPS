@@ -1,6 +1,5 @@
 import { Component } from "solid-js";
 
-// @ts-ignore
 import "fslightbox";
 
 /**
@@ -17,26 +16,25 @@ const Picture: Component<{
   alt: string;
   video?: string;
   gallery?: Array<string>;
-}> = ({ media: media, mediaAlternativeWebP, alt, gallery }) => {
+}> = (props) => {
   /**
    * Open FsLightbox window
    * @function
    */
   const MediaLightbox = (): void => {
-    // @ts-ignore
     const lightbox = new FsLightbox();
-    lightbox.props.sources = !gallery ? [media] : gallery;
+    lightbox.props.sources = !props.gallery ? [props.media] : props.gallery;
     lightbox.open();
   };
 
   return (
-    <picture className="w-full h-full">
-      <source srcset={mediaAlternativeWebP} type="image/webp" />
+    <picture class="w-full h-full">
+      <source srcset={props.mediaAlternativeWebP} type="image/webp" />
       <img
         class="w-full h-full"
-        src={media}
+        src={props.media}
         onClick={MediaLightbox}
-        alt={alt}
+        alt={props.alt}
       />
     </picture>
   );

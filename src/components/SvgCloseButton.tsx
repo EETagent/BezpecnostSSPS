@@ -6,11 +6,11 @@ import { Component } from "solid-js";
  * @param {VoidFunction} callback on:click callback
  * @returns {JSX.Element}
  */
-const SvgCloseButton: Component<{ callback?: VoidFunction }> = ({ callback }) => {
+const SvgCloseButton: Component<{ callback?: VoidFunction }> = (props) => {
   return (
     <svg
-      onclick={callback}
-      className="block h-6 w-6 transform transition duration-500 hover:scale-125"
+      onclick={props.callback}
+      class="block h-6 w-6 transform transition duration-500 hover:scale-125"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"

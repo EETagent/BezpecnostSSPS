@@ -1,18 +1,27 @@
 {
   "name": "bezpecnost-ssps-web",
-  "version": "1.5.2",
+  "version": "1.6.0",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "dev-php": "vite & php -S localhost:8000 -t public",
     "start": "npm run dev",
     "start-php": "npm run dev-php",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "lint": "prettier --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
+    "format": "prettier --write --plugin-search-dir=. ."
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.4",
+    "@typescript-eslint/eslint-plugin": "^5.22.0",
+    "@typescript-eslint/parser": "^5.22.0",
+    "eslint": "^8.15.0",
+    "eslint-plugin-solid": "^0.4.7",
+    "prettier": "^2.6.2",
     "postcss": "^8.4.12",
+    "autoprefixer": "^10.4.4",
     "tailwindcss": "^3.0.24",
+    "typescript": "^4.6.4",
     "vite": "^2.9.5",
     "vite-plugin-solid": "^2.2.6"
   },
