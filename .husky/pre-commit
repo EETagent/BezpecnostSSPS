@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+pnpm run lint
+
+SECRET="./public/backend/secret.php"
+if [ ! -f $SECRET ]; then
+    echo "Soubor secrets neexistuje! Pro úplnost repozitáře by měl být součástí!"
+    exit 1
+fi
+
+if [ "$(uname)" == "Darwin" ]; then
+   sed -i "" "s/'\(.*\)'/\'REDACTED'/" $SECRET
+else
+   sed -i "s/'\(.*\)'/\'REDACTED'/" $SECRET
+fi
+git add $SECRET
