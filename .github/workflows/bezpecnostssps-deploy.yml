@@ -41,3 +41,4 @@ jobs:
           host: ftp.ssps.cz
           user: ${{ secrets.FTP_USER}}
           password: ${{ secrets.FTP_PASSWORD }}
+          options: "--delete --exclude .htaccess --exclude persistent/ --exclude-glob *.db"
