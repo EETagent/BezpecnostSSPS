@@ -1,0 +1,45 @@
+name: Sestavení a nahrání projektu na školní FTP účet
+
+on:
+  push:
+    branches:
+      - "master"
+jobs:
+  build_and_deploy_job:
+    if: github.event_name == 'push' 
+    runs-on: ubuntu-latest
+    name: Sestavení a nahrání projektu
+    steps:
+      - name: Checkout 🚚
+        uses: actions/checkout@v3
+      - name: Správce balíků pnpm 🚀
+        uses: pnpm/action-setup@v2
+        with:
+          version: "latest"
+      - name: NodeJS 🚀
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: 'pnpm'
+      - name: Tokeny & secrets 🔑
+        env:
+          TOKEN: ${{ secrets.TOKEN }}
+          MAIL: ${{ secrets.MAIL }}
+          FOOD: ${{ secrets.FOOD }}
+        run: |
+          sed -i "0,/REDACTED/s//$TOKEN/" ./public/backend/secret.php
+          sed -i "0,/REDACTED/s//$MAIL/" ./public/backend/secret.php
+          sed -i "0,/REDACTED/s//$FOOD/" ./public/backend/secret.php
+      - name: Sestavení stránky 🔨
+        run: |
+          pnpm install
+          pnpm run build
+      - name: Nahrání na server 📂 
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        with:
+          local-dir: "./dist/"
+          server: ftp.ssps.cz
+          username: ${{ secrets.FTP_USER}}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21 
