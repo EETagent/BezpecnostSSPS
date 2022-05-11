@@ -35,11 +35,9 @@ jobs:
           pnpm install
           pnpm run build
       - name: Nahrání na server 📂 
-        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        uses: sebastianpopp/ftp-action@releases/v2
         with:
-          local-dir: "./dist/"
-          server: ftp.ssps.cz
-          username: ${{ secrets.FTP_USER}}
+          localDir: "./dist/"
+          host: ftp.ssps.cz
+          user: ${{ secrets.FTP_USER}}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
-          port: 21 
