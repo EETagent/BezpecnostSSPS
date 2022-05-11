@@ -1,6 +1,6 @@
 <h1 class="rich-diff-level-zero">BezpecnostSSPS</h1>
 
-<p>Webová stránka pro akci HackDays a kybernetický polygon Smíchovské střední průmyslové školy</p>
+<p>Webová stránka pro akci HackDays a kybernetický polygon Smíchovské střední průmyslové školy a gymnázia</p>
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-blue.svg)]() [![SolidJS](https://img.shields.io/badge/SolidJS-blue.svg)]()
 
