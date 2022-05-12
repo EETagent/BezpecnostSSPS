@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - "master"
+    tags:
+      - "*"
 jobs:
   build_and_deploy_job:
-    if: github.event_name == 'push' 
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     name: Sestavení a nahrání projektu
     steps:
@@ -20,7 +22,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "18"
-          cache: 'pnpm'
+          cache: "pnpm"
       - name: Tokeny & secrets 🔑
         env:
           TOKEN: ${{ secrets.TOKEN }}
@@ -34,7 +36,7 @@ jobs:
         run: |
           pnpm install
           pnpm run build
-      - name: Nahrání na server 📂 
+      - name: Nahrání na server 📂
         uses: sebastianpopp/ftp-action@releases/v2
         with:
           localDir: "./dist/"
