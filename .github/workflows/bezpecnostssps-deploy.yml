@@ -2,8 +2,6 @@ name: Sestavení a nahrání projektu na školní FTP účet
 
 on:
   push:
-    branches:
-      - "master"
     tags:
       - "*"
 jobs:
