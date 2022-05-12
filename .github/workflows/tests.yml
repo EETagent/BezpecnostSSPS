@@ -17,11 +17,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "18"
-          cache: 'pnpm'
+          cache: "pnpm"
       - name: Instalace 🍔
         run: pnpm install
       - name: Linting  ✅
         run: pnpm run lint
       - name: Build 🔨
         run: pnpm run build
-      
