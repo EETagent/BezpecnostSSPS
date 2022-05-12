@@ -1,0 +1,27 @@
+name: Testování projektu
+
+on: [push, pull_request]
+
+jobs:
+  test_job:
+    runs-on: ubuntu-latest
+    name: Testování projektu
+    steps:
+      - name: Checkout 🚚
+        uses: actions/checkout@v3
+      - name: Správce balíků pnpm 🚀
+        uses: pnpm/action-setup@v2
+        with:
+          version: "latest"
+      - name: NodeJS 🚀
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: 'pnpm'
+      - name: Instalace 🍔
+        run: pnpm install
+      - name: Linting  ✅
+        run: pnpm run lint
+      - name: Build 🔨
+        run: pnpm run build
+      
