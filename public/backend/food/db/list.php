@@ -35,7 +35,7 @@ try {
     unset($resultArray);
 
     $db->close();
-    
+
     echo json_encode($data);
 } catch (Exception $e) {
     if (isset($db)) {

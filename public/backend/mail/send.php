@@ -1,4 +1,5 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -27,11 +28,11 @@ try {
     $API_REQUEST = json_decode($php_input);
 
     //die(print_r($API_REQUEST));
-    
+
     if (!isset($API_REQUEST->{'email'})) {
         throw new Exception('Missing email property');
     } else {
-        if(!filter_var($API_REQUEST->{'email'}, FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($API_REQUEST->{'email'}, FILTER_VALIDATE_EMAIL)) {
             throw new Exception('Invalid e-mail address');
         }
     }
@@ -40,18 +41,26 @@ try {
     }
 
     //Ověření validity e-mailu a jména
-    if ($mail->addReplyTo($API_REQUEST->{'email'}, $API_REQUEST->{'name'})) 
-    {
+    if ($mail->addReplyTo($API_REQUEST->{'email'}, $API_REQUEST->{'name'})) {
         //Ověření existence captchy
         if (isset($API_REQUEST->{'captcha'})) {
             $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
             $recaptcha_secret = RECAPTCHA_SECRET;
             $recaptcha_response = $API_REQUEST->{'captcha'};
-            //Verifikace
-            $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
+            //Verifikace reCAPTCHA
+            $curl = curl_init();
+            if ($curl === false) {
+                throw new Exception('Can\'t create cURL handle');
+            }
+            curl_setopt($curl, CURLOPT_URL, $recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
+            curl_setopt($curl, CURLOPT_POST, true);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            $recaptcha = curl_exec($curl);
+            curl_close($curl);
             $recaptcha = json_decode($recaptcha);
-        
-            if($recaptcha->success == true) {
+
+            if ($recaptcha->success == true) {
                 if ($recaptcha->score >= 0.3) {
                     //Nastavení
                     $mail->isSMTP();                                                                        //Aktivování SMTP
@@ -61,27 +70,27 @@ try {
                     $mail->Password   = base64_decode(MAIL_SECRET);                                         //SMTP heslo
                     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;                                     //TLS šifrování
                     $mail->Port       = 587;                                                                //Port pro STARTTLS
-                    
+
                     //Kontakt
                     $mail->setFrom('registrace@hackdays.eu', 'Webový formulář');
-                    $mail->addAddress('registrace@hackdays.eu');  
+                    $mail->addAddress('registrace@hackdays.eu');
 
                     $mail->addReplyTo($API_REQUEST->{'email'}, $API_REQUEST->{'name'});
-                    
+
                     //Obsah
                     $content = 'Jméno: ' . $API_REQUEST->{'name'} . "\n E-mail: " . $API_REQUEST->{'email'} . "\n Rok narození: " . $API_REQUEST->{'birthDate'} . "\n Zpráva: " . $API_REQUEST->{'message'};
-                    $mail->isHTML(false);                                  
+                    $mail->isHTML(false);
                     $mail->Subject = 'HackDays 2022 | Předběžná registrace přes webový formulář';
                     $mail->Body    = $content;
 
                     //Odeslání
                     $mail->send();
-                    echo json_encode(array('result'=>'SUCCESS'));
+                    echo json_encode(array('result' => 'SUCCESS'));
                 } else {
-                    echo json_encode(array('result'=>'CAPTCHA', 'error'=>"Score too low: " . $recaptcha->score));
+                    echo json_encode(array('result' => 'CAPTCHA', 'error' => "Score too low: " . $recaptcha->score));
                 }
             } else {
-                echo json_encode(array('result'=>'CAPTCHA', 'error'=>'reCAPTCHA was evaluated as invalid'));
+                echo json_encode(array('result' => 'CAPTCHA', 'error' => 'reCAPTCHA was evaluated as invalid'));
             }
         } else {
             throw new Exception('Missing reCAPTCHA');
@@ -89,9 +98,6 @@ try {
     } else {
         throw new Exception('Invalid values of properties email and name in JSON');
     }
-} 
-
-catch (Exception $e) {
-    echo json_encode(array('result'=>'ERROR', 'error'=>$e->getMessage()));
+} catch (Exception $e) {
+    echo json_encode(array('result' => 'ERROR', 'error' => $e->getMessage()));
 }
-?>

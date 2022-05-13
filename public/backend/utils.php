@@ -1,10 +1,12 @@
 <?php
-function isValidJSON(string $str): bool {
+function isValidJSON(string $str): bool
+{
     json_decode($str);
     return json_last_error() == JSON_ERROR_NONE;
 }
 
-function base64UrlEncode(string $text): string {
+function base64UrlEncode(string $text): string
+{
     return str_replace(
         ['+', '/', '='],
         ['-', '_', ''],
@@ -12,7 +14,8 @@ function base64UrlEncode(string $text): string {
     );
 }
 
-function isValidJWT(string $jwt, string $secret): bool {
+function isValidJWT(string $jwt, string $secret): bool
+{
     $tokenParts = explode('.', $jwt);
 
     if (count($tokenParts) !== 3) {
@@ -31,7 +34,8 @@ function isValidJWT(string $jwt, string $secret): bool {
     return $base64UrlSignature === $signatureProvided;
 }
 
-function getPayloadJWT($jwt): string {
+function getPayloadJWT($jwt): string
+{
     $tokenParts = explode('.', $jwt);
     return base64_decode($tokenParts[1]);
 }
