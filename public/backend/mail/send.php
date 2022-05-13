@@ -53,7 +53,6 @@ try {
                 throw new Exception('Can\'t create cURL handle');
             }
             curl_setopt($curl, CURLOPT_URL, $recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
-            curl_setopt($curl, CURLOPT_POST, true);
             curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
             $recaptcha = curl_exec($curl);
