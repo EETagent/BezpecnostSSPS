@@ -272,6 +272,7 @@ const HackDaysRegistrace: Component = () => {
             <option disabled selected value="">
               Rok nar.
             </option>
+            <option value="2013">2013</option>
             <option value="2012">2012</option>
             <option value="2011">2011</option>
             <option value="2010">2010</option>
