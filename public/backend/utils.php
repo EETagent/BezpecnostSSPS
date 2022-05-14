@@ -1,6 +1,5 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: *");
+
 function isValidJSON(string $str): bool
 {
     json_decode($str);
