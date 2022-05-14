@@ -1,4 +1,6 @@
 <?php
+const REGISTARTION_DISABLED = true;
+
 const MAIL_HOST = 'smtp.seznam.cz';
 
 const MAIL_USERNAME ='registrace@hackdays.eu';

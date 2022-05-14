@@ -202,6 +202,9 @@ const HackDaysRegistrace: Component = () => {
       setFormStatus(FormResponse.NOTSENT);
     };
 
+    const [isRegistrationDisabled, setIsRegistrationDisabled] =
+      createSignal<boolean>(true);
+
     onMount(async () => {
       await load(REACAPTCHA_SITE_KEY, {
         useRecaptchaNet: false,
@@ -209,6 +212,9 @@ const HackDaysRegistrace: Component = () => {
       }).then((recaptcha) => {
         setRecaptcha(recaptcha);
       });
+      const registration =
+        (await (await fetch("/backend/mail/disabled.php")).text()) === "true";
+      setIsRegistrationDisabled(registration);
     });
 
     return (
@@ -312,7 +318,7 @@ const HackDaysRegistrace: Component = () => {
               <button
                 form="registration"
                 type="submit"
-                disabled={submitStatus()}
+                disabled={isRegistrationDisabled() || submitStatus()}
                 class="w-4/6 p-2 text-sm text-white bg-green-hacked disabled:bg-red-800 text-center font-supply uppercase rounded-br-2xl hover:transition-colors hover:duration-300 hover:bg-green-hacked-darker hover:cursor-pointer"
               >
                 Zaregistrovat se!
