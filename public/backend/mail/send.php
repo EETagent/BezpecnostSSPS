@@ -63,16 +63,16 @@ try {
                 if ($recaptcha->score >= 0.3) {
                     //Nastavení
                     $mail->isSMTP();                                                                        //Aktivování SMTP
-                    $mail->Host       = 'smtp.seznam.cz';                                                   //Nastavení SMTP serveru
+                    $mail->Host       = MAIL_HOST;                                                          //Nastavení SMTP serveru
                     $mail->SMTPAuth   = true;                                                               //Povolení SMTP autentifikace
-                    $mail->Username   = 'registrace@hackdays.eu';                                           //SMTP login
+                    $mail->Username   = MAIL_USERNAME;                                                      //SMTP login
                     $mail->Password   = base64_decode(MAIL_SECRET);                                         //SMTP heslo
                     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;                                     //TLS šifrování
                     $mail->Port       = 587;                                                                //Port pro STARTTLS
 
                     //Kontakt
-                    $mail->setFrom('registrace@hackdays.eu', 'Webový formulář');
-                    $mail->addAddress('registrace@hackdays.eu');
+                    $mail->setFrom(MAIL_USERNAME, 'Webový formulář');
+                    $mail->addAddress(MAIL_USERNAME);
 
                     $mail->addReplyTo($API_REQUEST->{'email'}, $API_REQUEST->{'name'});
 
