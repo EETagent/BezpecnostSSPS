@@ -27,9 +27,9 @@ jobs:
           MAIL: ${{ secrets.MAIL }}
           FOOD: ${{ secrets.FOOD }}
         run: |
-          sed -i "0,/REDACTED/s//$TOKEN/" ./public/backend/secret.php
-          sed -i "0,/REDACTED/s//$MAIL/" ./public/backend/secret.php
-          sed -i "0,/REDACTED/s//$FOOD/" ./public/backend/secret.php
+          sed -i "0,/REDACTED/s//$TOKEN/" ./public/backend/config.php
+          sed -i "0,/REDACTED/s//$MAIL/" ./public/backend/config.php
+          sed -i "0,/REDACTED/s//$FOOD/" ./public/backend/config.php
       - name: Sestavení stránky 🔨
         run: |
           pnpm install
