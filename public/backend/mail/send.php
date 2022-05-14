@@ -10,7 +10,7 @@ require './PHPMailer/SMTP.php';
 require './PHPMailer/Exception.php';
 
 require_once '../utils.php';
-require_once '../secret.php';
+require_once '../config.php';
 
 $mail = new PHPMailer(true);
 

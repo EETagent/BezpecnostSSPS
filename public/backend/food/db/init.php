@@ -1,4 +1,5 @@
 <?php
+
 const DB_PATH = 'food.db';
 
 function init_db($write = false)

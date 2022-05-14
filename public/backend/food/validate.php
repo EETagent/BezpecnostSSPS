@@ -1,6 +1,7 @@
 <?php
+
 require_once '../utils.php';
-require_once '../secret.php';
+require_once '../config.php';
 
 try {
     $php_input = file_get_contents('php://input');
