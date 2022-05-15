@@ -1,11 +1,12 @@
 import { Component } from "solid-js";
 
-import Events from "../components/Home/Events";
-import HackDays from "../components/Home/HackDays";
 import Intro from "../components/Home/Intro";
-import Kontakt from "../components/Home/Kontakt";
-import HackDaysRegistrace from "../components/Home/Registration";
+import HackDays from "../components/Home/HackDays";
+import Events from "../components/Home/Events";
 import Gallery from "../components/Home/Gallery";
+import HackDaysRegistrace from "../components/Home/Registration";
+import Partners from "../components/Home/Partners";
+import Kontakt from "../components/Home/Kontakt";
 
 /**
  * Component representing home page
@@ -19,6 +20,7 @@ const Home: Component = () => {
       <Events />
       <Gallery />
       <HackDaysRegistrace />
+      <Partners />
       <Kontakt />
     </>
   );

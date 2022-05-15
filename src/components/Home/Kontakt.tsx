@@ -12,7 +12,7 @@ const Kontakt: Component = () => {
   return (
     <section id="kontakt" class="bg-black min-h-[80vh] flex justify-center ">
       <div class="w-4/5 flex flex-col items-center my-10 lg:my-16 2xl:my-32">
-        <h1 class="mt-8 uppercase text-white font-supply text-5xl md:text-7xl">
+        <h1 class=" font-sans text-white font-bold uppercase text-3xl md:text-7xl">
           Kontakt
         </h1>
         <div class="my-8 flex flex-col md:flex-row w-full justify-center grow">
