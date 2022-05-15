@@ -54,7 +54,7 @@ const Partner: Component<{ name: string }> = (props) => {
 const Partners: Component = () => {
   return (
     <section
-      id="akce"
+      id="partneri"
       class="mt-10 lg:mt-16 2xl:mt-32 flex flex-col justify-center items-center bg-black"
     >
       <h1 class=" font-sans text-white font-bold uppercase text-3xl md:text-7xl">
