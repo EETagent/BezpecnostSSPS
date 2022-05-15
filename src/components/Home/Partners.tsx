@@ -2,7 +2,7 @@ import { Component, For } from "solid-js";
 
 const partnersImages = import.meta.globEager("../../assets/img/partners/*.png");
 
-const partnestAll = [
+const PARTNERS = [
   "ssps",
   "kypo",
   "cvut",
@@ -74,7 +74,7 @@ const Partners: Component = () => {
             #444 11px
           );"
       >
-        <For each={partnestAll}>
+        <For each={PARTNERS}>
           {(partner: string) => (
             <div>
               <Partner name={partner} />
