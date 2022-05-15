@@ -1,10 +1,6 @@
-import { Component, For, onMount } from "solid-js";
+import { Component, For } from "solid-js";
 
 const partnersImages = import.meta.globEager("../../assets/img/partners/*.png");
-
-onMount(() => {
-  console.log(partnersImages);
-});
 
 const partnestAll = [
   "ssps",
@@ -37,6 +33,10 @@ const partnestAll = [
   "vda",
 ];
 
+/**
+ * Component representing Partner item
+ * @returns {JSX.Element}
+ */
 const Partner: Component<{ name: string }> = (props) => {
   const getImageSrc = (name: string): string =>
     partnersImages[`../../assets/img/partners/${name}.png`].default;
@@ -51,6 +51,10 @@ const Partner: Component<{ name: string }> = (props) => {
   );
 };
 
+/**
+ * Component representing Parnters section
+ * @returns {JSX.Element}
+ */
 const Partners: Component = () => {
   return (
     <section
