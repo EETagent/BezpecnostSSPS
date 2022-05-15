@@ -1,6 +1,6 @@
 import { Component, For } from "solid-js";
 
-const partnersImages = import.meta.globEager("../../assets/img/partners/*.png");
+const partnersImages = import.meta.globEager("../../assets/img/partners/*");
 
 const PARTNERS = [
   "ssps",
@@ -38,15 +38,19 @@ const PARTNERS = [
  * @returns {JSX.Element}
  */
 const Partner: Component<{ name: string }> = (props) => {
-  const getImageSrc = (name: string): string =>
-    partnersImages[`../../assets/img/partners/${name}.png`].default;
+  const getImageSrc = (name: string, webP: boolean): string =>
+    partnersImages[`../../assets/img/partners/${name}.${webP ? "webp" : "png"}`]
+      .default;
   return (
     <div class="grayscale hover:grayscale-0 flex items-center justify-center">
-      <img
-        class="w-full h-full object-scale-down"
-        src={getImageSrc(props.name)}
-        alt={props.name}
-      />
+      <picture class="w-full h-full">
+        <source srcset={getImageSrc(props.name, true)} type="image/webp" />
+        <img
+          class="w-full h-full"
+          src={getImageSrc(props.name, false)}
+          alt={props.name}
+        />
+      </picture>
     </div>
   );
 };
