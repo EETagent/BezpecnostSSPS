@@ -38,6 +38,13 @@ const PARTNERS = [
  * @returns {JSX.Element}
  */
 const Partner: Component<{ name: string }> = (props) => {
+  /**
+   * Function getting valid image path from globEater
+   * @function getImageSrc
+   * @param {string} name Image name
+   * @param {boolean} webP Use webP version?
+   * @returns {string} Image src
+   */
   const getImageSrc = (name: string, webP: boolean): string =>
     partnersImages[`../../assets/img/partners/${name}.${webP ? "webp" : "png"}`]
       .default;
