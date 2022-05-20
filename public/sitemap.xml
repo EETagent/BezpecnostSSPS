@@ -5,13 +5,13 @@
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 <url>
-  <loc>https://hackdays.eu/</loc>
-  <lastmod>2022-03-21T16:26:40+00:00</lastmod>
+  <loc>https://bezpecnost.ssps.cz/</loc>
+  <lastmod>2022-05-19T16:26:40+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://hackdays.eu/about/</loc>
-  <lastmod>2022-01-16T16:26:40+00:00</lastmod>
+  <loc>https://bezpecnost.ssps.cz/about/</loc>
+  <lastmod>2022-05-19T16:26:40+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 </urlset>
