@@ -155,6 +155,9 @@ const Events: Component = () => {
       //"TĚLO"
     ];
     const EVENTS_URL = "https://www.ssps.cz/wp-json/wp/v2/posts";
+    const PARAMETERS = new URLSearchParams();
+    PARAMETERS.append("per_page", "50");
+
     const HEADERS: HeadersInit = {
       accept: "application/json",
       //"user-agent": "Stránka Bezpečnost SSPŠ a HackDays, stažení eventů z hlavního webu",
@@ -179,7 +182,10 @@ const Events: Component = () => {
       return false;
     };
 
-    await fetch(EVENTS_URL, { method: "GET", headers: HEADERS })
+    await fetch(EVENTS_URL + "?" + PARAMETERS, {
+      method: "GET",
+      headers: HEADERS,
+    })
       .then((response) => response.json())
       .then((json: Array<EventsApiInterface>) => {
         const filtered = json.filter((e) => filterEvents(e));
