@@ -3,7 +3,7 @@ const REGISTARTION_DISABLED = true;
 
 const MAIL_HOST = 'smtp.seznam.cz';
 
-const MAIL_USERNAME ='registrace@hackdays.eu';
+const MAIL_USERNAME ='registrace@hackdays.xyz';
 
 const RECAPTCHA_SECRET = 'REDACTED';
 
