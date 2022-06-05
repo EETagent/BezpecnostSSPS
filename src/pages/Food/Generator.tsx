@@ -178,27 +178,27 @@ const Generator: Component = () => {
 
   return (
     <div class="mx-auto min-h-screen m-7">
-      <form onsubmit={handleSubmit} class="mx-auto flex flex-col w-[80%]">
+      <form onSubmit={handleSubmit} class="mx-auto flex flex-col w-[80%]">
         <div class="flex flex-col md:flex-row justify-between items-center w-full">
           <input
             type="password"
             class="p-1 w-full rounded-lg"
             placeholder="Token secret"
             value={form.secret}
-            onchange={updateFormField("secret")}
+            onChange={updateFormField("secret")}
           />
           <input
             type="text"
             class="p-1 w-full mt-3 md:mt-0 md:ml-3 rounded-lg"
             placeholder="URL"
             value={form.url}
-            onchange={updateFormField("url")}
+            onChange={updateFormField("url")}
           />
           <select
             class="p-1 w-full mt-3 md:mt-0 md:ml-3 rounded-lg"
             style="-webkit-appearance:none;"
             value={form.day}
-            onchange={updateFormField("day")}
+            onChange={updateFormField("day")}
           >
             <For each={[...Array(7).keys()]}>
               {(_item, i) => <option value={DAYS[i()]}>{DAYS[i()]}</option>}
@@ -211,7 +211,7 @@ const Generator: Component = () => {
             class="p-2 w-full rounded-xl"
             rows="16"
             value={form.input}
-            onchange={updateFormField("input")}
+            onChange={updateFormField("input")}
           ></textarea>
           <textarea
             // Na Safari &#13;&#10; newline nefunkční :(

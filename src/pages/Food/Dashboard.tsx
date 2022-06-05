@@ -99,7 +99,7 @@ const Dashboard: Component = () => {
   return (
     <div class="mx-auto min-h-screen flex flex-col items-center">
       <button
-        onclick={refetch}
+        onClick={refetch}
         class="px-6 py-3 my-5 rounded-3xl bg-green-hacked text-white font-supply uppercase no-underline hover:transition-colors hover:duration-300 hover:bg-green-hacked-darker hover:cursor-pointer"
       >
         Refresh objednávek
@@ -190,7 +190,7 @@ const Dashboard: Component = () => {
                         <td class="py-4 px-6 text-sm text-white">
                           <button
                             class="mr-2 text-terminal-menu-red"
-                            onclick={() => {
+                            onClick={() => {
                               removeUser(item.token);
                               refetch();
                             }}
@@ -199,7 +199,7 @@ const Dashboard: Component = () => {
                           </button>
                           <button
                             class="text-terminal-menu-yellow"
-                            onclick={() => {
+                            onClick={() => {
                               window.open(
                                 "/food/ucastnik/" +
                                   item.token.replace(".", "@").replace(".", "@")

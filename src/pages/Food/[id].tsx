@@ -118,7 +118,7 @@ const Food: Component = () => {
       });
       return (
         <div
-          onclick={props.onClick}
+          onClick={props.onClick}
           class="group relative bg-white rounded-3xl text-black text-6xl hover:-translate-y-1 hover:scale-110 ease-in-out duration-300 hover:cursor-pointer"
         >
           <img
@@ -237,7 +237,7 @@ const Food: Component = () => {
               </div>
             </Show>
             <button
-              onclick={submit}
+              onClick={submit}
               class="w-1/2 px-6 py-4 rounded-3xl bg-green-hacked text-white font-supply uppercase no-underline hover:transition-colors hover:duration-300 hover:bg-green-hacked-darker hover:cursor-pointer"
             >
               Odeslat

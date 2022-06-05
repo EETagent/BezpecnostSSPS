@@ -9,7 +9,7 @@ import { Component } from "solid-js";
 const SvgCloseButton: Component<{ callback?: VoidFunction }> = (props) => {
   return (
     <svg
-      onclick={props.callback}
+      onClick={props.callback}
       class="block h-6 w-6 transform transition duration-500 hover:scale-125"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
