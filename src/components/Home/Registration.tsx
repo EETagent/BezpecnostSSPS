@@ -334,7 +334,9 @@ const HackDaysRegistrace: Component = () => {
           </a>
         </div>
         <div class="mt-3 font-supply text-gray-500 text-xs w-8/12">
-          <a href={`mailto:hackdays@ssps.cz?subject=HackDays ${new Date().getFullYear()} | Předběžná registrace přes webový formulář`}>
+          <a
+            href={`mailto:hackdays@ssps.cz?subject=HackDays ${new Date().getFullYear()} | Předběžná registrace přes webový formulář`}
+          >
             Staré dobré: <span class="underline">záložní registrace</span>
           </a>
         </div>
