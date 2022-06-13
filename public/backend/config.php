@@ -1,9 +1,12 @@
 <?php
 const REGISTARTION_DISABLED = true;
 
-const MAIL_HOST = 'smtp.seznam.cz';
+const MAIL_HOST = 'mail.ssps.cz';
 
-const MAIL_USERNAME ='registrace@hackdays.xyz';
+const MAIL_USERNAME = 'hackdays';
+
+// const MAIL_ADDRESS = MAIL_USERNAME;
+const MAIL_ADDRESS = "hackdays@ssps.cz";
 
 const RECAPTCHA_SECRET = 'REDACTED';
 

@@ -71,8 +71,8 @@ try {
                     $mail->Port       = 587;                                                                //Port pro STARTTLS
 
                     //Kontakt
-                    $mail->setFrom(MAIL_USERNAME, 'Webový formulář');
-                    $mail->addAddress(MAIL_USERNAME);
+                    $mail->setFrom(MAIL_ADDRESS, 'Webový formulář');
+                    $mail->addAddress(MAIL_ADDRESS);
 
                     $mail->addReplyTo($API_REQUEST->{'email'}, $API_REQUEST->{'name'});
 
