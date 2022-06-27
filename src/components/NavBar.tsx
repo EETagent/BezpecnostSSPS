@@ -18,7 +18,7 @@ const MenuButton: Component<{
   return (
     <button
       aria-controls="mobile-menu"
-      onClick={props.onClick}
+      onClick={() => props.onClick}
       class="transform transition duration-500 hover:scale-110 focus:outline-none"
     >
       <svg viewBox="0 0 32 36" class="h-10 stroke-green-hacked stroke-2">
@@ -26,7 +26,7 @@ const MenuButton: Component<{
         <path
           data-v-21716efb=""
           d="M15.5079 34.8482L1 26.4243V9.57571L15.5079 1.15178L30.5 9.58485V26.4152L15.5079 34.8482Z"
-        ></path>
+        />
       </svg>
       <div
         class={
@@ -38,17 +38,17 @@ const MenuButton: Component<{
           class={`block absolute h-0.5 w-4 text-white bg-current transform transition duration-500 ease-in-out" ${
             props.isMenuOpened() ? "rotate-45" : "-translate-y-1.5"
           }`}
-        ></span>{" "}
+        />{" "}
         <span
           class={`block absolute h-0.5 w-2 text-white bg-current transform transition duration-500 ease-in-out" ${
             props.isMenuOpened() ? "opacity-0" : ""
           }`}
-        ></span>{" "}
+        />{" "}
         <span
           class={`block absolute h-0.5 w-4 text-white bg-current transform transition duration-500 ease-in-out ${
             props.isMenuOpened() ? "-rotate-45" : "translate-y-1.5"
           }`}
-        ></span>{" "}
+        />{" "}
       </div>
     </button>
   );
@@ -92,7 +92,7 @@ const MenuItemCompact: Component<{
   return (
     <a
       rel="external"
-      onClick={props.onClick}
+      onClick={() => props.onClick}
       href={props.href}
       class="text-white hover:bg-green-hacked-darker  block mx-10 px-3 py-2 rounded-md text-base  uppercase"
     >
@@ -159,13 +159,10 @@ const Navigation: Component = () => {
             {
               <div
                 class="md:hidden"
-                style="background: repeating-linear-gradient(
-            -45deg,
-            black,
-            black 10px,
-            #444 10px,
-            #444 11px
-          );"
+                style={{
+                  background:
+                    "repeating-linear-gradient(-45deg,black,black 10px,#444 10px,#444 11px)",
+                }}
               >
                 <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                   <MenuItemCompact

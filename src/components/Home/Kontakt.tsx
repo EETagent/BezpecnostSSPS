@@ -19,8 +19,8 @@ const Kontakt: Component = () => {
           <iframe
             class="h-full w-full grayscale"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2560.585499539144!2d14.403756315717864!3d50.075323879425355!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470b94f900b7ea9b%3A0x95c769fe93886135!2zU23DrWNob3Zza8OhIHN0xZllZG7DrSBwcsWvbXlzbG92w6EgxaFrb2xhIGEgZ3ltbsOheml1bQ!5e0!3m2!1scs!2scz!4v1639929331283!5m2!1scs!2scz"
-            style="border:0;"
-          ></iframe>
+            style={{ border: "0" }}
+          />
           <div class="md:ml-8 mt-8 md:mt-0 flex flex-col text-white font-supply">
             <p>Preslova 72/25 Praha 5 - Smíchov 150 21</p>
             <a href="mailto:kb@ssps.cz" class="underline hover:text-zinc-300">

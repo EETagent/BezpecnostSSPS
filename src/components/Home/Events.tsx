@@ -73,7 +73,9 @@ const Events: Component = () => {
       <div class="flex h-full justify-between flex-col rounded-3xl bg-white border-solid border-2">
         <div
           class="w-full h-64 p-5 bg-top  bg-cover rounded-t-3xl flex text-center justify-center items-center text-white text-3xl uppercase font-supply leading-relaxed"
-          style={`background-image:linear-gradient(rgba(103, 114, 41, 0.4), rgba(0, 0, 0, 0.9)), url(${props.data.img})`}
+          style={{
+            "background-image": `linear-gradient(rgba(103, 114, 41, 0.4), rgba(0, 0, 0, 0.9)), url(${props.data.img})`,
+          }}
         >
           {trimTitle(props.data.title)}
         </div>
@@ -228,13 +230,10 @@ const Events: Component = () => {
     <section
       id="akce"
       class="relative flex justify-center content-center	"
-      style="background: repeating-linear-gradient(
-        -45deg,
-        black,
-        black 10px,
-        #444 10px,
-        #444 11px
-      );"
+      style={{
+        background:
+          "repeating-linear-gradient(-45deg,black,black 10px,#444 10px,#444 11px)",
+      }}
     >
       <div class="w-4/5 my-10 lg:my-16 2xl:my-32">
         <div

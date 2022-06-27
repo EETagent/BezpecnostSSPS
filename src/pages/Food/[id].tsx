@@ -118,7 +118,7 @@ const Food: Component = () => {
       });
       return (
         <div
-          onClick={props.onClick}
+          onClick={() => props.onClick}
           class="group relative bg-white rounded-3xl text-black text-6xl hover:-translate-y-1 hover:scale-110 ease-in-out duration-300 hover:cursor-pointer"
         >
           <img
@@ -202,13 +202,9 @@ const Food: Component = () => {
       <Show when={visitor() !== undefined && visitor() !== null}>
         <div
           class="w-full mt-10 p-3 rounded-3xl text-white flex items-center justify-center"
-          style="background: repeating-linear-gradient(
-              -45deg,
-              black,
-              black 10px,
-              #444 10px,
-              #444 11px
-            );"
+          style={{
+            background: "repeating-linear-gradient(-45deg,black,black 10px,",
+          }}
         >
           <div class="font-bold text-4xl">
             {
@@ -221,7 +217,7 @@ const Food: Component = () => {
         <Show when={!selectedFood()}>
           <select
             class="w-[90%] my-10 mx-auto rounded-3xl font-supply text-white text-xl p-4 bg-green-hacked"
-            style="-webkit-appearance:none;"
+            style={{ "-webkit-appearance": "none" }}
             onChange={(e) => setFilter(e.currentTarget.value)}
           >
             <For each={FOODCATEGORIES}>

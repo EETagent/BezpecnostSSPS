@@ -196,7 +196,7 @@ const Generator: Component = () => {
           />
           <select
             class="p-1 w-full mt-3 md:mt-0 md:ml-3 rounded-lg"
-            style="-webkit-appearance:none;"
+            style={{ "-webkit-appearance": "none" }}
             value={form.day}
             onChange={updateFormField("day")}
           >
@@ -212,7 +212,7 @@ const Generator: Component = () => {
             rows="16"
             value={form.input}
             onChange={updateFormField("input")}
-          ></textarea>
+          />
           <textarea
             // Na Safari &#13;&#10; newline nefunkční :(
             placeholder="Jméno Příjmení &#13;&#10;Token"
@@ -220,7 +220,7 @@ const Generator: Component = () => {
             rows="16"
             value={form.output}
             readonly
-          ></textarea>
+          />
         </div>
         <button
           type="submit"

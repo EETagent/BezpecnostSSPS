@@ -148,7 +148,7 @@ const Dashboard: Component = () => {
                           <img
                             class="aspect-square h-24 rounded-2xl"
                             src={findFood(food)?.image}
-                          ></img>
+                          />
                         </td>
                       </tr>
                     )}
@@ -170,7 +170,7 @@ const Dashboard: Component = () => {
                     <th class="py-3 px-6 text-xs font-medium text-white">
                       Den
                     </th>
-                    <th class="py-3 px-6 text-xs font-medium text-white"></th>
+                    <th class="py-3 px-6 text-xs font-medium text-white" />
                   </tr>
                 </thead>
                 <tbody>

@@ -77,13 +77,10 @@ const Partners: Component = () => {
       </h1>
       <div
         class="mt-10 w-4/5 p-10 grid grid-cols-3 md:grid-cols-5 gap-7"
-        style="background: repeating-linear-gradient(
-            -45deg,
-            black,
-            black 10px,
-            #444 10px,
-            #444 11px
-          );"
+        style={{
+          background:
+            "repeating-linear-gradient(-45deg,black,black 10px,#444 10px,#444 11px)",
+        }}
       >
         <For each={PARTNERS}>
           {(partner: string) => (

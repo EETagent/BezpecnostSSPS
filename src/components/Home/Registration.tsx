@@ -236,19 +236,19 @@ const HackDaysRegistrace: Component = () => {
               <ResponseBox
                 text="E-mail úspěšně odeslán"
                 callback={dismissReponse}
-              ></ResponseBox>
+              />
             </Match>
             <Match when={formStatus() === FormResponse.CAPTCHA}>
               <ResponseBox
                 text="Chybná reCAPTCHA, zpráva nebyla odeslána. V případě dalších problémů nás kontaktujte."
                 callback={dismissReponse}
-              ></ResponseBox>
+              />
             </Match>
             <Match when={formStatus() === FormResponse.ERROR}>
               <ResponseBox
                 text="Chyba serveru, zpráva nebyla odeslána."
                 callback={dismissReponse}
-              ></ResponseBox>
+              />
             </Match>
           </Switch>
         </Show>
@@ -273,7 +273,7 @@ const HackDaysRegistrace: Component = () => {
             value={form.birthDate}
             onChange={updateFormField("birthDate")}
             class="rounded-r-2xl rounded-l-none text-sm text-gray-400 font-supply outline-none border-solid border-l-2 text-center"
-            style="-webkit-appearance:none;"
+            style={{ "-webkit-appearance": "none" }}
           >
             <option disabled selected value="">
               Rok nar.
@@ -312,7 +312,7 @@ const HackDaysRegistrace: Component = () => {
             onChange={updateFormField("message")}
             id=""
             class="mt-7 font-supply text-sm p-3 rounded-t-2xl resize-none outline-none"
-          ></textarea>
+          />
           <div class="bg-white rounded-b-2xl">
             <div class="flex flex-row-reverse">
               <button

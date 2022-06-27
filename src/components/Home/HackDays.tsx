@@ -48,9 +48,9 @@ const Terminal: Component = () => {
               bg-terminal-bg pb-6 rounded-lg leading-normal overflow-hidden"
       >
         <div class="top mb-2 flex">
-          <div class="h-3 w-3 bg-terminal-menu-red rounded-full"></div>
-          <div class="ml-2 h-3 w-3 bg-terminal-menu-yellow rounded-full"></div>
-          <div class="ml-2 h-3 w-3 bg-terminal-menu-green rounded-full"></div>
+          <div class="h-3 w-3 bg-terminal-menu-red rounded-full" />
+          <div class="ml-2 h-3 w-3 bg-terminal-menu-yellow rounded-full" />
+          <div class="ml-2 h-3 w-3 bg-terminal-menu-green rounded-full" />
         </div>
         <div class="mt-4 flex flex-col leading-relaxed">
           <Command
