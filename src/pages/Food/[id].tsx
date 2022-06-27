@@ -203,7 +203,8 @@ const Food: Component = () => {
         <div
           class="w-full mt-10 p-3 rounded-3xl text-white flex items-center justify-center"
           style={{
-            background: "repeating-linear-gradient(-45deg,black,black 10px,",
+            background:
+              "repeating-linear-gradient(-45deg,black,black 10px,#444 10px,#444 11px)",
           }}
         >
           <div class="font-bold text-4xl">
