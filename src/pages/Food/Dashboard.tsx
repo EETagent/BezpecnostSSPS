@@ -24,14 +24,25 @@ interface ResponseJSONInterface {
 const [authorize, setAuthorize] = createSignal<string>();
 
 /**
+ * Setup authorization prompt
+ * @async
+ * @function setupAuthorization
+ * @returns {string}
+ */
+const setupAuthorization = (): string => {
+  const authorization =
+    !authorize() ? prompt("Zadejte heslo") ?? "" : authorize() ?? "";
+  return authorization;
+};
+
+/**
  * Get all items from food DB
  * @async
  * @function getFoodDashboard
  * @returns {Promise<ResponseJSONInterface>}
  */
 const getFoodDashboard = async (): Promise<ResponseJSONInterface> => {
-  const authorization =
-    authorize() == undefined ? prompt("Zadejte heslo") ?? "" : authorize();
+  const authorization = setupAuthorization();
   const response = await fetch("/backend/food/db/list.php", {
     method: "POST",
     body: JSON.stringify({ secret: authorization }),
@@ -40,6 +51,8 @@ const getFoodDashboard = async (): Promise<ResponseJSONInterface> => {
   const responseValue: ResponseJSONInterface = await response.json();
   if (responseValue.result === "SUCCESS") {
     setAuthorize(authorization);
+  } else {
+    console.error(responseValue.result);
   }
   return responseValue;
 };
@@ -74,6 +87,21 @@ const removeUser = async (token: string): Promise<boolean> => {
     body: JSON.stringify({ token: token }),
   });
   return response.ok;
+};
+
+const removeAll = async (): Promise<ResponseJSONInterface> => {
+  const authorization = setupAuthorization();
+
+  const response = await fetch("/backend/food/db/removeAll.php", {
+    method: "POST",
+    body: JSON.stringify({ secret: authorization }),
+  });
+
+  const responseValue: ResponseJSONInterface = await response.json();
+  if (responseValue.result === "SUCCESS") {
+    setAuthorize(authorization);
+  }
+  return responseValue;
 };
 
 const Dashboard: Component = () => {
@@ -120,9 +148,7 @@ const Dashboard: Component = () => {
                     <th class="py-3 px-6 text-xs font-bold text-white text-center">
                       Odhadovaná cena
                     </th>
-                    <th class="py-3 px-6 text-xs font-bold text-white text-center">
-                      Obrázek
-                    </th>
+                    <th />
                   </tr>
                 </thead>
                 <tbody>
@@ -170,7 +196,17 @@ const Dashboard: Component = () => {
                     <th class="py-3 px-6 text-xs font-medium text-white">
                       Den
                     </th>
-                    <th class="py-3 px-6 text-xs font-medium text-white" />
+                    <th class="py-3 px-6 text-xs font-medium text-white">
+                      <button
+                        class="mr-2 text-terminal-menu-red"
+                        onClick={async () => {
+                          await removeAll();
+                          await refetch();
+                        }}
+                      >
+                        Odstranit vše
+                      </button>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -190,9 +226,9 @@ const Dashboard: Component = () => {
                         <td class="py-4 px-6 text-sm text-white">
                           <button
                             class="mr-2 text-terminal-menu-red"
-                            onClick={() => {
-                              removeUser(item.token);
-                              refetch();
+                            onClick={async () => {
+                              await removeUser(item.token);
+                              await refetch();
                             }}
                           >
                             Odstranit
