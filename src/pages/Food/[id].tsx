@@ -118,7 +118,7 @@ const Food: Component = () => {
       });
       return (
         <div
-          onClick={() => props.onClick}
+          onClick={props.onClick}
           class="group relative bg-white rounded-3xl text-black text-6xl hover:-translate-y-1 hover:scale-110 ease-in-out duration-300 hover:cursor-pointer"
         >
           <img

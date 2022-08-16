@@ -18,7 +18,7 @@ const MenuButton: Component<{
   return (
     <button
       aria-controls="mobile-menu"
-      onClick={() => props.onClick}
+      onClick={props.onClick}
       class="transform transition duration-500 hover:scale-110 focus:outline-none"
     >
       <svg viewBox="0 0 32 36" class="h-10 stroke-green-hacked stroke-2">
@@ -92,7 +92,7 @@ const MenuItemCompact: Component<{
   return (
     <a
       rel="external"
-      onClick={() => props.onClick}
+      onClick={(props.onClick}
       href={props.href}
       class="text-white hover:bg-green-hacked-darker  block mx-10 px-3 py-2 rounded-md text-base  uppercase"
     >
