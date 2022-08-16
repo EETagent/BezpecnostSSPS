@@ -128,6 +128,9 @@ const Food: Component = () => {
           <div class="z-10 top-0 w-full h-full flex items-center justify-center absolute text-white break-words text-[30%] md:text-[40%] xl:text-[50%] opacity-0 group-hover:opacity-100 transition-opacity ease-in-out delay-700 duration-300 text-center rounded-3xl border-solid border border-white bg-black ">
             {props.name}
           </div>
+          <div class="flex sm:hidden z-10 items-center justify-center absolute w-[65%] h-[15%] left-0 -bottom-[5%] rounded-full bg-orange-700 text-white text-xs text-center leading-4">
+            <span class="p-3 text-[40%]">{props.name}</span>
+          </div>
           <Show when={selected()}>
             <div class="z-10 flex items-center justify-center absolute w-[15%] h-[15%] right-0 -top-[5%] rounded-full bg-green-700 text-white text-xs text-center leading-4">
               ✓
