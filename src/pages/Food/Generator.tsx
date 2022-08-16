@@ -43,7 +43,7 @@ const useForm = () => {
     input: "",
     output: "",
     secret: "",
-    url: "https://hackdays.eu/food/ucastnik/",
+    url: "https://bezpecnost.ssps.cz/food/ucastnik/",
     day: DAYS[new Date().getDay()],
   });
 

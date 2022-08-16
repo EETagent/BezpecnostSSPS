@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://hackdays.eu/sitemap.xml
+Sitemap: https://bezpecnost.ssps.cz/sitemap.xml

@@ -27,10 +27,10 @@ const Kontakt: Component = () => {
               kb@ssps.cz
             </a>
             <a
-              href="mailto:registrace@hackdays.eu"
+              href="mailto:hackdays@ssps.cz"
               class="underline hover:text-zinc-300"
             >
-              registrace@hackdays.eu
+              hackdays@ssps.cz
             </a>
             <a
               href="https://ssps.cz"
