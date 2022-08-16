@@ -5,7 +5,7 @@ require_once '../../config.php';
 require_once 'init.php';
 
 try {
-    $db = init_db(write: true);
+    $db = init_db(write: false);
 
     $php_input = file_get_contents('php://input');
 
