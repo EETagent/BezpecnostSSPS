@@ -30,8 +30,9 @@ const [authorize, setAuthorize] = createSignal<string>();
  * @returns {string}
  */
 const setupAuthorization = (): string => {
-  const authorization =
-    !authorize() ? prompt("Zadejte heslo") ?? "" : authorize() ?? "";
+  const authorization = !authorize()
+    ? prompt("Zadejte heslo") ?? ""
+    : authorize() ?? "";
   return authorization;
 };
 
