@@ -21,19 +21,35 @@ interface ResponseJSONInterface {
   data: FoodDBInterface[];
 }
 
-const [authorize, setAuthorize] = createSignal<string>();
-
 /**
- * Setup authorization prompt
+ * Authorization
  * @async
  * @function setupAuthorization
+ * @param {string} operation
+ * @param {string=} token
  * @returns {string}
  */
-const setupAuthorization = (): string => {
-  const authorization = !authorize()
-    ? prompt("Zadejte heslo") ?? ""
-    : authorize() ?? "";
-  return authorization;
+const setupAuthorization = (
+  operation: "get" | "save" | "remove",
+  token?: string | null
+): string | null => {
+  const storageToken = localStorage.getItem("foodDashboardToken");
+  switch (operation) {
+    case "get":
+      if (storageToken) {
+        return storageToken;
+      }
+      return prompt("Zadejte heslo") ?? "";
+    case "save":
+      if (token) {
+        localStorage.setItem("foodDashboardToken", token);
+      }
+      break;
+    case "remove":
+      localStorage.removeItem("foodDashboardToken");
+      break;
+  }
+  return null;
 };
 
 /**
@@ -43,7 +59,7 @@ const setupAuthorization = (): string => {
  * @returns {Promise<ResponseJSONInterface>}
  */
 const getFoodDashboard = async (): Promise<ResponseJSONInterface> => {
-  const authorization = setupAuthorization();
+  const authorization = setupAuthorization("get");
   const response = await fetch("/backend/food/db/list.php", {
     method: "POST",
     body: JSON.stringify({ secret: authorization }),
@@ -51,8 +67,9 @@ const getFoodDashboard = async (): Promise<ResponseJSONInterface> => {
 
   const responseValue: ResponseJSONInterface = await response.json();
   if (responseValue.result === "SUCCESS") {
-    setAuthorize(authorization);
+    setupAuthorization("save", authorization);
   } else {
+    setupAuthorization("remove");
     console.error(responseValue.result);
   }
   return responseValue;
@@ -91,7 +108,7 @@ const removeUser = async (token: string): Promise<boolean> => {
 };
 
 const removeAll = async (): Promise<ResponseJSONInterface> => {
-  const authorization = setupAuthorization();
+  const authorization = setupAuthorization("get");
 
   const response = await fetch("/backend/food/db/removeAll.php", {
     method: "POST",
@@ -100,7 +117,10 @@ const removeAll = async (): Promise<ResponseJSONInterface> => {
 
   const responseValue: ResponseJSONInterface = await response.json();
   if (responseValue.result === "SUCCESS") {
-    setAuthorize(authorization);
+    setupAuthorization("save" ,authorization);
+  } else {
+    setupAuthorization("remove");
+    console.error(responseValue.result);
   }
   return responseValue;
 };
@@ -133,7 +153,7 @@ const Dashboard: Component = () => {
       >
         Refresh objednávek
       </button>
-      <Show when={!items.loading && !items.error}>
+      <Show when={!items.loading && !items.error && items}>
         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
             <div class="overflow-hidden shadow-md sm:rounded-lg">
