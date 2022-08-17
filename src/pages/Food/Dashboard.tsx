@@ -117,7 +117,7 @@ const removeAll = async (): Promise<ResponseJSONInterface> => {
 
   const responseValue: ResponseJSONInterface = await response.json();
   if (responseValue.result === "SUCCESS") {
-    setupAuthorization("save" ,authorization);
+    setupAuthorization("save", authorization);
   } else {
     setupAuthorization("remove");
     console.error(responseValue.result);
