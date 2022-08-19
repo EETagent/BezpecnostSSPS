@@ -42,7 +42,7 @@ const useForm = () => {
   const [form, setForm] = createStore<FormFields>({
     input: "",
     output: "",
-    secret: "",
+    secret: localStorage.getItem("foodDashboardToken") ?? "",
     url: "https://bezpecnost.ssps.cz/food/ucastnik/",
     day: DAYS[new Date().getDay()],
   });
