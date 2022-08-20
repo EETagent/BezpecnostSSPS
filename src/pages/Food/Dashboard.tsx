@@ -154,124 +154,97 @@ const Dashboard: Component = () => {
         Refresh objednávek
       </button>
       <Show when={!items.loading && !items.error && items}>
-        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
-            <div class="overflow-hidden shadow-md sm:rounded-lg">
-              <table class="min-w-full">
-                <thead class="bg-green-hacked-darker">
-                  <tr>
-                    <th class="py-3 px-6 text-xs font-bold text-white text-center">
-                      Jídlo
-                    </th>
-                    <th class="py-3 px-6 text-xs font-bold text-white text-center">
-                      Počet
-                    </th>
-                    <th class="py-3 px-6 text-xs font-bold text-white text-center">
-                      Odhadovaná cena
-                    </th>
-                    <th />
-                  </tr>
-                </thead>
-                <tbody>
-                  <For each={[...new Set(items()?.data.map((x) => x.food))]}>
-                    {(food) => (
-                      <tr class="bg-green-hacked border-b border-green-hacked-darker text-center">
-                        <td class="py-4 px-6 text-sm font-medium text-white">
-                          {food}
-                        </td>
-                        <td class="py-4 px-6 text-xl font-medium text-white">
-                          {itemsCount()?.get(food)}
-                        </td>
-                        <td class="py-4 px-6 text-xl font-medium text-white">
-                          {() => {
-                            const priceEstm = findFood(food)?.priceEst;
-                            return priceEstm
-                              ? priceEstm * itemsCount().get(food)!
-                              : "Žádný odhad";
-                          }}
-                          Kč
-                        </td>
-                        <td class="py-4 px-6 text-sm font-medium mx-auto flex items-center justify-center">
-                          <img
-                            class="aspect-square h-24 rounded-2xl"
-                            src={findFood(food)?.image}
-                          />
-                        </td>
-                      </tr>
-                    )}
-                  </For>
-                </tbody>
-              </table>
+        <div class="md:w-1/2 inline-block py-2 px-6 lg:px-8">
+          <div class="overflow-hidden shadow-md rounded-lg">
+            <div class="py-2 flex items-center bg-green-hacked-darker">
+              <span class="w-[30%] sm:w-[20%] text-xs font-bold text-white text-center">
+                Jídlo
+              </span>
+              <span class="w-[30%] sm:w-[20%] text-xs font-bold text-white text-center">
+                Počet
+              </span>
+              <span class="w-[30%] sm:w-[25%] text-xs font-bold text-white text-center">
+                Odhadovaná cena
+              </span>
             </div>
-            <div class="mt-10 overflow-hidden shadow-md sm:rounded-lg">
-              <table class="min-w-full">
-                <thead class="bg-green-hacked-darker">
-                  <tr>
-                    <th class="py-3 px-6 text-xs font-medium text-white">#</th>
-                    <th class="py-3 px-6 text-xs font-medium text-white">
-                      Jméno
-                    </th>
-                    <th class="py-3 px-6 text-xs font-medium text-white">
-                      Jídlo
-                    </th>
-                    <th class="py-3 px-6 text-xs font-medium text-white">
-                      Den
-                    </th>
-                    <th class="py-3 px-6 text-xs font-medium text-white">
-                      <button
-                        class="mr-2 text-terminal-menu-red"
-                        onClick={async () => {
-                          await removeAll();
-                          await refetch();
-                        }}
-                      >
-                        Odstranit vše
-                      </button>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <For each={items()?.data}>
-                    {(item: FoodDBInterface, index) => (
-                      <tr class="bg-green-hacked border-b border-green-hacked-darker text-center">
-                        <td class="py-4 px-6 text-sm text-white">
-                          {index() + 1}.
-                        </td>
-                        <td class="py-4 px-6 text-sm text-white">
-                          {item.name}
-                        </td>
-                        <td class="py-4 px-6 text-sm text-white">
-                          {item.food}
-                        </td>
-                        <td class="py-4 px-6 text-sm text-white">{item.day}</td>
-                        <td class="py-4 px-6 text-sm text-white">
-                          <button
-                            class="mr-2 text-terminal-menu-red"
-                            onClick={async () => {
-                              await removeUser(item.token);
-                              await refetch();
-                            }}
-                          >
-                            Odstranit
-                          </button>
-                          <button
-                            class="text-terminal-menu-yellow"
-                            onClick={() => {
-                              window.open(
-                                "/food/ucastnik/" +
-                                  item.token.replace(".", "@").replace(".", "@")
-                              );
-                            }}
-                          >
-                            Upravit
-                          </button>
-                        </td>
-                      </tr>
-                    )}
-                  </For>
-                </tbody>
-              </table>
+            <For each={[...new Set(items()?.data.map((x) => x.food))]}>
+              {(food) => (
+                <div class="flex items-center bg-green-hacked border-b border-green-hacked-darker text-center">
+                  <span class="w-[30%] sm:w-[20%] py-2 px-3 text-sm font-medium text-white">
+                    {food}
+                  </span>
+                  <span class="w-[30%] sm:w-[20%] text-xl font-medium text-white">
+                    {itemsCount()?.get(food)}
+                  </span>
+                  <span class="w-[30%] sm:w-[25%] text-xl font-medium text-white">
+                    {() => {
+                      const priceEstm = findFood(food)?.priceEst;
+                      return priceEstm
+                        ? priceEstm * itemsCount().get(food)!
+                        : "Žádný odhad";
+                    }}
+                    Kč
+                  </span>
+                  <span class="w-0 sm:w-[20%] sm:flex-grow p-4">
+                    <img
+                      class="mx-auto aspect-square h-24 rounded-2xl"
+                      src={findFood(food)?.image}
+                    />
+                  </span>
+                </div>
+              )}
+            </For>
+          </div>
+          <div class="mt-10 overflow-hidden shadow-md rounded-lg">
+            <div class="py-2 flex items-center bg-green-hacked-darker text-center">
+              <span class="w-[10%] text-xs font-medium text-white">#</span>
+              <span class="w-[20%] text-xs font-medium text-white">Jméno</span>
+              <span class="w-[20%] text-xs font-medium text-white">Jídlo</span>
+              <span class="w-[20%] text-xs font-medium text-white">Den</span>
+              <span class="flex-grow text-xs font-medium text-white">
+                <button
+                  class="mr-2 text-terminal-menu-red"
+                  onClick={async () => {
+                    await removeAll();
+                    await refetch();
+                  }}
+                >
+                  Odstranit vše
+                </button>
+              </span>
             </div>
+            <For each={items()?.data}>
+              {(item: FoodDBInterface, index) => (
+                <div class="py-2 flex items-center bg-green-hacked border-b border-green-hacked-darker text-center">
+                  <span class="w-[10%] text-sm text-white">{index() + 1}.</span>
+                  <span class="w-[20%] text-sm text-white">{item.name}</span>
+                  <span class="w-[20%] text-sm text-white">{item.food}</span>
+                  <span class="w-[20%] text-sm text-white">{item.day}</span>
+                  <span class="flex-grow text-sm text-white">
+                    <button
+                      class="mr-2 text-terminal-menu-red"
+                      onClick={async () => {
+                        await removeUser(item.token);
+                        await refetch();
+                      }}
+                    >
+                      Odstranit
+                    </button>
+                    <button
+                      class="text-terminal-menu-yellow"
+                      onClick={() => {
+                        window.open(
+                          "/food/ucastnik/" +
+                            item.token.replace(".", "@").replace(".", "@")
+                        );
+                      }}
+                    >
+                      Upravit
+                    </button>
+                  </span>
+                </div>
+              )}
+            </For>
           </div>
         </div>
       </Show>
