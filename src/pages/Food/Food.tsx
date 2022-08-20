@@ -1,4 +1,6 @@
-const foodImage = import.meta.globEager("../../assets/img/food/**/*.jpg");
+const foodImage = import.meta.glob("../../assets/img/food/**/*.jpg", {
+  eager: true,
+});
 /**
  * Returns food image asset path
  * @param {string} type Food type -> Pizza, Čína, atd.
@@ -8,9 +10,13 @@ const foodImage = import.meta.globEager("../../assets/img/food/**/*.jpg");
 const getFoodImage = (type: string, name: string) => {
   const typeParsed = type.toLowerCase();
   const nameParsed = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
-  return foodImage[
+  type globAsset = {
+    default: string;
+  };
+  const asset = foodImage[
     `../../assets/img/food/${typeParsed}/${typeParsed}${nameParsed}.jpg`
-  ].default;
+  ] as globAsset;
+  return asset.default;
 };
 
 /**
@@ -70,24 +76,24 @@ const FOODS: FoodInterface[] = [
           FoodCategories.VEGETARIAN,
           FoodCategories.FISH,
         ],
-        priceEst: 100,
+        priceEst: 115,
       },
       {
         name: "Pizza Hawaii",
         image: getFoodImage("pizza", "hawaii"),
-        priceEst: 130,
+        priceEst: 145,
         categories: [FoodCategories.ALL],
       },
       {
         name: "Pizza Šunková",
         image: getFoodImage("pizza", "sunkova"),
-        priceEst: 120,
+        priceEst: 135,
         categories: [FoodCategories.ALL],
       },
       {
         name: "Pizza Vegetariana",
         image: getFoodImage("pizza", "vegetariana"),
-        priceEst: 120,
+        priceEst: 135,
         categories: [
           FoodCategories.ALL,
           FoodCategories.VEGETARIAN,
@@ -108,13 +114,13 @@ const FOODS: FoodInterface[] = [
       {
         name: "Klasický Kebab",
         image: getFoodImage("kebab", "klasicky"),
-        priceEst: 100,
+        priceEst: 115,
         categories: [FoodCategories.ALL],
       },
       {
         name: "Vegetariánský Kebab",
         image: getFoodImage("kebab", "vegetariansky"),
-        priceEst: 100,
+        priceEst: 115,
         categories: [
           FoodCategories.ALL,
           FoodCategories.VEGETARIAN,
@@ -135,19 +141,19 @@ const FOODS: FoodInterface[] = [
       {
         name: "Kuře kung-pao",
         image: getFoodImage("cina", "kungpao"),
-        priceEst: 100,
+        priceEst: 125,
         categories: [FoodCategories.ALL],
       },
       {
         name: "Nudle s kuřecím",
         image: getFoodImage("cina", "kureci"),
-        priceEst: 100,
+        priceEst: 120,
         categories: [FoodCategories.ALL],
       },
       {
         name: "Nudle se zeleninou",
         image: getFoodImage("cina", "zelenina"),
-        priceEst: 100,
+        priceEst: 120,
         categories: [
           FoodCategories.ALL,
           FoodCategories.VEGETARIAN,
