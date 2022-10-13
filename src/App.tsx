@@ -22,7 +22,13 @@ const App: Component = () => {
       </header>
       <main class="relative bg-black overflow-x-hidden">
         <Routes>
-          <Route path="/*all" element={<Home />} />
+          <Route
+            path="/*all"
+            element={() => {
+              About.preload();
+              return <Home />;
+            }}
+          />
           <Route path="/about" element={<About />} />
           <Route path="/food/ucastnik/:id" element={<Food />} />
           <Route path="/food/dashboard/" element={<Dashboard />} />
