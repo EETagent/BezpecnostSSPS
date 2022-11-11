@@ -16,7 +16,7 @@ jobs:
       - name: NodeJS 🚀
         uses: actions/setup-node@v3
         with:
-          node-version: "18"
+          node-version: "19"
           cache: "pnpm"
       - name: Instalace 🍔
         run: pnpm install
