@@ -1,4 +1,4 @@
-import { useParams } from "solid-app-router";
+import { useParams } from "@solidjs/router";
 import {
   Component,
   createEffect,

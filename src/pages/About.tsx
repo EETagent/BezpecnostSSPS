@@ -1,5 +1,5 @@
-import { Link } from "solid-app-router";
-import { Component } from "solid-js";
+import { Link } from "@solidjs/router";
+import { Component, JSX } from "solid-js";
 
 import polygonWebP from "../assets/img/about-polygon.webp";
 import polygon from "../assets/img/about-polygon.jpg";
@@ -15,7 +15,9 @@ const About: Component = () => {
    * @param {string} text Article text
    * @returns {JSX.Element}
    */
-  const Article: Component<{ title: string; text: string }> = (props) => {
+  const Article: Component<{ title: string; text: string }> = (
+    props
+  ): JSX.Element => {
     return (
       <article>
         <h1 class="my-10 font-supply text-center text-2xl md:text-[2.5vw]">
@@ -44,7 +46,13 @@ const About: Component = () => {
       />
       <picture class="mt-10">
         <source srcset={polygonWebP} type="image/webp" />
-        <img class="rounded-3xl" src={polygon} alt="Kybernetický polygon" />
+        <img
+          class="rounded-3xl"
+          src={polygon}
+          alt="Kybernetický polygon"
+          elementtiming=""
+          fetchpriority="high"
+        />
       </picture>
       <Article
         title="Proč byla oslovena právě vaše škola, aby pilotovala nový obor Kybernetická bezpečnost?"

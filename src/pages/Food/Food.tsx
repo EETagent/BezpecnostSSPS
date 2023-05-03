@@ -7,7 +7,7 @@ const foodImage = import.meta.glob("../../assets/img/food/**/*.jpg", {
  * @param {string} name Food name -> Margherita
  * @returns {string} Image path
  */
-const getFoodImage = (type: string, name: string) => {
+const getFoodImage = (type: string, name: string): string => {
   const typeParsed = type.toLowerCase();
   const nameParsed = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
   type globAsset = {

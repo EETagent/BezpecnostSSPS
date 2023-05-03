@@ -1,4 +1,4 @@
-import { Link } from "solid-app-router";
+import { Link } from "@solidjs/router";
 import type { Component } from "solid-js";
 
 import bg from "../../assets/img/background/intro-bg.jpg";

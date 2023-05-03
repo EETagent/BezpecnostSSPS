@@ -1,11 +1,4 @@
-import {
-  Component,
-  createMemo,
-  createResource,
-  createSignal,
-  For,
-  Show,
-} from "solid-js";
+import { Component, createMemo, createResource, For, Show } from "solid-js";
 import { FoodInterface, FOODS } from "./Food";
 
 interface FoodDBInterface {
@@ -180,7 +173,8 @@ const Dashboard: Component = () => {
                     {() => {
                       const priceEstm = findFood(food)?.priceEst;
                       return priceEstm
-                        ? priceEstm * itemsCount().get(food)!
+                        ? ((priceEstm *
+                            itemsCount().get(food)!) as unknown as string)
                         : "Žádný odhad";
                     }}
                     Kč
@@ -189,6 +183,8 @@ const Dashboard: Component = () => {
                     <img
                       class="mx-auto aspect-square h-24 rounded-2xl"
                       src={findFood(food)?.image}
+                      elementtiming=""
+                      fetchpriority="high"
                     />
                   </span>
                 </div>
